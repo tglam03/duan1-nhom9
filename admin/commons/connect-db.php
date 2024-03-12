@@ -1,0 +1,3 @@
+<?php
+
+// kết nói csdl
