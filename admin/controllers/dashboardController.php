@@ -1,5 +1,7 @@
 <?php 
 
 function dashboard(){
-    require_once PATH_VIEW_ADMIN . 'dashboard.php';
+    $ccript = 'dashboard';
+    $view = 'dashboard';
+    require_once PATH_VIEW_ADMIN . 'layouts/master.php';
 }

@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d938624-0fdb-4eae-ad0f-7e06a59e83d2" name="Changes" comment="" />
+    <list default="true" id="6d938624-0fdb-4eae-ad0f-7e06a59e83d2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/admin/views/layouts/master.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/controllers/AbcController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/controllers/HomeController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/admin/models/User.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/confirm.html" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,7 +38,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "E:/PHP/laragon/www/duan1",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -50,6 +58,7 @@
       <workItem from="1709803379720" duration="721000" />
       <workItem from="1709830388446" duration="612000" />
       <workItem from="1709892434389" duration="911000" />
+      <workItem from="1710782030026" duration="999000" />
     </task>
     <servers />
   </component>
