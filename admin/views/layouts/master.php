@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
 
-    <title>Admin  - Dashboard</title>
+    <title><?= $title ?? 'ADMIN';?></title>
  
     <!-- Custom fonts for this template-->
     <link href="../assets/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -20,6 +20,11 @@
 
     <!-- Custom styles for this template-->
     <link href="<?= BASE_URL ?>assets/admin/css/sb-admin-2.min.css" rel="stylesheet">
+    <?php
+    if(isset($style) && $style){
+        require_once PATH_VIEW_ADMIN . 'styles/' . $style . '.php';
+    }
+    ;?>
 
 </head>
 
@@ -79,11 +84,10 @@
     <script src="<?= BASE_URL ?>assets/admin/js/sb-admin-2.min.js"></script>
 
     <?php
-    if(isset($script) && $ccript){
-        require_once PATH_VIEW_ADMIN . 'scripts' . $ccript . '.php';
+    if(isset($script) && $script){
+        require_once PATH_VIEW_ADMIN . 'scripts/' . $script . '.php';
     }
     ;?>
-
 </body>
 
 </html>

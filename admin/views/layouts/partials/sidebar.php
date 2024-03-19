@@ -40,10 +40,14 @@
             <a class="collapse-item" href="buttons.html">Buttons</a>
             <a class="collapse-item" href="cards.html">Cards</a>
         </div>
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Sản phẩm:</h6>
+            <a class="collapse-item" href="buttons.html">Thêm sản phẩm</a>
+            <a class="collapse-item" href="cards.html">Cập nhật sản phẩm</a>
+            <a class="collapse-item" href="cards.html">Danh sách sách sản phẩm</a>
+        </div>
     </div>
 </li>
-
-
 <!-- Divider -->
 <hr class="sidebar-divider">
 

@@ -17,7 +17,11 @@ $act = $_GET['act'] ?? '/';
 
 match($act) {
     '/' => dashboard(),
-
+    // CRUD product
+    'product' => productListAll(),
+    'product-create' => productCreate(),
+    'product-update' => productUpdate($_GET['id']),
+    'product-delete' => productDelete($_GET['id']),
 };
 
 require_once '../commons/disconnect-db.php';
