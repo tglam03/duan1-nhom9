@@ -49,8 +49,8 @@
                     <div class="col-md-6">
 
                         <div class="mb-3 mt-3">
-                            <label for="vaitro" class="form-label">Vai trò:</label>
-                            <select class="form-control" id="vaitro" name="vaitro">
+                            <label for="vai_tro" class="form-label">Vai trò:</label>
+                            <select class="form-control" id="vai_tro" name="vai_tro">
                                 <option value="1">Admin</option>
                                 <option value="0">Member</option>
                             </select>
@@ -59,8 +59,8 @@
                         <div class="mb-3 mt-3">
                             <p>Avatar:</p>
                             <div class="custom-file mb-3">
-                                <input type="file" class="custom-file-input" id="customFile" name="filename">
-                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                <input type="file" class="custom-file-input" id="hinh" name="hinh">
+                                <label name="hinh" class="custom-file-label" for="customFile">Choose file</label>
                             </div>
                         </div>
                     </div>
