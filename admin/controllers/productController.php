@@ -9,9 +9,51 @@ function productListAll(){
 }
 
 function productCreate(){
-    $script = 'dashboard';
-    $view = 'products/index';
-
+    $title = 'Thêm Mới Sản Phẩm';
+    $view = 'products/add';
+    $script1 = 'scripts';
+    $category = listAll('loai');
+    if(!empty($_POST)){
+        if(empty($_POST['loai_id'])){
+            $_POST['loai_id'] = NULL;
+        }
+        if(empty($_POST['giam_gia'])){
+            $_POST['giam_gia'] = 0;
+        }
+        $data = [
+            'ten_hh' => $_POST['ten_hh'],
+            'don_gia' => $_POST['don_gia'],
+            'giam_gia' => $_POST['giam_gia'],
+            'loai_id' => $_POST['loai_id'],
+            'soluong' => $_POST['soluong'],
+            'hinh' => $_POST['hinh'],
+            'mo_ta' => $_POST['mo_ta'],
+        ];
+        insert('sanpham', $data);
+        $lastID = lastID('sanpham');
+        $variant = $_POST['variant'];
+        $soluong = count($variant);
+        for ($i=1; $i<= $soluong ; $i++) { 
+            $data = [
+                'hh_id' => $lastID,
+                'mau' => $variant[$i]['mau'],
+            ];
+            insert('mauhh', $data);
+            $lastIDmau = lastID('mauhh');
+            foreach ($variant[$i]['size'] as $value) {
+                    if(!empty($value[1]) && !empty($value[0])){
+                        $data = [
+                            'hh_id' => $lastID,
+                            'mau_id' => $lastIDmau,
+                            'size' => $value[0],
+                            'soluong' => $value[1],
+                        ];
+                        insert('sizehh', $data);
+                    }
+                
+            }
+        }
+    }
     require_once PATH_VIEW_ADMIN . 'layouts/master.php';
 }
 

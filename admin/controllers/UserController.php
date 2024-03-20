@@ -57,7 +57,7 @@ function userCreate()
     require_once PATH_VIEW_ADMIN . 'layouts/master.php';
 }
 
-function userUpdate()
+function userUpdate($id)
 {
     $title = 'Danh sách khách hàng';
     $view = 'user/update';
