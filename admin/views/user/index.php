@@ -4,8 +4,7 @@
     <h1 class="h3 mb-2 text-gray-800">
         <?= $title ?>
 
-        <a class="btn btn-info"
-         href="<?= BASE_URL_ADMIN ?>/?act=users-create">Thêm mới</a>
+        <a class="btn btn-info" href="<?= BASE_URL_ADMIN ?>/?act=users-create">Thêm mới</a>
 
 
     </h1>
@@ -24,7 +23,7 @@
                             <th>ID</th>
                             <th>Họ tên</th>
                             <th>User(Tên đăng nhập)</th>
-                            <th>Email</th>
+                            <th >Email</th>
                             <th>Avatar</th>
                             <th>Địa chỉ</th>
                             <th>Số điện thoại</th>
@@ -42,7 +41,7 @@
                                 <td><?= $user['ho_ten'] ?></td>
                                 <td><?= $user['user'] ?></td>
                                 <td><?= $user['email'] ?></td>
-                                <td><img src="<?= $user['hinh'] ?>" alt=""> </td>
+                                <td><img src="<?= BASE_URL . $user['hinh'] ?>" width="100px" alt=""> </td>
                                 <td><?= $user['diachi'] ?></td>
                                 <td><?= $user['dienthoai'] ?></td>
                                 <td><?= $user['vai_tro'] ?
@@ -51,11 +50,13 @@
                                 </td>
 
                                 <td>
-
                                     <a class="btn btn-info" href="<?= BASE_URL_ADMIN ?>/?act=users-detail&id=<?= $user['id'] ?>">Xem chi tiết</a>
-
+                                    <a class="btn btn-warning" href="<?= BASE_URL_ADMIN ?>/?act=users-update&id=<?= $user['id'] ?>">Cập nhật</a>
+                                    <a class="btn btn-danger" href="<?= BASE_URL_ADMIN ?>/?act=users-delete&id=<?= $user['id'] ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">Xóa</a>
                                 </td>
+
                             </tr>
+
                         </tbody>
 
                     <?php endforeach; ?>
@@ -64,5 +65,4 @@
             </div>
         </div>
     </div>
-
 </div>
