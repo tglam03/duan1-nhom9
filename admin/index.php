@@ -22,6 +22,15 @@ match($act) {
     'product-create' => productCreate(),
     'product-update' => productUpdate($_GET['id']),
     'product-delete' => productDelete($_GET['id']),
+
+    //CRUD User
+    'users'        => userListAll(),
+    'users-detail' => userShowOne($_GET['id']),
+    'users-create' => userCreate(),
+    'users-update' => userUpdate($_GET['id']),
+    'users-delete' => userDelete($_GET['id']),
+
+
 };
 
 require_once '../commons/disconnect-db.php';
