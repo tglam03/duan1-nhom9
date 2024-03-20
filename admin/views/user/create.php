@@ -9,7 +9,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Create</h6>
         </div>
         <div class="card-body">
-            <form class="user" method="post">
+            <form class="user" method="post" enctype="multipart/form-data">
 
                 <div class="row">
                     <div class="col-md-6">
@@ -29,7 +29,7 @@
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="mat_khau" class="form-label">Mật khẩu:</label>
-                            <input type="mat_khau" class="form-control" id="mat_khau" placeholder="Mật khẩu" name="mat_khau">
+                            <input type="password" class="form-control" id="mat_khau" placeholder="Mật khẩu" name="mat_khau">
                         </div>
                     </div>
 
