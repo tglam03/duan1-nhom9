@@ -110,7 +110,7 @@
                         <div class="mb-3 mt-3">
                             <label for="dienthoai" class="form-label">Hình ảnh sản phẩm:</label>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="hinh">
+                                <input type="file" class="custom-file-input" name="hinh[]" multiple>
                                 <label name="hinh" class="custom-file-label" for="customFile">Choose file</label>
                             </div>
                         </div>

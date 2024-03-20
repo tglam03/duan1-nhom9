@@ -26,9 +26,9 @@ function productCreate(){
             'giam_gia' => $_POST['giam_gia'],
             'loai_id' => $_POST['loai_id'],
             'soluong' => $_POST['soluong'],
-            'hinh' => $_POST['hinh'],
             'mo_ta' => $_POST['mo_ta'],
         ];
+        $hinh=$_POST['hinh'];
         insert('sanpham', $data);
         $lastID = lastID('sanpham');
         $variant = $_POST['variant'];
