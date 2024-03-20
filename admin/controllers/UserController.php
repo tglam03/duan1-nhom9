@@ -93,7 +93,7 @@ function validateCreate($data){
     if(empty($data['email'])){
         $errors[] = 'Email bắt buộc phải nhập';
     }else if(filter_var($data['email']) && FILTER_VALIDATE_EMAIL){
-        $errors[] = 'Email không được nhập trùng';
+        $errors[] = 'Email sai định dạng';
     }
     return $errors;
 }
@@ -120,7 +120,8 @@ function userUpdate($id)
             "dienthoai" => $_POST['dienthoai'],
             "vai_tro"  => $_POST['vai_tro'],
         ];
-
+        
+        // upload ảnh
         $avatar = $_FILES['hinh'] ?? null;
         if (!empty($avatar)) {
             $data['hinh'] = upload_file($avatar, 'uploads/users');
