@@ -12,7 +12,7 @@
                         <input type="color" placeholder="Màu sắc" name="variant[${variantCount}][mau]">
                     </div>
                      <div class="d-flex justify-content-center col-md-6">
-                        <label for="variant_size_${variantCount}">Size:</label>
+                        <label>Size:</label>
                         <div class="mr-2 col-md-3">
                             <div class="d-flex">
                                 <input type="checkbox" id="variant_size_${variantCount}_S" name="variant[${variantCount}][size][S][]" onclick="showQuantityInput(${variantCount}, 'S')" value="S">S
@@ -60,8 +60,18 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-dark" onclick="removeVariant(${variantCount})">Xóa biến thể</button>
-            `;
+                <input type="hidden" name="variancont" id="variancont" value="${variantCount}">
+                <?php
+                    if (isset($_POST['variancont'])) {
+                        $vartiantcount = $_POST['variancont'];
+                ?>
+                <div class="d-flex justify-content-between">
+                    <span class=" text-warning"><?=(isset($errors[$vartiantcount]['size'])&& $errors[$vartiantcount]['size'] != "")?$errors[$vartiantcount]['size']:'';?></span>
+                    <span class=" text-warning"><?=(isset($errors[$vartiantcount]['soluong'])&& $errors[$vartiantcount]['soluong'] != "")?$errors[$vartiantcount]['soluong']:'';?></span>
+                </div>   
+                <?php }?> 
+                <div><button type="button" class="btn btn-danger mb-2" onclick="removeVariant(${variantCount})">Xóa</button></div>
+   `;
         document.getElementById("variants").appendChild(variantDiv);
     }
 
