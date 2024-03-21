@@ -1,6 +1,7 @@
 <div class="container-fluid">
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800"><?= $title ?? '' ?></h1>
+    <h1 class="h3 mb-2 text-gray-800"><?= $title ?? '' ?>
+    <a class="btn btn-info" href="<?= BASE_URL_ADMIN ?>/?act=product-create">Thêm mới</a></h1>
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -41,9 +42,9 @@
                             <td><img src="<?=$product['hinh'] ;?>" alt=""></td>
                             <td><?=$product['loai_id'] ;?></td>
                             <td class="d-flex justify-content-around">
-                                <a href="<?= BASE_URL_ADMIN ?>?act=product-update&id=<?= $product['id']; ?>" class="btn btn-dark">Sửa</a>
-                                <a href="<?= BASE_URL_ADMIN ?>?act=product-delete&id=<?= $product['id']; ?>" class="btn btn-dark">Xóa</a>
-                            </td>
+                                    <a class="btn btn-warning" href="<?= BASE_URL_ADMIN ?>/?act=product-update&id=<?= $product['id'] ?>">Cập nhật</a>
+                                    <a class="btn btn-danger" href="<?= BASE_URL_ADMIN ?>/?act=product-delete&id=<?= $product['id'] ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">Xóa</a>
+                           </td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

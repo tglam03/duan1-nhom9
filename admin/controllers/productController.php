@@ -65,6 +65,7 @@ function productUpdate($id){
 }
 
 function productDelete($id){
-    $view = 'products/index';
-    require_once PATH_VIEW_ADMIN . 'layouts/master.php';
+    delete2('sanpham', $id);
+    header('Location: ' . BASE_URL_ADMIN .  '?act=product');
+    exit();
 }
