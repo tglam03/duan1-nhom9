@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
 
-    <title><?= $title ?? 'Admin' ?></title>
+    <title>Admin  - Dashboard</title>
  
     <!-- Custom fonts for this template-->
     <link href="<?= BASE_URL ?>assets/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -20,14 +20,12 @@
 
     <!-- Custom styles for this template-->
     <link href="<?= BASE_URL ?>assets/admin/css/sb-admin-2.min.css" rel="stylesheet">
-
     <?php
     if(isset($style) && $style){
-        require_once PATH_VIEW_ADMIN . 'style/' . $style . '.php';
+        require_once PATH_VIEW_ADMIN . 'styles/' . $style . '.php';
     }
-
     if(isset($style2) && $style2){
-        require_once PATH_VIEW_ADMIN  . $style2 . '.php';
+        require_once PATH_VIEW_ADMIN . 'products/' . $style2 . '.php';
     }
     ;?>
 </head>
@@ -91,12 +89,10 @@
     if(isset($script) && $script){
         require_once PATH_VIEW_ADMIN . 'scripts/' . $script . '.php';
     }
-
-    if(isset($script2) && $script2){
-        require_once PATH_VIEW_ADMIN  . $script2 . '.php';
+    if(isset($script1) && $script1){
+        require_once PATH_VIEW_ADMIN . 'products/' . $script1 .'.php';
     }
     ;?>
-
 </body>
 
 </html>

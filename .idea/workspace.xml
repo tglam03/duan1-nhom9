@@ -5,13 +5,53 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d938624-0fdb-4eae-ad0f-7e06a59e83d2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/admin/views/layouts/master.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/admin/controllers/AbcController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/admin/controllers/HomeController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/admin/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/admin/index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/admin/models/User.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/confirm.html" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/controllers/productController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/models/products.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/views/products/add.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/views/products/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/views/products/scripts.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/views/products/style.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/views/products/update.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/views/styles/datatable.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711019832-fd0703e9-40ae-4b47-a622-87090cdc7735.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711021564-01402904-478f-438d-abd7-bace3f800fdd.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711021564-dc469bc5-8622-4fe5-889a-a0dd292ef2de.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711021564-fd0703e9-40ae-4b47-a622-87090cdc7735.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711022251-22abbf23-81cd-4781-9b41-784772aa6f3a.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711022251-6828632f-db93-4367-836d-828686e5868e.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711022251-7410365b-3ab9-45d2-85c3-94833bfc04f6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711022277-22abbf23-81cd-4781-9b41-784772aa6f3a.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711022277-6828632f-db93-4367-836d-828686e5868e.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711022277-7410365b-3ab9-45d2-85c3-94833bfc04f6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711022305-22abbf23-81cd-4781-9b41-784772aa6f3a.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711022305-6828632f-db93-4367-836d-828686e5868e.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711022305-7410365b-3ab9-45d2-85c3-94833bfc04f6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711022500-22abbf23-81cd-4781-9b41-784772aa6f3a.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711022500-6828632f-db93-4367-836d-828686e5868e.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711022500-7410365b-3ab9-45d2-85c3-94833bfc04f6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711022634-22abbf23-81cd-4781-9b41-784772aa6f3a.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711022634-6828632f-db93-4367-836d-828686e5868e.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711022634-7410365b-3ab9-45d2-85c3-94833bfc04f6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711022789-01402904-478f-438d-abd7-bace3f800fdd.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711022789-dc469bc5-8622-4fe5-889a-a0dd292ef2de.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711022789-fd0703e9-40ae-4b47-a622-87090cdc7735.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711024020-01402904-478f-438d-abd7-bace3f800fdd.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711024020-dc469bc5-8622-4fe5-889a-a0dd292ef2de.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711024020-fd0703e9-40ae-4b47-a622-87090cdc7735.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711040235-22abbf23-81cd-4781-9b41-784772aa6f3a.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711040235-6828632f-db93-4367-836d-828686e5868e.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711042585-6828632f-db93-4367-836d-828686e5868e.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/1711042585-7410365b-3ab9-45d2-85c3-94833bfc04f6.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/controllers/dashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/controllers/dashboardController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/views/layouts/master.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/views/layouts/master.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/views/layouts/partials/sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/views/layouts/partials/sidebar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/views/scripts/datatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/views/scripts/datatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/views/user/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/views/user/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/views/user/script.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/views/user/update.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/views/user/update.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +63,27 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "history": [
+    {
+      "state": "OPEN"
+    }
+  ],
+  "lastFilter": {
+    "state": "OPEN"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="8aa58c63-509e-4d2e-bf7b-ba9274f8d6a6" />
+        <option name="url" value="https://github.com/tglam03/D-n-1-nh-m-9.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\Users\abc\Downloads\php-8.2.13-nts-Win32-vs16-x64 (4)\php.exe" />
   <component name="ProjectColorInfo">{
@@ -38,8 +99,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "E:/PHP/laragon/www/duan1",
+    "git-widget-placeholder": "Merging main",
+    "last_opened_file_path": "E:/PHP/laragon/www/duan1_nhom9",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -59,6 +120,7 @@
       <workItem from="1709830388446" duration="612000" />
       <workItem from="1709892434389" duration="911000" />
       <workItem from="1710782030026" duration="999000" />
+      <workItem from="1711130967837" duration="895000" />
     </task>
     <servers />
   </component>
