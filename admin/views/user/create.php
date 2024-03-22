@@ -30,7 +30,6 @@
                         <?php foreach ($_SESSION['errors'] as $error) : ?>
 
                             <li><?= $error ?></li>
-
                         <?php endforeach; ?>
                     </ul>
 

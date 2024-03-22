@@ -48,26 +48,19 @@ function userCreate()
         ];
 
         // validation
-        $errors = validateCreate($data);
-        if (!empty($errors)) {
-            $_SESSION['errors'] = $errors;
-            $_SESSION['data'] = $data;
-
-
-            header('Location: ' . BASE_URL_ADMIN .  '?act=users-create');
-            exit();
-        }
-
+        validateUserCreate($data);
         // end validation
 
 
         $avatar = $_FILES['hinh'] ?? null;
         if (!empty($avatar)) {
-            $data['hinh'] = upload_file($avatar, 'uploads/users');
+            $data['hinh'] = upload_file($avatar, 'uploads/users/');
         }
 
         insert('khach_hang', $data);
+
         $_SESSION['success'] = 'Thêm mới thành công';
+
         header('Location: ' . BASE_URL_ADMIN .  '?act=users');
         exit();
     }
@@ -75,7 +68,7 @@ function userCreate()
     require_once PATH_VIEW_ADMIN . 'layouts/master.php';
 }
 
-function validateCreate($data)
+function validateUserCreate($data)
 {
     // tên - bắt buộc, độ dài tối đa 50 kí tự
     // email - bắt buộc phải nhập, không được trùng
@@ -122,6 +115,24 @@ function validateCreate($data)
     if (empty($data['diachi'])) {
         $errors[] = 'Địa chỉ bắt buộc phải nhập';
     }
+    if (!empty($data['hinh']) && $data['hinh']['size'] > 0) {
+        $typeImage = ['image/png', 'image/jpg', 'image/jpeg'];
+
+        if ($data['hinh']['size'] > 2 * 1024 * 1024) {
+            $errors[] = 'Hình ảnh phải có dung lượng nhỏ hơn 2M';
+        } else if (!in_array($data['hinh']['type'], $typeImage)) {
+            $errors[] = 'Hình ảnh chỉ chấp nhận định dạng file: png, jpg, jpeg';
+        }
+    }
+
+
+    if (!empty($errors)) {
+        $_SESSION['errors'] = $errors;
+        $_SESSION['data'] = $data;
+
+        header('Location: ' . BASE_URL_ADMIN . '?act=users-create');
+        exit();
+    }
 
 
     return $errors;
@@ -152,36 +163,25 @@ function userUpdate($id)
         // upload ảnh
         $avatar = $_FILES['hinh'] ?? null;
         if (!empty($avatar)) {
-            $data['hinh'] = upload_file($avatar, 'uploads/users');
+            $data['hinh'] = upload_file($avatar, 'uploads/users/');
         }
         if (
             !empty($avatar)
             && !empty($users['hinh'])                      //Có upload file
             && !empty($data['hinh'])                       // Upload file thành công
             && file_exists(PATH_UPLOAD . $users['hinh'])
-        )  // Phải còn file tồn tại trên hệ thống
+        )                                                   // Phải còn file tồn tại trên hệ thống
         {
             unlink(PATH_UPLOAD . $users['hinh']);
         }
 
 
         // validation
-        $errors = validateUpdate($id, $data);
-        if (!empty($errors)) {
-            $_SESSION['errors'] = $errors;
+        validateUserUpdate($id, $data);
 
+        update('khach_hang', $id, $data);
 
-            header('Location: ' . BASE_URL_ADMIN .  '?act=users-update');
-            exit();
-        } else {
-            update('khach_hang', $id, $data);
-
-            $_SESSION['success'] = 'Cập nhật thành công';
-        }
-
-        // end validation
-
-
+        $_SESSION['success'] = 'Cập nhật thành công';
 
         header('Location: ' . BASE_URL_ADMIN .  '?act=users-update&id=' . $id);
 
@@ -191,7 +191,7 @@ function userUpdate($id)
 }
 
 
-function validateUpdate($id, $data)
+function validateUserUpdate($id, $data)
 {
     // tên - bắt buộc, độ dài tối đa 50 kí tự
     // email - bắt buộc phải nhập, không được trùng
@@ -211,8 +211,7 @@ function validateUpdate($id, $data)
         $errors[] = 'Email bắt buộc phải nhập';
     } else if (!checkUniqueEmailUpdate('khach_hang', $id, $data['email'])) {
         $errors[] = 'Email đã được sử dụng';
-    }
-    else if (!filter_var($data['email'],  FILTER_VALIDATE_EMAIL)) {
+    } else if (!filter_var($data['email'],  FILTER_VALIDATE_EMAIL)) {
         $errors[] = 'Email sai định dạng';
     }
 
@@ -240,6 +239,24 @@ function validateUpdate($id, $data)
         $errors[] = 'Địa chỉ bắt buộc phải nhập';
     }
 
+    if (!empty($data['hinh']) && $data['hinh']['size'] > 0) {
+        $typeImage = ['image/png', 'image/jpg', 'image/jpeg'];
+
+        if ($data['hinh']['size'] > 2 * 1024 * 1024) {
+            $errors[] = 'Hình ảnh phải có dung lượng nhỏ hơn 2M';
+        } else if (!in_array($data['hinh']['type'], $typeImage)) {
+            $errors[] = 'Hình ảnh chỉ chấp nhận định dạng file: png, jpg, jpeg';
+        }
+    }
+
+    if (!empty($errors)) {
+        $_SESSION['errors'] = $errors;
+        $_SESSION['data'] = $data;
+
+        header('Location: ' . BASE_URL_ADMIN . '?act=users-update');
+        exit();
+    }
+
 
     return $errors;
 }
@@ -254,7 +271,3 @@ function userDelete($id)
 
     exit();
 }
-
-
-
-

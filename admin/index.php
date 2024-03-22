@@ -20,6 +20,8 @@ require_file(PATH_MODEL_ADMIN);
 $act = $_GET['act'] ?? '/';
 
 
+
+
 // Kiểm tra user đã đăng nhập chưa
 middleware_auth_check($act);
 
@@ -38,6 +40,9 @@ match ($act) {
     'users-update' => userUpdate($_GET['id']),
     'users-delete' => userDelete($_GET['id']),
 
+
+    //
+    
 
     // //CRUD Loai
     // 'loai'        => loaiListAll(),
