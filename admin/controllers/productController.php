@@ -5,8 +5,12 @@ function productListAll()
     $view = 'products/index';
     $script = 'datatable';
     $style = 'datatable';
-    $products = loadAllsanpham();
-    debug($products);
+    $style2 = 'style';
+    $products = loadAllsanpham('');
+    $productsColors = listAll('mauhh');
+    $productsSizes = listAll('sizehh');
+    $products = movearray($products,$productsColors,$productsSizes);
+    $products = productConvert($products);
     require_once PATH_VIEW_ADMIN . 'layouts/master.php';
 }
 
@@ -93,8 +97,23 @@ function productUpdate($id)
     $view = 'products/update';
     $script1 = 'scripts';
     $category = listAll('loai');
+    $products = loadAllsanpham($id);
+    $productsColors = showAllVariantProduct('mauhh',$id);
+    $productsSizes = showAllVariantProduct('sizehh',$id);
+    $products = movearray($products,$productsColors,$productsSizes);
     if (!empty($_POST)) {
         //validate
+        $product_img = $_FILES['hinh'] ?? null;
+        $countimg = count($product_img['name']);
+        // //xử lý hình ảnh
+        if (!empty($product_img)) {
+            for ($i = 0; $i < $countimg; $i++) {
+                $product_imgs[$i]['name'] = $product_img['name'][$i];
+                $product_imgs[$i]['tmp_name'] = $product_img['tmp_name'][$i];
+                $data['hinh'] = upload_file($product_imgs[$i], 'uploads/');
+                $hinh[] = $data['hinh'];
+            }
+        }
         $data = [
             'ten_hh' => $_POST['ten_hh'] ?? null,
             'don_gia' => $_POST['don_gia'] ?? null,
@@ -102,9 +121,8 @@ function productUpdate($id)
             'loai_id' => $_POST['loai_id'] ?? null,
             'ngay_nhap' => date('h:i:s d/m/Y'),
             'mo_ta' => $_POST['mo_ta'] ?? null,
+            'hinh' => implode(',', $hinh) ?? null,
         ];
-        $product_img = $_FILES['hinh'] ?? null;
-        $countimg = count($product_img['name']);
         $variant = $_POST['variant'];
         $soluong = count($variant);
         for ($i = 1; $i <= $soluong; $i++) {
@@ -150,27 +168,16 @@ function productUpdate($id)
                 }
             }
         }
-// //xử lý hình ảnh
-        if (!empty($product_img)) {
-            for ($i = 0; $i < $countimg; $i++) {
-                $product_imgs[$i]['name'] = $product_img['name'][$i];
-                $product_imgs[$i]['tmp_name'] = $product_img['tmp_name'][$i];
-                $data['hinh'] = upload_file($product_imgs[$i], 'uploads/');
-                $data = [
-                    'hinh' => $data['hinh'],
-                    'hh_id' => $lastID,
-                ];
-                insert('hinhhh', $data);
-            }
-        }
     }
     require_once PATH_VIEW_ADMIN . 'layouts/master.php';
 }
 
 function productDelete($id)
 {
+    deleteProduct('sizehh',$id);
+    deleteProduct('mauhh',$id);
     delete2('sanpham', $id);
-    header('Location: ' . BASE_URL_ADMIN .  '?act=product');
+    header('Location: ' . BASE_URL_ADMIN . '?act=product');
     exit();
 }
 function validateProduct($data, $data1, $data2)

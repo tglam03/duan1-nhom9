@@ -36,39 +36,71 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        <?php foreach ($products as $product) : ?>
+                        <?php 
+                        foreach ($products as $product) : ?>
                             <tr>
                                 <td><?= $product['id']; ?></td>
                                 <td><?= $product['ten_hh']; ?></td>
-                                <td><?= $product['don_gia']; ?></td>
-                                <td><?= $product['giam_gia']; ?></td>
-                                <td>
-                                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                                        <div class="carousel-inner">
-                                            <div class="carousel-item active">
-                                                <?php $hinhs = $product['hinh'];
-                                                    explode(',',$hinh);
-                                                    foreach ($hinhs as $hinh) {
-                                                        # code...
+                                <td>$<?= $product['don_gia']; ?></td>
+                                <td><?= $product['giam_gia']; ?>%</td>
+                                <td class=" col-sm-2">
+                                    <div class="slideshow-container">
+                                        <?php
+                                        $a=1;
+                                        $hinhs = explode(',', $product['hinh']);
+                                        $sohinh =sizeof($hinhs);
+                                        foreach ($hinhs as $hinh) {
+                                            $a++;
+                                            echo '  <div class="mySlides fade">
+                                                        <div class="numbertext">'.$a.' / '.$sohinh.'</div>
+                                                            <img src="'.BASE_URL.$hinh.'" style="width:100%">
+                                                        <div class="text">Hình '.$a.'</div>
+                                                    </div>';
+                                                    if($a==$sohinh){
+                                                        $a=0;
                                                     }
-                                                ?>
-                                            </div>
-                                        </div>
-                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Previous</span>
-                                        </button>
-                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Next</span>
-                                        </button>
+                                        }
+                                        ?>   
                                     </div>
-
-                                    <!-- Bootstrap JS -->
-                                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+                                    <div style="text-align:center">
+                                        <?php for ($i=1; $i <= $sohinh ; $i++) { 
+                                            echo '<span class="dot"></span>';
+                                        };
+                                        ?>
+                                    </div>
                                 </td>
-                                <td><?= $product['loai_id']; ?></td>
-                                <td class="d-flex justify-content-around">
+                                <td><?= $product['ten_loai']; ?></td>
+                                <td>
+                                    <div>
+                                        <div class="mb-2 d-flex align-items-center">
+                                            <div class="btn btn-success btn-sm mr-2">Màu</div>
+                                        <?php
+                                            $mau_size_soluongs = $product['mau_size_soluong'];
+                                            extract($mau_size_soluongs);
+                                            $maus = explode(',',$mau);
+                                            foreach ($maus as $mau) { ?>
+                                            <div class="btnhinhtron mr-1" style="background-color:<?=$mau;?>;"></div>
+                                            <?php };?>
+                                        </div>
+                                        <div class="mb-2 d-flex align-items-center">
+                                            <div class="btn btn-success btn-sm mr-2">Size</div>
+                                            <?php $sizes = explode(',',$size);
+                                            $dem = 0;
+                                            $phay = ',';
+                                            for ($i=0; $i < sizeof($sizes) ; $i++) { 
+                                                $dem++;
+                                                if($dem == sizeof($sizes)){$phay='.';}
+                                            ?>
+                                            <p class="mr-1"><?=$sizes[$i]?><?=$phay;?></p>
+                                              <?php  }; ?>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <div class="btn btn-success btn-sm mr-2">Slượng</div>
+                                            <p class="mr-1"><?=$soluong;?></p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
                                     <a class="btn btn-warning" href="<?= BASE_URL_ADMIN ?>/?act=product-update&id=<?= $product['id'] ?>">Cập nhật</a>
                                     <a class="btn btn-danger" href="<?= BASE_URL_ADMIN ?>/?act=product-delete&id=<?= $product['id'] ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">Xóa</a>
                                 </td>
@@ -81,3 +113,25 @@
     </div>
 
 </div>
+<script>
+    let slideIndex = 0;
+    showSlides();
+    function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {
+            slideIndex = 1;
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        setTimeout(showSlides, 1000); // Change image every 1 second
+    }
+</script>

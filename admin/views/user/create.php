@@ -10,17 +10,18 @@
         </div>
         <div class="card-body">
 
-             <?php if (isset($_SESSION['success'])) : ?>
+            <!-- in ra thông báo thành công -->
+            <?php if (isset($_SESSION['success'])) : ?>
 
                 <div class="alert alert-success">
-                   <?= $_SESSION['success'] ?>
+                    <?= $_SESSION['success'] ?>
                 </div>
 
-                 <?php unset($_SESSION['success']) ?>
+                <?php unset($_SESSION['success']) ?>
 
             <?php endif; ?>
 
-
+            <!-- in ra validate -->
             <?php if (isset($_SESSION['errors'])) : ?>
 
                 <div class="alert alert-danger">

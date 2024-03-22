@@ -2,8 +2,9 @@
 <script src="<?= BASE_URL ?>assets/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <script>
     // Call the dataTables jQuery plugin
-$(document).ready(function() {
-  $('#dataTable').DataTable();
-  'oderby'=none;
+    $(document).ready(function() {
+  $('#dataTable').DataTable({
+    "order": [] // Thiết lập mặc định không có sắp xếp
+  });
 });
 </script>

@@ -1,31 +1,31 @@
 <div class="container-fluid">
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800"><?= $title ?></h1>
-
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Create</h6>
         </div>
         <div class="card-body">
+        <?php foreach($products as $product){?>
             <form action="<?= BASE_URL_ADMIN .'?act=product-create' ?>" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3 mt-3">
                             <label class="form-label">Tên sản phẩm:</label>
-                            <input type="text" class="form-control" placeholder="Tên sản phẩm" name="ten_hh">
+                            <input type="text" class="form-control" placeholder="Tên sản phẩm" name="ten_hh" value="<?=$product['ten_hh'];?>">
                             <span class=" text-warning"><?= (isset($errors['ten_hh'])&& $errors['ten_hh'] != "")?$errors['ten_hh']:'';?></span>
                         </div>
                         <div class="mb-3 mt-3">
                             <label class="form-label">Đơn giá:</label>
-                            <input type="text" class="form-control" placeholder="Đơn giá" name="don_gia">
+                            <input type="text" class="form-control" placeholder="Đơn giá" name="don_gia" value="<?=$product['don_gia'];?>">
                             <span class=" text-warning"><?= (isset($errors['don_gia'])&& $errors['don_gia'] != "")?$errors['don_gia']:'';?></span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3 mt-3">
                             <label class="form-label">Giảm giá:</label>
-                            <input type="text" class="form-control" placeholder=" Giảm giá" name="giam_gia">
+                            <input type="text" class="form-control" placeholder=" Giảm giá" name="giam_gia" value="<?=$product['giam_gia'];?>">
                         </div>
                         <div class="mb-3 mt-3">
                             <label class="form-label">Loại sản phẩm:</label>
@@ -33,7 +33,7 @@
                                 <option value="" selected>Trống</option>
                                 <?php foreach ($category as $ls) {
                                     extract($ls); ?>
-                                    <option value="<?=$id; ?>"><?= $ten_loai; ?></option>
+                                    <option value="<?=$id; ?> <?= ($id == $products['loai_id'])?'selected':'';?>"><?= $ten_loai; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -113,6 +113,30 @@
                             <label class="form-label">Hình ảnh sản phẩm:</label>
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" name="hinh[]" multiple>
+                                <div class="slideshow-container">
+                                        <?php
+                                        $a=1;
+                                        $hinhs = explode(',', $product['hinh']);
+                                        $sohinh =sizeof($hinhs);
+                                        foreach ($hinhs as $hinh) {
+                                            $a++;
+                                            echo '  <div class="mySlides fade">
+                                                        <div class="numbertext">'.$a.' / '.$sohinh.'</div>
+                                                            <img src="'.BASE_URL.$hinh.'" style="width:100%">
+                                                        <div class="text">Hình '.$a.'</div>
+                                                    </div>';
+                                                    if($a==$sohinh){
+                                                        $a=0;
+                                                    }
+                                        }
+                                        ?>  
+                                                                            <div style="text-align:center">
+                                        <?php for ($i=1; $i <= $sohinh ; $i++) { 
+                                            echo '<span class="dot"></span>';
+                                        };
+                                        ?>
+                                    </div> 
+                                    </div>
                                 <label name="hinh" class="custom-file-label">Choose file</label>
                                 <span class=" text-warning"><?= (isset($errors['hinh'])&& $errors['hinh'] != "")?$errors['hinh']:'';?></span>
                             </div>
@@ -121,7 +145,7 @@
                         <div class="mb-3 mt-3 o-hidden">
                             <label class="form-label">Mô tả:</label>
                             <div class="custom-file mb-3">
-                                <textarea class="form-control" name="mo_ta" id="mo_ta" cols="60" rows="5"></textarea>
+                                <textarea class="form-control" name="mo_ta" id="mo_ta" cols="60" rows="5"value="<?=$product['mo_ta'];?>"></textarea>
                                 <span class=" text-warning"><?= (isset($errors['mo_ta'])&& $errors['mo_ta'] != "")?$errors['mo_ta']:'';?></span>
                             </div>
                         </div>
@@ -129,7 +153,7 @@
                 </div>
                 <button type="submit" class="btn btn-info">Thêm mới</button>
             </form>
-
+        <?php }?>
         </div>
     </div>
 </div>

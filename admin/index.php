@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 session_start();
 
@@ -12,16 +12,29 @@ require_once '../commons/model.php';
 require_file(PATH_CONTROLLER_ADMIN);
 require_file(PATH_MODEL_ADMIN);
 
+
+
+
+
 // Điều hướng
 $act = $_GET['act'] ?? '/';
 
-match($act) {
+
+// Kiểm tra user đã đăng nhập chưa
+middleware_auth_check($act);
+
+match ($act) {
     '/' => dashboard(),
     // CRUD product
     'product' => productListAll(),
     'product-create' => productCreate(),
     'product-update' => productUpdate($_GET['id']),
     'product-delete' => productDelete($_GET['id']),
+
+    //login
+    'login' => authenShowFormLogin(),
+    'logout' => authenLogout(),
+
 
     //CRUD User
     'users'        => userListAll(),
@@ -31,6 +44,21 @@ match($act) {
     'users-delete' => userDelete($_GET['id']),
 
 
+    // //CRUD Loai
+    // 'loai'        => loaiListAll(),
+    // 'loai-detail' => loaiShowOne($_GET['id']),
+    // 'loai-create' => loaiCreate(),
+    // 'loai-update' => loaiUpdate($_GET['id']),
+    // 'loai-delete' => loaiDelete($_GET['id']),
+
+
+
+    //CRUD Mã giảm giá
+    // 'magiamgia'        => magiamgiaListAll(),
+    // 'magiamgia-detail' => magiamgiaShowOne($_GET['id']),
+    // 'magiamgia-create' => magiamgiaCreate(),
+    // 'magiamgia-update' => magiamgiaUpdate($_GET['id']),
+    // 'magiamgia-delete' => magiamgiaDelete($_GET['id']),
 };
 
 require_once '../commons/disconnect-db.php';
