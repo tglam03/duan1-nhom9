@@ -30,7 +30,7 @@ function productCreate()
             for ($i = 0; $i < $countimg; $i++) {
                 $product_imgs[$i]['name'] = $product_img['name'][$i];
                 $product_imgs[$i]['tmp_name'] = $product_img['tmp_name'][$i];
-                $data['hinh'] = upload_file($product_imgs[$i], 'uploads/');
+                $data['hinh'] = upload_file($product_imgs[$i], 'uploads/products/');
                 $hinh[] = $data['hinh'];
             }
         }
@@ -115,7 +115,7 @@ function productUpdate($id)
             for ($i = 0; $i < $countimg; $i++) {
                 $product_imgs[$i]['name'] = $product_img['name'][$i];
                 $product_imgs[$i]['tmp_name'] = $product_img['tmp_name'][$i];
-                $data['hinh'] = upload_file($product_imgs[$i], 'uploads/');
+                $data['hinh'] = upload_file($product_imgs[$i], 'uploads/products/');
                 $hinh[] = $data['hinh'];
             }
         }
