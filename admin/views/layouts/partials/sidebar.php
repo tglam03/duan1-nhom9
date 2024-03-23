@@ -31,59 +31,49 @@
 <!-- thêm các danh mục quản lí vào đây -->
 <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-        aria-expanded="true" aria-controls="collapseTwo">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
+        aria-expanded="true" aria-controls="collapseOne">
         <i class="fas fa-fw fa-cog"></i>
         <span>Quản lí khách hàng</span>
     </a>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+    <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Quản lí khách h</h6>
-            <a class="collapse-item" href="<?= BASE_URL_ADMIN ?>/?act=users">Danh sách</a>
-            <a class="collapse-item" href="<?= BASE_URL_ADMIN ?>/?act=users-create">Thêm mới khách hàng</a>
+            <h6 class="collapse-header">Quản lí khách hàng</h6>
+            <a class="collapse-item" href="<?= BASE_URL_ADMIN ?>?act=users">Danh sách</a>
+            <a class="collapse-item" href="<?= BASE_URL_ADMIN ?>?act=users-create">Thêm mới khách hàng</a>
 
         </div>
     </div>
 </li>
 <!-- end 1 nhánh -->
-
-<!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
         aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-fw fa-cog"></i>
-        <span>Quản lí khách hàng</span>
+        <span>Quản lí loại hàng</span>
     </a>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Quản lí khách h</h6>
-            <a class="collapse-item" href="<?= BASE_URL_ADMIN ?>/?act=users">Danh sách</a>
-            <a class="collapse-item" href="<?= BASE_URL_ADMIN ?>/?act=users-create">Thêm mới khách hàng</a>
+            <h6 class="collapse-header">Quản lí loại hàng</h6>
+            <a class="collapse-item" href="<?= BASE_URL_ADMIN ?>?act=category">Danh sách</a>
+            <a class="collapse-item" href="<?= BASE_URL_ADMIN ?>?act=category-create">Thêm mới loại hàng</a>
 
         </div>
     </div>
 </li>
-<!-- end 1 nhánh -->
-
 <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-        aria-expanded="true" aria-controls="collapseTwo">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+        aria-expanded="true" aria-controls="collapseThree">
         <i class="fas fa-fw fa-cog"></i>
-        <span>Quản lí khách hàng</span>
+        <span>Quản lí sản phẩm</span>
     </a>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+    <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Quản lí khách h</h6>
-            <a class="collapse-item" href="<?= BASE_URL_ADMIN ?>/?act=users">Danh sách</a>
-            <a class="collapse-item" href="<?= BASE_URL_ADMIN ?>/?act=users-create">Thêm mới khách hàng</a>
+            <h6 class="collapse-header">Quản lí sản phẩm</h6>
+            <a class="collapse-item" href="<?= BASE_URL_ADMIN ?>?act=product">Danh sách sản phảm</a>
+            <a class="collapse-item" href="<?= BASE_URL_ADMIN ?>?act=product-create">Thêm mới sản phẩm</a>
 
-        </div>
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Sản phẩm:</h6>
-            <a class="collapse-item" href="buttons.html">Thêm sản phẩm</a>
-            <a class="collapse-item" href="cards.html">Cập nhật sản phẩm</a>
-            <a class="collapse-item" href="cards.html">Danh sách sách sản phẩm</a>
         </div>
     </div>
 </li>

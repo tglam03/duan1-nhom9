@@ -60,9 +60,9 @@
                                 </td>
 
                                 <td>
-                                    <a class="btn btn-info" href="<?= BASE_URL_ADMIN ?>/?act=users-detail&id=<?= $user['id'] ?>">Xem chi tiết</a>
-                                    <a class="btn btn-warning" href="<?= BASE_URL_ADMIN ?>/?act=users-update&id=<?= $user['id'] ?>">Cập nhật</a>
-                                    <a class="btn btn-danger" href="<?= BASE_URL_ADMIN ?>/?act=users-delete&id=<?= $user['id'] ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">Xóa</a>
+                                    <a class="btn btn-info mt-1" href="<?= BASE_URL_ADMIN ?>?act=users-detail&id=<?= $user['id'] ?>">Xem chi tiết</a>
+                                    <a class="btn btn-warning mt-1" href="<?= BASE_URL_ADMIN ?>?act=users-update&id=<?= $user['id'] ?>">Cập nhật</a>
+                                    <a class="btn btn-danger mt-1" href="<?= BASE_URL_ADMIN ?>?act=users-delete&id=<?= $user['id'] ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">Xóa</a>
                                 </td>
 
                             </tr>

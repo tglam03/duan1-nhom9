@@ -98,7 +98,7 @@
                             </div>
                         </div>
                     </div>
-
+                                <input type="hidden" name="id" id="id">
 
                     <button type="submit" class="btn btn-info">Cập nhật</button>
                     <a href="<?= BASE_URL_ADMIN ?>/?act=users" class="btn btn-danger">Back to list</a>
