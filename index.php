@@ -15,6 +15,7 @@ require_file(PATH_MODEL);
 $act = $_GET['act'] ?? '/';
 match ($act) {
     '/' => dashboard(),
+    'products' => listProducts(),
 };
 
 require_once './commons/disconnect-db.php';

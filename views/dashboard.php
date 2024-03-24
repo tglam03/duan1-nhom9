@@ -4,7 +4,7 @@
         <div class="owl-carousel owl-theme">
             <?php $titlesptop = 'Attack Air<br>Monarch';
             $psptop = 'Sản phẩm chất lượng';
-            foreach ($product as $key => $value) : ?>
+            foreach ($producthot as $key => $value) : ?>
                 <div class="owl-slide cover" style="background-image: url(<?= explode(',', $value['hinh'])[0]; ?>);">
                     <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
                         <div class="container">
@@ -74,7 +74,7 @@
             <p>Sản phẩm bán chạy nhất mọi thời đại</p>
         </div>
         <div class="row small-gutters">
-            <?php foreach ($product as $key => $value) : ?>
+            <?php foreach ($producttopselling as $key => $value) : ?>
                 <div class="col-6 col-md-4 col-xl-3">
                     <div class="grid_item">
                         <figure>
@@ -146,7 +146,7 @@
                 <p></p>
             </div>
             <div class="owl-carousel owl-theme products_carousel">
-                <?php foreach ($product as $key => $value) : ?>
+                <?php foreach ($productnew as $key => $value) : ?>
                     <div class="item">
                         <div class="grid_item">
                             <span class="ribbon new"><?= ($key <= 2) ? 'New' : $value['giam_gia']; ?></span>

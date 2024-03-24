@@ -75,12 +75,11 @@
                                     </div>
                                 </td>
                                 <td><?php
-                                    if (isset($product['loai_id']) && $product['loai_id'] != '') {
-                                        foreach ($category as  $category) {
-                                            if ($product['loai_id'] == $category['id']) {
-                                                echo $category['ten_loai'];
-                                            } else {
-                                                echo '';
+                                    if (isset($product['loai_id']) && !empty($product['loai_id']) && is_array($category)) {
+                                        foreach ($category as $cat) {
+                                            if ($cat['id'] == $product['loai_id']) {
+                                                echo $cat['ten_loai'];
+                                                break;
                                             }
                                         }
                                     } else {
@@ -142,7 +141,7 @@
                                         // Tăng slideIndex và kiểm tra xem nó có vượt qua số lượng slides hay không
                                         slideIndex<?= $key ?>++;
                                         if (slideIndex<?= $key ?> > slides.length) {
-                                            slideIndex<?=$key?> = 1;
+                                            slideIndex<?= $key ?> = 1;
                                         }
 
                                         // Loại bỏ lớp "active" từ tất cả các nút điều hướng

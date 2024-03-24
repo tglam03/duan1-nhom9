@@ -18,7 +18,11 @@
     <link href="<?= BASE_URL; ?>assets/client/css/style.css" rel="stylesheet">
 
     <!-- SPECIFIC CSS -->
-    <link href="<?= BASE_URL; ?>assets/client/css/home_1.css" rel="stylesheet">
+    <?php
+    if(isset($style) && $style){
+        require_once PATH_VIEW . 'styles/' . $style . '.php';
+    }
+    ;?>
 
     <!-- YOUR CUSTOM CSS -->
     <link href="<?= BASE_URL; ?>assets/client/css/custom.css" rel="stylesheet">
@@ -44,8 +48,11 @@
     <script src="<?= BASE_URL; ?>assets/client/js/main.js"></script>
 
     <!-- SPECIFIC SCRIPTS -->
-    <script src="<?= BASE_URL; ?>assets/client/js/carousel-home-2.js"></script>
-
+    <?php
+    if(isset($script) && $script){
+        require_once PATH_VIEW . 'scripts/' . $script . '.php';
+    }
+    ;?>
 </body>
 
 </html>
