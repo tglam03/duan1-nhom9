@@ -37,13 +37,11 @@
     </div>
     <!-- page -->
 
-
-
     <div id="toTop"></div><!-- Back to top button -->
 
     <!-- COMMON SCRIPTS -->
     <script src="<?= BASE_URL; ?>assets/client/js/common_scripts.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="<?= BASE_URL; ?>assets/client/js/main.js"></script>
 
     <!-- SPECIFIC SCRIPTS -->
     <script src="<?= BASE_URL; ?>assets/client/js/carousel-home-2.js"></script>
