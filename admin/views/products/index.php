@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800"><?= $title ?? '' ?>
-        <a class="btn btn-info" href="<?= BASE_URL_ADMIN ?>/?act=product-create">Thêm mới</a>
+        <a class="btn btn-info" href="<?= BASE_URL_ADMIN ?>?act=product-create">Thêm mới</a>
     </h1>
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -37,7 +37,7 @@
                     </tfoot>
                     <tbody>
                         <?php
-                        foreach ($products as $product) : ?>
+                        foreach ($products as $key => $product) : ?>
                             <tr>
                                 <td><?= $product['id']; ?></td>
                                 <td><?= $product['ten_hh']; ?></td>
@@ -49,27 +49,44 @@
                                         $a = 1;
                                         $hinhs = explode(',', $product['hinh']);
                                         $sohinh = sizeof($hinhs);
-                                        foreach ($hinhs as $hinh) {
-                                            $a++;
-                                            echo '  <div class="mySlides fade">
-                                                        <div class="numbertext">' . $a . ' / ' . $sohinh . '</div>
-                                                            <img src="' . BASE_URL . $hinh . '" style="width:100%">
-                                                        <div class="text">Hình ' . $a . '</div>
-                                                    </div>';
-                                            if ($a == $sohinh) {
-                                                $a = 0;
+                                        if ($sohinh > 1) {
+                                            foreach ($hinhs as $hinh) {
+                                                $a++;
+                                                echo '  <div class="mySlides' . $key . ' fade">
+                                                            <div class="numbertext">' . $a . ' / ' . $sohinh . '</div>
+                                                                <img src="' . BASE_URL . $hinh . '" style="width:100%">
+                                                            <div class="text">Hình ' . $a . '</div>
+                                                        </div>';
+                                                if ($a == $sohinh) {
+                                                    $a = 0;
+                                                }
                                             }
                                         }
                                         ?>
                                     </div>
                                     <div style="text-align:center">
-                                        <?php for ($i = 1; $i <= $sohinh; $i++) {
-                                            echo '<span class="dot"></span>';
-                                        };
+                                        <?php
+                                        if ($sohinh > 1) {
+                                            for ($i = 1; $i <= $sohinh; $i++) {
+                                                echo '<span class="dot' . $key . '"></span>';
+                                            };
+                                        }
                                         ?>
                                     </div>
                                 </td>
-                                <td><?= $product['ten_loai']; ?></td>
+                                <td><?php
+                                    if (isset($product['loai_id']) && !empty($product['loai_id']) && is_array($category)) {
+                                        foreach ($category as $cat) {
+                                            if ($cat['id'] == $product['loai_id']) {
+                                                echo $cat['ten_loai'];
+                                                break;
+                                            }
+                                        }
+                                    } else {
+                                        echo '';
+                                    }
+                                    ?>
+                                </td>
                                 <td>
                                     <div>
                                         <div class="mb-2 d-flex align-items-center">
@@ -107,6 +124,40 @@
                                     <a class="btn btn-danger" href="<?= BASE_URL_ADMIN ?>?act=product-delete&id=<?= $product['id'] ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">Xóa</a>
                                 </td>
                             </tr>
+                            <?php if ($hinhs != '') { ?>
+                                <script>
+                                    let slideIndex<?= $key ?> = 0; // Sử dụng key để tạo slideIndex riêng cho mỗi slideshow
+                                    showSlides<?= $key ?>();
+
+                                    function showSlides<?= $key ?>() {
+                                        let i;
+                                        let slides = document.getElementsByClassName("mySlides<?= $key ?>");
+                                        let dots = document.getElementsByClassName("dot<?= $key ?>");
+                                        // Ẩn tất cả các slide
+                                        for (i = 0; i < slides.length; i++) {
+                                            slides[i].style.display = "none";
+                                        }
+
+                                        // Tăng slideIndex và kiểm tra xem nó có vượt qua số lượng slides hay không
+                                        slideIndex<?= $key ?>++;
+                                        if (slideIndex<?= $key ?> > slides.length) {
+                                            slideIndex<?= $key ?> = 1;
+                                        }
+
+                                        // Loại bỏ lớp "active" từ tất cả các nút điều hướng
+                                        for (i = 0; i < dots.length; i++) {
+                                            dots[i].classList.remove("active");
+                                        }
+
+                                        // Hiển thị slide hiện tại và thêm lớp "active" vào nút điều hướng tương ứng
+                                        slides[slideIndex<?= $key ?> - 1].style.display = "block";
+                                        dots[slideIndex<?= $key ?> - 1].classList.add("active");
+
+                                        // Gọi lại hàm này sau 1 giây để chuyển đổi slide
+                                        setTimeout(showSlides<?= $key ?>, 1000);
+                                    }
+                                </script>
+                            <?php } ?>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
@@ -115,26 +166,3 @@
     </div>
 
 </div>
-<script>
-    let slideIndex = 0;
-    showSlides();
-
-    function showSlides() {
-        let i;
-        let slides = document.getElementsByClassName("mySlides");
-        let dots = document.getElementsByClassName("dot");
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        slideIndex++;
-        if (slideIndex > slides.length) {
-            slideIndex = 1;
-        }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-        slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].className += " active";
-        setTimeout(showSlides, 1000); // Change image every 1 second
-    }
-</script>

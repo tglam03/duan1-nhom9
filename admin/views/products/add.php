@@ -128,7 +128,7 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-info">Thêm mới</button>
-                <a href="<?= BASE_URL_ADMIN ?>/?act=product" class="btn btn-danger">Back to list</a>
+                <a href="<?= BASE_URL_ADMIN ?>?act=product" class="btn btn-danger">Back to list</a>
             </form>
 
         </div>

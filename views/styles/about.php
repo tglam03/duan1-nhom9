@@ -1,0 +1,1 @@
+<link href="<?= BASE_URL; ?>assets/client/css/about.css" rel="stylesheet">

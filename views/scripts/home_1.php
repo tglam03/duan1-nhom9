@@ -1,0 +1,1 @@
+<script src="<?= BASE_URL; ?>assets/client/js/carousel-home-2.js"></script>

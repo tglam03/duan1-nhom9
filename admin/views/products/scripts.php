@@ -62,14 +62,14 @@
                 </div>
                 <input type="hidden" name="variancont" id="variancont" value="${variantCount}">
                 <?php
-                    if (isset($_POST['variancont'])) {
-                        $vartiantcount = $_POST['variancont'];
+                if (isset($_POST['variancont'])) {
+                    $vartiantcount = $_POST['variancont'];
                 ?>
                 <div class="d-flex justify-content-between">
-                    <span class=" text-warning"><?=(isset($errors[$vartiantcount]['size'])&& $errors[$vartiantcount]['size'] != "")?$errors[$vartiantcount]['size']:'';?></span>
-                    <span class=" text-warning"><?=(isset($errors[$vartiantcount]['soluong'])&& $errors[$vartiantcount]['soluong'] != "")?$errors[$vartiantcount]['soluong']:'';?></span>
+                    <span class=" text-warning"><?= (isset($errors[$vartiantcount]['size']) && $errors[$vartiantcount]['size'] != "") ? $errors[$vartiantcount]['size'] : ''; ?></span>
+                    <span class=" text-warning"><?= (isset($errors[$vartiantcount]['soluong']) && $errors[$vartiantcount]['soluong'] != "") ? $errors[$vartiantcount]['soluong'] : ''; ?></span>
                 </div>   
-                <?php }?> 
+                <?php } ?> 
                 <div><button type="button" class="btn btn-danger mb-2" onclick="removeVariant(${variantCount})">Xóa</button></div>
    `;
         document.getElementById("variants").appendChild(variantDiv);
@@ -87,5 +87,45 @@
         } else {
             quantityDiv.style.display = "none";
         }
+    }
+    window.onload = function() {
+        // Lặp qua tất cả các variant để kiểm tra trạng thái của checkbox
+        var variantCount = 1; // Bắt đầu với variantCount là 1
+        while (document.getElementById(`variant_size_${variantCount}_S`)) { // Kiểm tra xem checkbox có tồn tại không
+            ['S', 'M', 'L', 'XL', 'XXL'].forEach(function(size) {
+                showQuantityInput(variantCount, size); // Kiểm tra trạng thái của checkbox cho mỗi size của từng variant
+            });
+            variantCount++; // Tăng variantCount lên 1 để kiểm tra variant tiếp theo
+        }
+    };
+    let slideIndex = 0; // Sử dụng key để tạo slideIndex riêng cho mỗi slideshow
+    showSlides();
+
+    function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        // Ẩn tất cả các slide
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+
+        // Tăng slideIndex và kiểm tra xem nó có vượt qua số lượng slides hay không
+        slideIndex++;
+        if (slideIndex > slides.length) {
+            slideIndex = 1;
+        }
+
+        // Loại bỏ lớp "active" từ tất cả các nút điều hướng
+        for (i = 0; i < dots.length; i++) {
+            dots[i].classList.remove("active");
+        }
+
+        // Hiển thị slide hiện tại và thêm lớp "active" vào nút điều hướng tương ứng
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].classList.add("active");
+
+        // Gọi lại hàm này sau 1 giây để chuyển đổi slide
+        setTimeout(showSlides, 1000);
     }
 </script>

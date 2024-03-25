@@ -12,7 +12,7 @@
     }
     /* Slideshow container */
     .slideshow-container {
-        max-width: 1000px;
+        max-width: 300px;
         position: relative;
         margin: auto;
     }
@@ -27,6 +27,7 @@
         width: 100%;
         font-weight: bold;
         text-align: center;
+        margin-bottom: 5%;
     }
 
     /* Number text (1/3 etc) */

@@ -34,33 +34,6 @@ if (!function_exists('showAllVariantProduct')) {
         }
     }
 }
-if (!function_exists('loadAllsanpham')) {
-    function loadAllsanpham($id)
-    {
-        try {
-            $sql = "SELECT c.*, d.ten_loai 
-            FROM sanpham AS c 
-            JOIN loai AS d ON c.loai_id = d.id 
-            WHERE 1";
-
-            if ($id != "") {
-                $sql .= " AND c.id = $id";
-            }
-
-            $sql .= " GROUP BY c.id, c.ten_hh 
-              ORDER BY c.id DESC";
-            $stmt = $GLOBALS['conn']->prepare($sql);
-
-            $stmt->execute();
-
-            $result = $stmt->fetchAll();
-
-            return $result;
-        } catch (\Exception $e) {
-            debug($e);
-        }
-    }
-}
 if (!function_exists('deleteProduct')) {
     function deleteProduct($tableName, $hh_id)
     {
@@ -76,6 +49,7 @@ if (!function_exists('deleteProduct')) {
         }
     }
 }
+//chuyển size số lượng thành mảng 
 if (!function_exists('movearray')) {
     function movearray($products, $productsColors, $productsSizes)
     {
@@ -110,7 +84,7 @@ if (!function_exists('movearray')) {
         }
     }
 }
-
+//chuyển đổi size chuỗi số lượng thành tổng màu thành chuỗi
 if (!function_exists('productConvert')) {
     function productConvert($products)
     {
@@ -146,3 +120,49 @@ if (!function_exists('productConvert')) {
         }
     }
 }
+//kiểm tra sản phẩm có size gì và số lượng là bao nhiêu
+// if (!function_exists('checkmausize')) {
+//     function checkmausize($productsColorsandsize)
+//     {
+//         try {
+//             $mangsize = [];
+//             $mangsoluong = [];
+//             $mangid = [];
+//             $checksize = [];
+//             foreach ($productsColorsandsize['mau'] as $key => $mau) {
+//                 foreach ($productsColorsandsize['size'] as $size) {
+//                     if ($mau['id'] == $size['mau_id']) {
+//                         if ($size['size'] == 'S') {
+//                             $cheksize[$key]['s']['size'] = 1;
+//                             $cheksize[$key]['s']['soluong']= $size['soluong'];
+//                             $cheksize[$key]['s']['id'] =$size['id'];
+//                         }
+//                         if ($size['size'] == 'M') {
+//                             $cheksize[$key]['m']['size'] = 1;
+//                             $cheksize[$key]['m']['soluong']= $size['soluong'];
+//                             $cheksize[$key]['m']['id'] =$size['id'];
+//                         }
+//                         if ($size['size'] == 'L') {
+//                             $cheksize[$key]['l']['size'] = 1;
+//                             $cheksize[$key]['l']['soluong']= $size['soluong'];
+//                             $cheksize[$key]['l']['id'] =$size['id'];
+//                         }
+//                         if ($size['size'] == 'XL') {
+//                             $cheksize[$key]['xl']['size'] = 1;
+//                             $cheksize[$key]['xl']['soluong']= $size['soluong'];
+//                             $cheksize[$key]['xl']['id'] =$size['id'];
+//                         }
+//                         if ($size['size'] == 'XXL') {
+//                             $cheksize[$key]['xxl']['size'] = 1;
+//                             $cheksize[$key]['xxl']['soluong']= $size['soluong'];
+//                             $cheksize[$key]['xxl']['id'] =$size['id'];
+//                         }
+//                     }
+//                 }
+//             }
+//             return $cheksize;
+//         } catch (\Exception $e) {
+//             debug($e);
+//         }
+//     }
+// }
