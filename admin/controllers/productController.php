@@ -190,6 +190,7 @@ function productDelete($id)
     deleteProduct('sizehh', $id);
     deleteProduct('mauhh', $id);
     delete2('sanpham', $id);
+    $_SESSION['success'] = 'Xóa thành công';
     header('Location: ' . BASE_URL_ADMIN . '?act=product');
     exit();
 }
