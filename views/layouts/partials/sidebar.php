@@ -30,7 +30,7 @@
 							<li>
 								<a href="<?= BASE_URL; ?>?act=products">Sản phẩm</a>
 							</li>
-							<li><a href="about.html">Giới thiệu</a></li>
+							<li><a href="<?= BASE_URL; ?>?act=about">Giới thiệu</a></li>
 							<li><a href="account.html">Tạo tài khoản</a></li>
 							<li><a href="help.html">Trợ giúp</a></li>
 						</ul>

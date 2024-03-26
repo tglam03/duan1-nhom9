@@ -16,6 +16,7 @@ $act = $_GET['act'] ?? '/';
 match ($act) {
     '/' => dashboard(),
     'products' => listProducts(),
+    'about' => about(),
 };
 
 require_once './commons/disconnect-db.php';

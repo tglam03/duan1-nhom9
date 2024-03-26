@@ -46,11 +46,13 @@
     <!-- COMMON SCRIPTS -->
     <script src="<?= BASE_URL; ?>assets/client/js/common_scripts.min.js"></script>
     <script src="<?= BASE_URL; ?>assets/client/js/main.js"></script>
-
     <!-- SPECIFIC SCRIPTS -->
     <?php
     if(isset($script) && $script){
         require_once PATH_VIEW . 'scripts/' . $script . '.php';
+    }
+    if(isset($script1) && $script1){
+        require_once PATH_VIEW . 'products/' . $script1 . '.php';
     }
     ;?>
 </body>

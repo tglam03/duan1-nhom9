@@ -78,7 +78,7 @@
                 <div class="col-6 col-md-4 col-xl-3">
                     <div class="grid_item">
                         <figure>
-                            <span class="ribbon off"><?= $value['giam_gia']; ?>%</span>
+                            <span class="ribbon off">-<?= $value['giam_gia']; ?>%</span>
                             <a href="#0">
                                 <img class="img-fluid lazy" src="<?= explode(',', $value['hinh'])[0]; ?>" alt="">
                                 <img class="img-fluid lazy" src="<?= explode(',', $value['hinh'])[0]; ?>" data-src="<?= explode(',', $value['hinh'])[1]; ?>"" alt="">
@@ -100,8 +100,6 @@
                     <ul>
                         <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to
                                     favorites</span></a></li>
-                        <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to
-                                    compare</span></a></li>
                         <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a>
                         </li>
                     </ul>
@@ -149,7 +147,7 @@
                 <?php foreach ($productnew as $key => $value) : ?>
                     <div class="item">
                         <div class="grid_item">
-                            <span class="ribbon new"><?= ($key <= 2) ? 'New' : $value['giam_gia']; ?></span>
+                            <span class="ribbon new"><?= ($key <= 2) ? 'New' : '-'.$value['giam_gia'].'%'; ?></span>
                             <figure>
                                 <a href="product-detail-1.html">
                                     <img class="owl-lazy" src="<?= explode(',', $value['hinh'])[0]; ?>" data-src="<?= explode(',', $value['hinh'])[1]; ?>" alt="">
@@ -169,8 +167,6 @@
                             <ul>
                                 <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to
                                             favorites</span></a></li>
-                                <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to
-                                            compare</span></a></li>
                                 <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a>
                                 </li>
                             </ul>
