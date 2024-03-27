@@ -9,6 +9,18 @@
             <h6 class="m-0 font-weight-bold text-primary">DataTables</h6>
         </div>
         <div class="card-body">
+
+            <?php if (isset($_SESSION['success'])) : ?>
+
+
+                <div class="alert alert-success">
+                    <?= $_SESSION['success'] ?>
+                </div>
+
+                <?php unset($_SESSION['success']) ?>
+
+            <?php endif; ?>
+
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>

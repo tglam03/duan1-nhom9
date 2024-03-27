@@ -239,15 +239,15 @@ function validateUserUpdate($id, $data)
         $errors[] = 'Địa chỉ bắt buộc phải nhập';
     }
 
-    if (!empty($data['hinh']) && $data['hinh']['size'] > 0) {
-        $typeImage = ['image/png', 'image/jpg', 'image/jpeg'];
+    // if (!empty($data['hinh']) && $data['hinh']['size'] > 0) {
+    //     $typeImage = ['hinh/png', 'hinh/jpg', 'hinh/jpeg'];
 
-        if ($data['hinh']['size'] > 2 * 1024 * 1024) {
-            $errors[] = 'Hình ảnh phải có dung lượng nhỏ hơn 2M';
-        } else if (!in_array($data['hinh']['type'], $typeImage)) {
-            $errors[] = 'Hình ảnh chỉ chấp nhận định dạng file: png, jpg, jpeg';
-        }
-    }
+    //     if ($data['hinh']['size'] > 2 * 1024 * 1024) {
+    //         $errors[] = 'Hình ảnh phải có dung lượng nhỏ hơn 2M';
+    //     } else if (!in_array($data['hinh']['type'], $typeImage)) {
+    //         $errors[] = 'Hình ảnh chỉ chấp nhận định dạng file: png, jpg, jpeg';
+    //     }
+    // }
 
     if (!empty($errors)) {
         $_SESSION['errors'] = $errors;

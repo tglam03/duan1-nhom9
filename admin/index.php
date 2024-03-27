@@ -58,11 +58,11 @@ match ($act) {
 
 
     //CRUD Mã giảm giá
-    // 'magiamgia'        => magiamgiaListAll(),
-    // 'magiamgia-detail' => magiamgiaShowOne($_GET['id']),
-    // 'magiamgia-create' => magiamgiaCreate(),
-    // 'magiamgia-update' => magiamgiaUpdate($_GET['id']),
-    // 'magiamgia-delete' => magiamgiaDelete($_GET['id']),
+    // 'voucher'        => voucherListAll(),
+    // 'voucher-detail' => voucherShowOne($_GET['id']),
+    // 'voucher-create' => voucherCreate(),
+    // 'voucher-update' => voucherUpdate($_GET['id']),
+    // 'voucher-delete' => voucherDelete($_GET['id']),
 };
 
 require_once '../commons/disconnect-db.php';

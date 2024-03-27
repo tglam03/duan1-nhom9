@@ -22,7 +22,7 @@
     if(isset($style) && $style){
         require_once PATH_VIEW . 'styles/' . $style . '.php';
     }
-    ;?>
+    ?>
 
     <!-- YOUR CUSTOM CSS -->
     <link href="<?= BASE_URL; ?>assets/client/css/custom.css" rel="stylesheet">

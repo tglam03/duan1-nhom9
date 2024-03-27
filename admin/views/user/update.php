@@ -93,8 +93,9 @@
                                 <div class="custom-file mb-3">
                                     <input type="file" class="custom-file-input" id="hinh" name="hinh">
                                     <label name="hinh" class="custom-file-label" for="customFile">Choose file</label>
-                                    <img src="<?= BASE_URL . $user['hinh'] ?>" width="100px" alt="">
+                                   
                                 </div>
+                                <img src="<?= BASE_URL . $users['hinh'] ?>" width="100px" alt="">
                             </div>
                         </div>
                     </div>

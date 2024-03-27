@@ -25,7 +25,7 @@ function productCreate()
         //validate
         $product_img = $_FILES['hinh'] ?? null;
         $countimg = count($product_img['name']);
-        // //xử lý hình ảnh
+         //xử lý hình ảnh
         if (!empty($product_img)) {
             for ($i = 0; $i < $countimg; $i++) {
                 $product_imgs[$i]['name'] = $product_img['name'][$i];
@@ -217,6 +217,7 @@ function productDelete($id)
     deleteProduct('sizehh', $id);
     deleteProduct('mauhh', $id);
     delete2('sanpham', $id);
+    $_SESSION['success'] = 'Xóa thành công';
     header('Location: ' . BASE_URL_ADMIN . '?act=product');
     exit();
 }
