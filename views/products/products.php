@@ -132,12 +132,12 @@
 					<div class="grid_item">
 						<figure>
 							<span class="ribbon off">-<?= $value['giam_gia']; ?>%</span>
-							<a href="product-detail-1.html">
+							<a href="<?= BASE_URL; ?>?act=product-detail&id=<?=$value['id']?>">
 								<img class="img-fluid lazy" src="<?= explode(',', $value['hinh'])[0]; ?>" alt="">
 							</a>
 							<div data-countdown="2019/05/15" class="countdown"></div>
 						</figure>
-						<a href="product-detail-1.html">
+						<a href="<?= BASE_URL; ?>?act=product-detail&id=<?=$value['id']?>">
 							<h3><?= $value['ten_hh']; ?></h3>
 						</a>
 						<div class="price_box">

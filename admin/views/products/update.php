@@ -52,7 +52,7 @@
                                         <?php $mangsize = [];
                                         $mangsoluong = [];
                                         $mangid = [];
-                                        foreach ($productsColorsandsize['mau'] as $key => $mau) {
+                                        foreach ($productsColorsandsize['mau'] as $key => $mau) :
                                             foreach ($productsColorsandsize['size'] as $size) {
                                                 if ($mau['id'] == $size['mau_id']) {
                                                     if ($size['size'] == 'S') {
@@ -96,7 +96,7 @@
                                                         </div>
                                                         <div id="soluongsize_<?= $key + 1 ?>_S" style="display: none;">
                                                             <label class="form-label">Số lượng:</label>
-                                                            <input type="text" value="<?= (isset($mangsoluong[$key]['s']) && $mangsoluong[$key]['s'] != 0) ? $mangsoluong[$key]['s'] : ''; ?>" class=" w-100" name="variant[<?= $key + 1 ?>][size][S][]" id="">
+                                                            <input type="text" value="<?= (isset($mangsoluong[$key]['s']) && $mangsoluong[$key]['s'] > 0) ? $mangsoluong[$key]['s'] : ''; ?>" class=" w-100" name="variant[<?= $key + 1 ?>][size][S][]" id="">
                                                         </div>
                                                     </div>
                                                     <div class="mr-2 col-md-3">
@@ -105,7 +105,7 @@
                                                         </div>
                                                         <div id="soluongsize_<?= $key + 1 ?>_M" style="display: none;">
                                                             <label class="form-label">Số lượng:</label>
-                                                            <input value="" type="text" value="<?= (isset($mangsoluong[$key]['m']) && $mangsoluong[$key]['m'] != 0) ? $mangsoluong[$key]['m'] : ''; ?>" class=" w-100" name="variant[<?= $key + 1 ?>][size][M][]" id="">
+                                                            <input type="text" value="<?= (isset($mangsoluong[$key]['m']) && $mangsoluong[$key]['m'] > 0) ? $mangsoluong[$key]['m'] : ''; ?>" class=" w-100" name="variant[<?= $key + 1 ?>][size][M][]" id="">
                                                         </div>
                                                     </div>
                                                     <div class="mr-2 col-md-3">
@@ -114,7 +114,7 @@
                                                         </div>
                                                         <div id="soluongsize_<?= $key + 1 ?>_L" style="display: none;">
                                                             <label class="form-label">Số lượng:</label>
-                                                            <input type="text" class=" w-100" value="<?= (isset($mangsoluong[$key]['l']) && $mangsoluong[$key]['l'] != 0) ? $mangsoluong[$key]['l'] : ''; ?>" name="variant[<?= $key + 1 ?>][size][L][]" id="">
+                                                            <input type="text" class=" w-100" value="<?= (isset($mangsoluong[$key]['l']) && $mangsoluong[$key]['l'] > 0) ? $mangsoluong[$key]['l'] : ''; ?>" name="variant[<?= $key + 1 ?>][size][L][]" id="">
                                                         </div>
                                                     </div>
                                                     <div class="mr-2 col-md-3">
@@ -123,7 +123,7 @@
                                                         </div>
                                                         <div id="soluongsize_<?= $key + 1 ?>_XL" style="display: none;">
                                                             <label class="form-label">Số lượng:</label>
-                                                            <input type="text" class=" w-100" value="<?= (isset($mangsoluong[$key]['xl']) && $mangsoluong[$key]['xl'] != 0) ? $mangsoluong[$key]['xl'] : ''; ?>" name="variant[<?= $key + 1 ?>][size][XL][]" id="">
+                                                            <input type="text" class=" w-100" value="<?= (isset($mangsoluong[$key]['xl']) && $mangsoluong[$key]['xl'] > 0) ? $mangsoluong[$key]['xl'] : ''; ?>" name="variant[<?= $key + 1 ?>][size][XL][]" id="">
                                                         </div>
                                                     </div>
                                                     <div class="mr-2 col-md-3">
@@ -132,7 +132,7 @@
                                                         </div>
                                                         <div id="soluongsize_<?= $key + 1 ?>_XXL" style="display: none;">
                                                             <label class="form-label">Số lượng:</label>
-                                                            <input type="text" class=" w-100" value="<?= (isset($mangsoluong[$key]['xxl']) && $mangsoluong[$key]['xxl'] != 0) ? $mangsoluong[$key]['xxl'] : ''; ?>" name="variant[<?= $key + 1 ?>][size][XXL][]" id="">
+                                                            <input type="text" class=" w-100" value="<?= (isset($mangsoluong[$key]['xxl']) && $mangsoluong[$key]['xxl'] > 0) ? $mangsoluong[$key]['xxl'] : ''; ?>" name="variant[<?= $key + 1 ?>][size][XXL][]" id="">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -147,7 +147,7 @@
                                             <input type="hidden" name="variant[<?= $key + 1 ?>][size][L][idsize]" value="<?= (isset($mangid[$key]['l']) && $mangid[$key]['l'] != '') ? $mangid[$key]['l'] : ''; ?>">
                                             <input type="hidden" name="variant[<?= $key + 1 ?>][size][XL][idsize]" value="<?= (isset($mangid[$key]['xl']) && $mangid[$key]['xl'] != '') ? $mangid[$key]['xl'] : ''; ?>">
                                             <input type="hidden" name="variant[<?= $key + 1 ?>][size][XXL][idsize]" value="<?= (isset($mangid[$key]['xxl']) && $mangid[$key]['xxl'] != '') ? $mangid[$key]['xxl'] : ''; ?>">
-                                        <?php }; ?>
+                                        <?php endforeach; ?>
                                     </div>
                                 </div>
                                 <button type="button" class="btn btn-dark" onclick="addVariant()">Thêm biến thể</button>
@@ -201,8 +201,40 @@
                         </div>
                     </div>
                     <input type="hidden" name="hinh" value="<?= $product['hinh']; ?>">
-                    <button type="submit" class="btn btn-info">Cập nhật</button>
+                    <button type="submit" name="submit" class="btn btn-info">Cập nhật</button>
                 </form>
         </div>
     </div>
 </div>
+<script>
+let slideIndex = 0; // Sử dụng key để tạo slideIndex riêng cho mỗi slideshow
+    showSlides();
+
+    function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        // Ẩn tất cả các slide
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+
+        // Tăng slideIndex và kiểm tra xem nó có vượt qua số lượng slides hay không
+        slideIndex++;
+        if (slideIndex > slides.length) {
+            slideIndex = 1;
+        }
+
+        // Loại bỏ lớp "active" từ tất cả các nút điều hướng
+        for (i = 0; i < dots.length; i++) {
+            dots[i].classList.remove("active");
+        }
+
+        // Hiển thị slide hiện tại và thêm lớp "active" vào nút điều hướng tương ứng
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].classList.add("active");
+
+        // Gọi lại hàm này sau 1 giây để chuyển đổi slide
+        setTimeout(showSlides, 1000);
+    }
+</script>

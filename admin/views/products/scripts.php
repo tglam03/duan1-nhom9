@@ -1,5 +1,5 @@
 <script>
-    var variantCount = 1; // Đặt variantCount ở ngoài hàm để có thể sử dụng chung cho cả hai hàm
+    var variantCount = <?=(isset($productsColorsandsize['mau'])&&is_array($productsColorsandsize['mau']))?sizeof($productsColorsandsize['mau']):'1';?>; // Đặt variantCount ở ngoài hàm để có thể sử dụng chung cho cả hai hàm
     function addVariant() {
         ++variantCount;
         var variantDiv = document.createElement("div");
@@ -98,34 +98,4 @@
             variantCount++; // Tăng variantCount lên 1 để kiểm tra variant tiếp theo
         }
     };
-    let slideIndex = 0; // Sử dụng key để tạo slideIndex riêng cho mỗi slideshow
-    showSlides();
-
-    function showSlides() {
-        let i;
-        let slides = document.getElementsByClassName("mySlides");
-        let dots = document.getElementsByClassName("dot");
-        // Ẩn tất cả các slide
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-
-        // Tăng slideIndex và kiểm tra xem nó có vượt qua số lượng slides hay không
-        slideIndex++;
-        if (slideIndex > slides.length) {
-            slideIndex = 1;
-        }
-
-        // Loại bỏ lớp "active" từ tất cả các nút điều hướng
-        for (i = 0; i < dots.length; i++) {
-            dots[i].classList.remove("active");
-        }
-
-        // Hiển thị slide hiện tại và thêm lớp "active" vào nút điều hướng tương ứng
-        slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].classList.add("active");
-
-        // Gọi lại hàm này sau 1 giây để chuyển đổi slide
-        setTimeout(showSlides, 1000);
-    }
 </script>

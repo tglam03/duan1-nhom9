@@ -17,6 +17,7 @@ match ($act) {
     '/' => dashboard(),
     'products' => listProducts(),
     'about' => about(),
+    'product-detail' => productDetail(),
 };
 
 require_once './commons/disconnect-db.php';

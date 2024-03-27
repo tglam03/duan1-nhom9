@@ -37,8 +37,8 @@ function productCreate()
         $data = [
             'ten_hh' => $_POST['ten_hh'] ?? null,
             'don_gia' => $_POST['don_gia'] ?? null,
-            'giam_gia' => (isset($_POST['giam_gia']) && $_POST['giam_gia'] != "")?$_POST['giam_gia']:0,
-            'loai_id' =>  (isset($_POST['loai_id']) && $_POST['loai_id'] != "")?$_POST['loai_id']:null,
+            'giam_gia' => (isset($_POST['giam_gia']) && $_POST['giam_gia'] != "") ? $_POST['giam_gia'] : 0,
+            'loai_id' => (isset($_POST['loai_id']) && $_POST['loai_id'] != "") ? $_POST['loai_id'] : null,
             'ngay_nhap' => date('h:i:s d/m/Y'),
             'mo_ta' => $_POST['mo_ta'] ?? null,
             'hinh' => implode(',', $hinh) ?? null,
@@ -58,7 +58,6 @@ function productCreate()
                 }
             }
         }
-        // debug($data1);
         $errors = validateProduct($data, $data1, implode(',', $hinh));
         if (!empty($errors)) {
             require_once PATH_VIEW_ADMIN . 'layouts/master.php';
@@ -102,7 +101,7 @@ function productUpdate($id)
     $style = 'datatable';
     $style2 = 'style';
     $category = listAll('loai');
-    $product = showOne('sanpham',$id);
+    $product = showOne('sanpham', $id);
     $productsColors = showAllVariantProduct('mauhh', $id);
     $productsSizes = showAllVariantProduct('sizehh', $id);
     $productsColorsandsize = array('mau' => $productsColors, 'size' => $productsSizes);
@@ -122,8 +121,8 @@ function productUpdate($id)
         $data = [
             'ten_hh' => $_POST['ten_hh'] ?? null,
             'don_gia' => $_POST['don_gia'] ?? null,
-            'giam_gia' => (isset($_POST['giam_gia']) && $_POST['giam_gia'] != "")?$_POST['giam_gia']:0,
-            'loai_id' =>  (isset($_POST['loai_id']) && $_POST['loai_id'] != "")?$_POST['loai_id']:null,
+            'giam_gia' => (isset($_POST['giam_gia']) && $_POST['giam_gia'] != "") ? $_POST['giam_gia'] : 0,
+            'loai_id' => (isset($_POST['loai_id']) && $_POST['loai_id'] != "") ? $_POST['loai_id'] : null,
             'ngay_nhap' => date('h:i:s d/m/Y'),
             'mo_ta' => $_POST['mo_ta'] ?? null,
             'hinh' => (!empty(implode(',', $hinh))) ? implode(',', $hinh) : $_POST['hinh'],
@@ -135,52 +134,80 @@ function productUpdate($id)
                 'mau' => $variant[$i]['mau'],
             ];
             foreach ($variant[$i]['size'] as $value) {
-                if (!empty($value[1]) && !empty($value[0])) {
+                if (isset($value['idsize']) && $value['idsize'] != "") {
                     $data1[$i][] = [
-                        'size' => $value[0],
-                        'soluong' => $value[1],
+                        'idsize' => $value['idsize'],
+                        'size' => (isset($value[0]) && $value[0] != "") ? $value[0] : '',
+                        'soluong' => (isset($value[1]) && $value[1] != "") ? $value[1] : '',
+                    ];
+                } else {
+                    if (!empty($value[1]) && !empty($value[0])){
+                        $data1[$i][] = [
+                            'size' => (isset($value[0]) && $value[0] != "") ? $value[0] : '',
+                            'soluong' => (isset($value[1]) && $value[1] != "") ? $value[1] : '',
                     ];
                 }
+                }
             }
-            // debug($data1);
-            $errors = validateProduct($data, $data1, 1);
-            if (!empty($errors)) {
-                require_once PATH_VIEW_ADMIN . 'layouts/master.php';
-                exit();
-            }
-            //end validate
+        }
+        $errors = validateProduct($data, $data1, 1);
+        if (!empty($errors)) {
+            require_once PATH_VIEW_ADMIN . 'layouts/master.php';
+            exit();
+        }
+        //end validate
 
-            update('sanpham', $id, $data);
-    //xử lý biến thể
-            for ($i = 1; $i <= $soluong; $i++) {
+        update('sanpham', $id, $data);
+        //xử lý biến thể
+        for ($i = 1; $i <= $soluong; $i++) {
+            $check = 0;
+            foreach ($variant[$i]['size'] as $value) {
+                if (!empty($value[1]) && !empty($value[0])) {
+                    $check = 1;
+                    break;
+                }
+            }
+            if (!empty($variant[$i]['idmau'])) {
                 $data = [
                     'mau' => $variant[$i]['mau'],
                 ];
                 update('mauhh', $variant[$i]['idmau'], $data);
                 $idmau = $variant[$i]['idmau'];
-                foreach ($variant[$i]['size'] as $value) {
-                    if (!empty($value[1]) && !empty($value[0]) && !empty($value['idsize'])) {
-                        $data = [
-                            'size' => $value[0],
-                            'soluong' => $value[1],
-                        ];
-                        update('sizehh',$value['idsize'], $data);
-                    }elseif(empty($value[1]) && !empty($value['idsize'])){
-                        delete2('sizehh',$value['idsize']);
-                    }elseif(!empty($value[1]) && !empty($value[0]) && empty($value['idsize'])){
-                        $data = [
-                            'mau_id' => $idmau,
-                            'hh_id' => $id,
-                            'size' => $value[0],
-                            'soluong' => $value[1],
-                        ];
-                        insert('sizehh',$data);
-                    }
+            } else {
+                if ($check == 1) {
+                    $data = [
+                        'hh_id' => $id,
+                        'mau' => $variant[$i]['mau'],
+                    ];
+                    insert('mauhh', $data);
+                    $idmau = lastID('mauhh');
                 }
+            }
+            foreach ($variant[$i]['size'] as $value) {
+                if (!empty($value[1]) && !empty($value[0]) && !empty($value['idsize'])) {
+                    $data = [
+                        'size' => $value[0],
+                        'soluong' => $value[1],
+                    ];
+                    update('sizehh', $value['idsize'], $data);
+                } elseif (empty($value[1]) && !empty($value['idsize'])) {
+                    delete2('sizehh', $value['idsize']);
+                } elseif (!empty($value[1]) && !empty($value[0]) && empty($value['idsize'])) {
+                    $data = [
+                        'mau_id' => $idmau,
+                        'hh_id' => $id,
+                        'size' => $value[0],
+                        'soluong' => $value[1],
+                    ];
+                    insert('sizehh', $data);
+                }
+            }
+            if ($check == 0) {
+                delete2('mauhh', $idmau);
             }
         }
         $_SESSION['success'] = 'Cập nhật thành công';
-        header('Location: ' . BASE_URL_ADMIN .  '?act=product-update&id='. $id);
+        header('Location: ' . BASE_URL_ADMIN .  '?act=product-update&id=' . $id);
     }
     require_once PATH_VIEW_ADMIN . 'layouts/master.php';
 }
@@ -206,15 +233,15 @@ function validateProduct($data, $data1, $data2)
             $errors['don_gia'] = 'Đơn giá bắt buộc phải nhập';
         } else if ($data['don_gia'] < 0) {
             $errors['don_gia'] = 'Đơn giá phải lớn hơn 0';
-        }elseif(!is_numeric($data['don_gia'])){
+        } elseif (!is_numeric($data['don_gia'])) {
             $errors['don_gia'] = 'Đơn giá phải là một số';
         }
         //check mota
         if (empty($data['mo_ta'])) {
             $errors['mo_ta'] = 'Mô tả bắt buộc phải nhập';
         }
-        if(!empty($data['giam_gia'])){
-            if($data['giam_gia'] < 0 || $data['giam_gia'] > 100 ){
+        if (!empty($data['giam_gia'])) {
+            if ($data['giam_gia'] < 0 || $data['giam_gia'] > 100) {
                 $errors['giam_gia'] = 'Giảm giá phải nằm trong khoảng 0 - 100';
             }
         }
@@ -223,17 +250,22 @@ function validateProduct($data, $data1, $data2)
         //check hinh
         $errors['hinh'] = 'Hình ảnh không được để trống';
     }
-    if (!empty($data1)) {
-        //check mota
-        for ($i = 1; $i <= sizeof($data1); $i++) {
-            if (empty($data1[$i][1]['size'])) {
-                $errors[$i]['size'] = 'Bắt buộc chọn size';
-            }
+    for ($i = 1; $i <= sizeof($data1); $i++) {
+        if (isset($data1[$i][1]['idsize']) && !empty($data1[$i][1]['idsize'])) {
             if (empty($data1[$i][1]['soluong'])) {
-                $errors[$i]['soluong'] = 'Bắt buộc nhập số lượng';
-            } elseif ($data1[$i][1]['soluong'] < 0) {
-                $errors[$i]['soluong'] = 'Số lượng lớn hơn 0';
+                // Nếu có idsize nhưng không có size, bỏ qua và tiếp tục vòng lặp
+                continue;
             }
+        }
+    
+        // Kiểm tra các điều kiện khác và ghi lại lỗi nếu cần
+        if (empty($data1[$i][1]['size'])) {
+            $errors[$i]['size'] = 'Bắt buộc chọn size';
+        }
+        if (empty($data1[$i][1]['soluong'])) {
+            $errors[$i]['soluong'] = 'Bắt buộc nhập số lượng';
+        } elseif ($data1[$i][1]['soluong'] < 0) {
+            $errors[$i]['soluong'] = 'Số lượng lớn hơn 0';
         }
     }
     return $errors;

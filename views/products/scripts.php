@@ -9,9 +9,9 @@
                 window.location.reload();
             }
         };
-        xhttp.open("GET", "?act=products&<?=(isset($page)&&$page!="")?'page='.$page.'&':'';?>sort=" + selectedValue, true);
+        xhttp.open("GET", "?act=products&<?=(isset($_GET['page'])&&$_GET['page']!="")?'page='.$_GET['page'].'&':'';?>sort=" + selectedValue, true);
         xhttp.send();
-        var newUrl = window.location.pathname + "?act=products&<?=(isset($page)&&$page!="")?'page='.$page.'&':'';?>sort=" + selectedValue;
+        var newUrl = window.location.pathname + "?act=products&<?=(isset($_GET['page'])&&$_GET['page']!="")?'page='.$_GET['page'].'&':'';?>sort=" + selectedValue;
         history.pushState({
             path: newUrl
         }, '', newUrl);
