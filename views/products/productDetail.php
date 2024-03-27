@@ -65,9 +65,9 @@
                                 <label class="col-xl-5 col-lg-5 col-md-6 col-6"><strong>Size</strong> - Size Guide <a href="#0" data-bs-toggle="modal" data-bs-target="#size-modal"><i class="ti-help-alt"></i></a></label>
                                 <div class="col-xl-4 col-lg-5 col-md-6 col-6">
                                     <div class="custom-select-form">
-                                        <select class="wide">
+                                        <select class="wide" id="sizeSelect">
                                             <?php foreach (explode(',', $product['mau_size_soluong']['size']) as $keysize => $sizesp) {
-                                                if ($keysize == 0) echo '<option value="' . $sizesp . '" ac>Small (' . $sizesp . ')</option>';
+                                                if ($keysize == 0) echo '<option value="' . $sizesp . '" selected>Small (' . $sizesp . ')</option>';
                                                 else echo '<option value="' . $sizesp . '">' . $sizesp . '</option>';
                                             }; ?>
                                         </select>
