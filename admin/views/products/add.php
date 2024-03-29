@@ -6,6 +6,9 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Create</h6>
+            <div style="color: red;">
+                <?= (isset($_SESSION['success']) && $_SESSION['success'] != "") ? $_SESSION['success'] : ''; unset($_SESSION['success']); ?>
+            </div>
         </div>
         <div class="card-body">
             <form action="<?= BASE_URL_ADMIN .'?act=product-create' ?>" method="post" enctype="multipart/form-data">

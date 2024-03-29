@@ -8,7 +8,7 @@
         <div class="card-header py-3 d-flex align-items-center">
             <h6 class="m-0 mr-3 font-weight-bold text-primary">Update</h6>
             <div style="color: red;">
-                <?= (isset($_SESSION['success']) && $_SESSION['success'] != "") ? $_SESSION['success'] : ''; ?>
+                <?= (isset($_SESSION['success']) && $_SESSION['success'] != "") ? $_SESSION['success'] : '';unset($_SESSION['success']); ?>
             </div>
         </div>
         <div class="card-body">

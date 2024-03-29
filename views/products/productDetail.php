@@ -65,7 +65,7 @@
                                 <label class="col-xl-5 col-lg-5 col-md-6 col-6"><strong>Size</strong> - Size Guide <a href="#0" data-bs-toggle="modal" data-bs-target="#size-modal"><i class="ti-help-alt"></i></a></label>
                                 <div class="col-xl-4 col-lg-5 col-md-6 col-6">
                                     <div class="custom-select-form">
-                                        <select class="wide" id="sizeSelect">
+                                        <select class="wide">
                                             <?php foreach (explode(',', $product['mau_size_soluong']['size']) as $keysize => $sizesp) {
                                                 if ($keysize == 0) echo '<option value="' . $sizesp . '" selected>Small (' . $sizesp . ')</option>';
                                                 else echo '<option value="' . $sizesp . '">' . $sizesp . '</option>';
@@ -136,7 +136,7 @@
                                         <h3>Details</h3>
                                         <p><?= $product['mo_ta']; ?></p>
                                     </div>
-                                    <div class="col-lg-5">
+                                    <div class="col-lg-4">
                                         <h3>Thông số sản phẩm</h3>
                                         <div class="table-responsive">
                                             <table class="table table-sm table-striped">
@@ -173,59 +173,22 @@
                                 </a>
                             </h5>
                         </div>
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                        <script>
+                            $(document).ready(function() {
+                                $("#binhluan").load("views/comment/comment.php", {
+                                    mahh: <?= $product['id']; ?>
+                                });
+                            });
+                        </script>
                         <div id="collapse-B" class="collapse" role="tabpanel" aria-labelledby="heading-B">
-                            <div class="card-body">
-                                <div class="row justify-content-between">
-                                    <div class="col-lg-6">
-                                        <div class="review_content">
-                                            <div class="clearfix add_bottom_10">
-                                                <span class="rating"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><em>5.0/5.0</em></span>
-                                                <em>Published 54 minutes ago</em>
-                                            </div>
-                                            <h4>"Commpletely satisfied"</h4>
-                                            <p>Eos tollit ancillae ea, lorem consulatu qui ne, eu eros eirmod scaevola sea. Et nec tantas accusamus salutatus, sit commodo veritus te, erat legere fabulas has ut. Rebum laudem cum ea, ius essent fuisset ut. Viderer petentium cu his.</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="review_content">
-                                            <div class="clearfix add_bottom_10">
-                                                <span class="rating"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star empty"></i><i class="icon-star empty"></i><em>4.0/5.0</em></span>
-                                                <em>Published 1 day ago</em>
-                                            </div>
-                                            <h4>"Always the best"</h4>
-                                            <p>Et nec tantas accusamus salutatus, sit commodo veritus te, erat legere fabulas has ut. Rebum laudem cum ea, ius essent fuisset ut. Viderer petentium cu his.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /row -->
-                                <div class="row justify-content-between">
-                                    <div class="col-lg-6">
-                                        <div class="review_content">
-                                            <div class="clearfix add_bottom_10">
-                                                <span class="rating"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star empty"></i><em>4.5/5.0</em></span>
-                                                <em>Published 3 days ago</em>
-                                            </div>
-                                            <h4>"Outstanding"</h4>
-                                            <p>Eos tollit ancillae ea, lorem consulatu qui ne, eu eros eirmod scaevola sea. Et nec tantas accusamus salutatus, sit commodo veritus te, erat legere fabulas has ut. Rebum laudem cum ea, ius essent fuisset ut. Viderer petentium cu his.</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="review_content">
-                                            <div class="clearfix add_bottom_10">
-                                                <span class="rating"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><em>5.0/5.0</em></span>
-                                                <em>Published 4 days ago</em>
-                                            </div>
-                                            <h4>"Excellent"</h4>
-                                            <p>Sit commodo veritus te, erat legere fabulas has ut. Rebum laudem cum ea, ius essent fuisset ut. Viderer petentium cu his.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /row -->
-                                <p class="text-end"><a href="leave-review.html" class="btn_1">Leave a review</a></p>
+                            <div class="card-body" id="binhluan">
+
                             </div>
                             <!-- /card-body -->
                         </div>
                     </div>
+
                     <!-- /tab B -->
                 </div>
                 <!-- /tab-content -->

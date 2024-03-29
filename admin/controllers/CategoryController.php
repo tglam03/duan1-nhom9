@@ -16,7 +16,6 @@ function categoryListAll()
 function categoryShowOne($id)
 {
 
-
     $category = showOne('loai', $id);
 
     if (empty($category)) {
