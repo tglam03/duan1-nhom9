@@ -77,6 +77,20 @@
         </div>
     </div>
 </li>
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
+        aria-expanded="true" aria-controls="collapseFour">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Quản lí bình luận</span>
+    </a>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Quản lí bình luận</h6>
+            <a class="collapse-item" href="<?= BASE_URL_ADMIN ?>?act=comment">Danh sách bình luận</a>
+        </div>
+    </div>
+</li>
+
 
 
 <!-- Divider -->
