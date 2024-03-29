@@ -21,5 +21,10 @@ function listProducts()
         $dongia = (isset($_POST['dongia']) && $_POST['dongia']!="")?$_POST['dongia']:'';
         $productnew = locselect('','sanpham',$star,$end,$soluotxem,$dongia,$loaisp);
     }
+    if(isset($_GET['kywsb']) && $_GET['kywsb']){
+        $kyw = (isset($_GET['kywsb']) && $_GET['kywsb'] !="")?$_GET['kywsb']:'';
+        $productnew = loctenProduct($kyw);
+        debug($productnew);
+    }
     require_once PATH_VIEW . 'layouts/client.php';
 }

@@ -44,17 +44,17 @@
                     <div class="col-md-6">
                         <div class="mb-3 mt-3">
                             <label for="ho_ten" class="form-label">Họ và tên:</label>
-                            <input type="text" class="form-control" value="<?= isset($_SESSION['data']) ? $_SESSION['data']['ho_ten'] : null ?>" id="ho_ten" placeholder="Họ và tên" name="ho_ten">
+                            <input type="text" class="form-control" value="<?= ($check=1 && isset($_SESSION['data'])) ? $_SESSION['data']['ho_ten'] : null ?>" id="ho_ten" placeholder="Họ và tên" name="ho_ten">
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="user" class="form-label">User:</label>
-                            <input type="text" class="form-control" value="<?= isset($_SESSION['data']) ? $_SESSION['data']['user'] : null ?>" id="user" placeholder="User(tên đăng nhập)" name="user">
+                            <input type="text" class="form-control" value="<?= ($check=1 && isset($_SESSION['data'])) ? $_SESSION['data']['user'] : null ?>" id="user" placeholder="User(tên đăng nhập)" name="user">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3 mt-3">
                             <label for="email" class="form-label">Email:</label>
-                            <input type="email" class="form-control" value="<?= isset($_SESSION['data']) ? $_SESSION['data']['email'] : null ?>" id="email" placeholder=" Email" name="email">
+                            <input type="email" class="form-control" value="<?= ($check=1 && isset($_SESSION['data'])) ? $_SESSION['data']['email'] : null ?>" id="email" placeholder=" Email" name="email">
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="mat_khau" class="form-label">Mật khẩu:</label>

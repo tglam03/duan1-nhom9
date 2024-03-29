@@ -97,15 +97,16 @@ function categoryUpdate($id)
 
 
         // validation
-        validateCategoryUpdate($data);
+        $erors = validateCategoryUpdate($data);
+        if (empty($erors)) {
+            update('loai', $id, $data);
 
-        update('loai', $id, $data);
+            $_SESSION['success'] = 'Cập nhật thành công';
 
-        $_SESSION['success'] = 'Cập nhật thành công';
+            header('Location: ' . BASE_URL_ADMIN .  '?act=category-update&id=' . $id);
 
-        header('Location: ' . BASE_URL_ADMIN .  '?act=category-update&id=' . $id);
-
-        exit();
+            exit();
+        }
     }
     require_once PATH_VIEW_ADMIN . 'layouts/master.php';
 }
@@ -117,17 +118,14 @@ function validateCategoryUpdate($data)
     $errors = [];
     if (empty($data['ten_loai'])) {
         $errors[] = 'Tên loại bắt buộc phải nhập';
-    } else if (strlen($data['ten_loai']) > 50) {
+    } else if (strlen($data['ten_loai']) < 50) {
         $errors[] = 'Tên loại phải lớn hơn 50 kí tự';
     }
 
-   
+
     if (!empty($errors)) {
         $_SESSION['errors'] = $errors;
         $_SESSION['data'] = $data;
-
-        header('Location: ' . BASE_URL_ADMIN . '?act=category-update');
-        exit();
     }
 
 

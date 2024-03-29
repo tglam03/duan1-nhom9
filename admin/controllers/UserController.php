@@ -34,7 +34,7 @@ function userCreate()
 {
     $title = 'Danh sách khách hàng';
     $view = 'user/create';
-
+    $check = 1;
     if (!empty($_POST)) {
 
         $data = [
@@ -47,28 +47,30 @@ function userCreate()
             "vai_tro"  => $_POST['vai_tro'] ?? null,
         ];
 
-        // validation
-        validateUserCreate($data);
-        // end validation
-
-
         $avatar = $_FILES['hinh'] ?? null;
         if (!empty($avatar)) {
             $data['hinh'] = upload_file($avatar, 'uploads/users/');
         }
+        // validation
+        $errors = validateUserCreate($data, $avatar);
+        if(!empty($errors)){
+            $_SESSION['errors'] = $errors;
+            $_SESSION['data'] = $data;
+        }else{
+            insert('khach_hang', $data);
 
-        insert('khach_hang', $data);
-
-        $_SESSION['success'] = 'Thêm mới thành công';
-
-        header('Location: ' . BASE_URL_ADMIN .  '?act=users');
-        exit();
+            $_SESSION['success'] = 'Thêm mới thành công';
+            $check =0;
+            header('Location: ' . BASE_URL_ADMIN .  '?act=users');
+            exit();
+        }
+        // end validation
     }
 
     require_once PATH_VIEW_ADMIN . 'layouts/master.php';
 }
 
-function validateUserCreate($data)
+function validateUserCreate($data, $avatar)
 {
     // tên - bắt buộc, độ dài tối đa 50 kí tự
     // email - bắt buộc phải nhập, không được trùng
@@ -115,26 +117,17 @@ function validateUserCreate($data)
     if (empty($data['diachi'])) {
         $errors[] = 'Địa chỉ bắt buộc phải nhập';
     }
-    if (!empty($data['hinh']) && $data['hinh']['size'] > 0) {
+    if (!empty($avatar) && $avatar['size'] > 0) {
         $typeImage = ['image/png', 'image/jpg', 'image/jpeg'];
 
-        if ($data['hinh']['size'] > 2 * 1024 * 1024) {
+        if ($avatar['size'] > 2 * 1024 * 1024) {
             $errors[] = 'Hình ảnh phải có dung lượng nhỏ hơn 2M';
-        } else if (!in_array($data['hinh']['type'], $typeImage)) {
+        } else if (!in_array($avatar['type'], $typeImage)) {
             $errors[] = 'Hình ảnh chỉ chấp nhận định dạng file: png, jpg, jpeg';
         }
+    } else {
+        $errors[] = 'Hình ảnh không được để trống';
     }
-
-
-    if (!empty($errors)) {
-        $_SESSION['errors'] = $errors;
-        $_SESSION['data'] = $data;
-
-        header('Location: ' . BASE_URL_ADMIN . '?act=users-create');
-        exit();
-    }
-
-
     return $errors;
 }
 function userUpdate($id)
@@ -177,21 +170,22 @@ function userUpdate($id)
 
 
         // validation
-        validateUserUpdate($id, $data);
+        $erors = validateUserUpdate($id, $data,$avatar);
+        if (empty($erors)) {
+            update('khach_hang', $id, $data);
 
-        update('khach_hang', $id, $data);
+            $_SESSION['success'] = 'Cập nhật thành công';
 
-        $_SESSION['success'] = 'Cập nhật thành công';
+            header('Location: ' . BASE_URL_ADMIN .  '?act=users-update&id=' . $id);
 
-        header('Location: ' . BASE_URL_ADMIN .  '?act=users-update&id=' . $id);
-
-        exit();
+            exit();
+        }
     }
     require_once PATH_VIEW_ADMIN . 'layouts/master.php';
 }
 
 
-function validateUserUpdate($id, $data)
+function validateUserUpdate($id, $data,$avatar)
 {
     // tên - bắt buộc, độ dài tối đa 50 kí tự
     // email - bắt buộc phải nhập, không được trùng
@@ -238,9 +232,19 @@ function validateUserUpdate($id, $data)
     if (empty($data['diachi'])) {
         $errors[] = 'Địa chỉ bắt buộc phải nhập';
     }
+    if (!empty($avatar) && $avatar['size'] > 0) {
+        $typeImage = ['image/png', 'image/jpg', 'image/jpeg'];
 
+        if ($avatar['size'] > 2 * 1024 * 1024) {
+            $errors[] = 'Hình ảnh phải có dung lượng nhỏ hơn 2M';
+        } else if (!in_array($avatar['type'], $typeImage)) {
+            $errors[] = 'Hình ảnh chỉ chấp nhận định dạng file: png, jpg, jpeg';
+        }
+    } else {
+        $errors[] = 'Hình ảnh không được để trống';
+    }
     // if (!empty($data['hinh']) && $data['hinh']['size'] > 0) {
-    //     $typeImage = ['hinh/png', 'hinh/jpg', 'hinh/jpeg'];
+    //     $typeImage = ['image/png', 'image/jpg', 'image/jpeg'];
 
     //     if ($data['hinh']['size'] > 2 * 1024 * 1024) {
     //         $errors[] = 'Hình ảnh phải có dung lượng nhỏ hơn 2M';
@@ -252,9 +256,6 @@ function validateUserUpdate($id, $data)
     if (!empty($errors)) {
         $_SESSION['errors'] = $errors;
         $_SESSION['data'] = $data;
-
-        header('Location: ' . BASE_URL_ADMIN . '?act=users-update');
-        exit();
     }
 
 

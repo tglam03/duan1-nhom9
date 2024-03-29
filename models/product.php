@@ -144,3 +144,21 @@ if (!function_exists('locselect')) {
         }
     }
 }
+
+//locsp theo tên 
+if (!function_exists('loctenProduct')) {
+    function loctenProduct($kyw)
+    {
+        try {
+            $sql = "SELECT * FROM sanpham WHERE ten_hh like %$kyw% ORDER BY id DESC ";
+            $stmt = $GLOBALS['conn']->prepare($sql);
+
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+        } catch (\Exception $e) {
+            debug($e);
+        }
+    }
+}
+
