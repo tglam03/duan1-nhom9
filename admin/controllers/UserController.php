@@ -154,7 +154,7 @@ function userUpdate($id)
             "vai_tro"  => $_POST['vai_tro'] ?? null,
         ];
         // upload ảnh
-        $avatar = $_FILES['hinh'] ?? null;
+        $avatar = (isset($_FILES['hinh']) && $_FILES['hinh']['size'] > 0) ?$_FILES['hinh']:$_POST['hinh'];
         if (!empty($avatar)) {
             $data['hinh'] = upload_file($avatar, 'uploads/users/');
         }
@@ -170,8 +170,11 @@ function userUpdate($id)
 
 
         // validation
-        $erors = validateUserUpdate($id, $data,$avatar);
-        if (empty($erors)) {
+        $errors = validateUserUpdate($id, $data,$avatar);
+        if (!empty($errors)) {
+            $_SESSION['errors'] = $errors;
+            $_SESSION['data'] = $data;
+        }else{
             update('khach_hang', $id, $data);
 
             $_SESSION['success'] = 'Cập nhật thành công';
@@ -232,16 +235,16 @@ function validateUserUpdate($id, $data,$avatar)
     if (empty($data['diachi'])) {
         $errors[] = 'Địa chỉ bắt buộc phải nhập';
     }
-    if (!empty($avatar) && $avatar['size'] > 0) {
-        $typeImage = ['image/png', 'image/jpg', 'image/jpeg'];
-
-        if ($avatar['size'] > 2 * 1024 * 1024) {
-            $errors[] = 'Hình ảnh phải có dung lượng nhỏ hơn 2M';
-        } else if (!in_array($avatar['type'], $typeImage)) {
-            $errors[] = 'Hình ảnh chỉ chấp nhận định dạng file: png, jpg, jpeg';
+    if(is_array($avatar)){
+        if (!empty($avatar) && $avatar['size'] > 0) {
+            $typeImage = ['image/png', 'image/jpg', 'image/jpeg'];
+    
+            if ($avatar['size'] > 2 * 1024 * 1024) {
+                $errors[] = 'Hình ảnh phải có dung lượng nhỏ hơn 2M';
+            } else if (!in_array($avatar['type'], $typeImage)) {
+                $errors[] = 'Hình ảnh chỉ chấp nhận định dạng file: png, jpg, jpeg';
+            }
         }
-    } else {
-        $errors[] = 'Hình ảnh không được để trống';
     }
     // if (!empty($data['hinh']) && $data['hinh']['size'] > 0) {
     //     $typeImage = ['image/png', 'image/jpg', 'image/jpeg'];
@@ -253,10 +256,6 @@ function validateUserUpdate($id, $data,$avatar)
     //     }
     // }
 
-    if (!empty($errors)) {
-        $_SESSION['errors'] = $errors;
-        $_SESSION['data'] = $data;
-    }
 
 
     return $errors;
