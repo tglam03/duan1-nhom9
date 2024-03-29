@@ -17,6 +17,7 @@ function productListAll()
 
 function productCreate()
 {
+    unset( $_SESSION['success']);
     $title = 'Thêm Mới Sản Phẩm';
     $view = 'products/add';
     $script1 = 'scripts';
@@ -208,6 +209,7 @@ function productUpdate($id)
         }
         $_SESSION['success'] = 'Cập nhật thành công';
         header('Location: ' . BASE_URL_ADMIN .  '?act=product-update&id=' . $id);
+        exit();
     }
     require_once PATH_VIEW_ADMIN . 'layouts/master.php';
 }
