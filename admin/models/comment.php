@@ -3,7 +3,7 @@ if (!function_exists('loadall_comment')) {
     function loadall_comment($hh_id)
     {
         try {
-            $sql = "SELECT * from khach_hang a join binh_luan b on a.id = b.kh_id 
+            $sql = "SELECT *,b.id as idbl,c.id as idhh from khach_hang a join binh_luan b on a.id = b.kh_id 
             join sanpham c on b.hh_id = c.id where b.hh_id = :hh_id ORDER BY b.id DESC";
 
             $stmt = $GLOBALS['conn']->prepare($sql);

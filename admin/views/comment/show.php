@@ -21,6 +21,7 @@
                             <th>Nội dung</th>
                             <th>Người bình luận</th>
                             <th>Ngày bình luận</th>
+                            <th>Thao tác</th>
                         </tr>
                     </thead>
 
@@ -29,11 +30,14 @@
                         <tbody>
 
                             <tr>
-                                <td><?= $comments['id'] ?></td>
+                                <td><?= $comments['idbl'] ?></td>
                                 <td><?= $comments['ten_hh'] ?></td>
                                 <td><?= $comments['noi_dung'] ?></td>
                                 <td><span class="badge badge-warning"><?= $comments['user'] ?></span></td>
                                 <td><?= $comments['ngay_bl'] ?></td>
+                                <td class="d-flex justify-content-center align-items-center">
+                                    <a onclick="return confirm('Bạn có chắc muốn xóa không?');" class="btn btn-danger mt-1" href="<?= BASE_URL_ADMIN ?>?act=delete-comment&id=<?= $comments['idbl'] ?>&idhh=<?=$comments['idhh']?>">Xóa</a>
+                                </td>
                             </tr>
 
                         </tbody>
