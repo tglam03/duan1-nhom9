@@ -99,6 +99,7 @@
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" name="hinh" <?=$users['hinh'] ?>>
                                 <input type="hidden" name="id" id="id">
 
                     <button type="submit" class="btn btn-info">Cập nhật</button>
