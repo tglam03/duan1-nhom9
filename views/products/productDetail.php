@@ -55,8 +55,8 @@
                                 <label class="col-xl-5 col-lg-5 col-md-6 col-6 pt-0"><strong>Màu</strong></label>
                                 <div class="col-xl-4 col-lg-5 col-md-6 col-6 colors">
                                     <ul id="colorList">
-                                        <?php foreach (explode(',', $product['mau_size_soluong']['mau']) as $keymau => $mausp) { ?>
-                                            <li><a href="#0" style="background-color: <?= $mausp; ?>;" class="color color_<?= $keymau; ?> <?= ($keymau == 0) ? 'active' : ''; ?>"></a></li>
+                                        <?php foreach ($products1[0]['mau_size_soluong'] as $keymau => $mausp) { ?>
+                                            <li><a href="#0" style="background-color: <?= $mausp['mau']; ?>;" class="color color_<?= $keymau; ?> <?= ($keymau == 0) ? 'active' : ''; ?>"></a></li>
                                         <?php }; ?>
                                     </ul>
                                 </div>

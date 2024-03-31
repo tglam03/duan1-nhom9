@@ -203,7 +203,7 @@ if (!function_exists('movearray')) {
                 $mau_size_soluongs = [];
                 foreach ($productsColors as $color) {
                     if ($product['id'] == $color['hh_id']) {
-                        $mau_size_soluong = ['mau' => $color['mau'], 'size_soluong' => []];
+                        $mau_size_soluong = ['idmau' => $color['id'],'mau' => $color['mau'], 'size_soluong' => []];
                         foreach ($productsSizes as $size) {
                             if ($product['id'] == $size['hh_id'] && $color['id'] == $size['mau_id']) {
                                 $mau_size_soluong['size_soluong'][] = $size['size'];

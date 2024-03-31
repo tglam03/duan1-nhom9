@@ -12,6 +12,7 @@ function productDetail()
         $productsSizes = showAllVariantProduct('sizehh', $_GET['id']);
         $products1 = movearray($products, $productsColors, $productsSizes);
         $products = productConvert($products1);
+        debug($products1);
         $productscungloai = loadAllspcungloai('sanpham', $products[0]['loai_id'], $products[0]['id']);
         update('sanpham', $_GET['id'], ['so_luot_xem' => $products[0]['so_luot_xem'] + 1]);
     } else {
