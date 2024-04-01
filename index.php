@@ -18,6 +18,8 @@ match ($act) {
     'products' => listProducts(),
     'about' => about(),
     'product-detail' => productDetail(),
+    'account' => account(),
+    'singout' => singout(),
 };
 
 require_once './commons/disconnect-db.php';

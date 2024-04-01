@@ -1,3 +1,9 @@
+<style>
+	.nav-link:hover {
+		text-decoration: underline !important;
+		color: black !important;
+	}
+</style>
 <header class="version_1">
 	<div class="layer"></div><!-- Mobile menu overlay mask -->
 	<div class="main_header">
@@ -31,8 +37,14 @@
 								<a href="<?= BASE_URL; ?>?act=products">Sản phẩm</a>
 							</li>
 							<li><a href="<?= BASE_URL; ?>?act=about">Giới thiệu</a></li>
-							<li><a href="account.html">Tạo tài khoản</a></li>
-							<li><a href="help.html">Trợ giúp</a></li>
+							<?php if (!isset($_SESSION['user']) || empty($_SESSION['user'])) { ?>
+								<li><a href="<?= BASE_URL; ?>?act=account">Tạo tài khoản</a></li>
+							<?php } else { ?>
+								<li class="nav-item">
+									<a class="nav-link" href="<?= BASE_URL; ?>?act=singout">Đăng xuất</a>
+								</li>
+							<?php } ?>
+							<li><a href="<?= BASE_URL; ?>?act=help">Trợ giúp</a></li>
 						</ul>
 					</div>
 					<!--/main-menu -->
@@ -65,15 +77,21 @@
 								<div id="menu">
 									<ul>
 										<li>
-											<a href="<?=BASE_URL?>">Trang chủ</a>
+											<a href="<?= BASE_URL ?>">Trang chủ</a>
 										</li>
 
 										<li>
 											<a href="<?= BASE_URL; ?>?act=products">Sản phẩm</a>
 										</li>
-										<li><a href="about.html">Giới thiệu</a></li>
-										<li><a href="account.html">Tạo tài khoản</a></li>
-										<li><a href="help.html">Trợ giúp</a></li>
+										<li><a href="<?= BASE_URL; ?>?act=about">Giới thiệu</a></li>
+										<?php if (!isset($_SESSION['user']) || empty($_SESSION['user'])) { ?>
+											<li><a href="<?= BASE_URL; ?>?act=account">Tạo tài khoản</a></li>
+										<?php } else { ?>
+											<li>
+												<a href="<?= BASE_URL; ?>?act=singout">Đăng xuất</a>
+											</li>
+										<?php } ?>
+										<li><a href="<?= BASE_URL; ?>?act=help">Trợ giúp</a></li>
 									</ul>
 								</div>
 							</li>
@@ -83,7 +101,7 @@
 				<div class="col-xl-6 col-lg-7 col-md-6 d-none d-md-block">
 					<div class="custom-search-input">
 						<form method="get">
-							<input type="text" name="kyw" placeholder="Tìm kiếm sản phẩm" value="<?=(isset($kyw)&&$kyw!="")?$kyw:'';?>">
+							<input type="text" name="kyw" placeholder="Tìm kiếm sản phẩm" value="<?= (isset($kyw) && $kyw != "") ? $kyw : ''; ?>">
 							<button type="submit" name="kywsb"><i class="header-icon_search_custom"></i></button>
 						</form>
 					</div>
@@ -117,19 +135,34 @@
 						</li>
 						<li>
 							<div class="dropdown dropdown-access">
-								<a href="account.html" class="access_link"><span>Tài khoản</span></a>
+								<?php if (!isset($_SESSION['user']) || empty($_SESSION['user'])) { ?>
+									<a href="<?= BASE_URL; ?>?act=account" class="access_link"><span>Tài khoản</span></a>
+								<?php } else { ?>
+									<a class="access_link"><span>Tài khoản</span></a>
+								<?php } ?>
 								<div class="dropdown-menu">
-									<a href="account.html" class="btn_1">Đăng nhập hoặc đăng ký</a>
+									<?php if (!isset($_SESSION['user']) || empty($_SESSION['user'])) { ?>
+										<a href="<?= BASE_URL; ?>?act=account" class="btn_1">Đăng nhập hoặc đăng ký</a>
+									<?php } else { ?>
+										<p class="btn_1 w-100">Xin chào: <?= $_SESSION['user']['user'] ?></p>
+									<?php } ?>
 									<ul>
 										<li>
-											<a href="account.html"><i class="ti-package"></i>Giỏ hàng của tôi</a>
+											<a href="<?= BASE_URL; ?>?act=account"><i class="ti-package"></i>Giỏ hàng của tôi</a>
 										</li>
+										<?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) { ?>
+											<li>
+												<a href="<?= BASE_URL; ?>?act=account"><i class="ti-user"></i>Thông tin tài khoản</a>
+											</li>
+										<?php } ?>
 										<li>
-											<a href="account.html"><i class="ti-user"></i>Thông tin tài khoản</a>
+											<a href="<?= BASE_URL; ?>?act=help"><i class="ti-help-alt"></i>Trợ giúp và câu hỏi thường gặp</a>
 										</li>
-										<li>
-											<a href="help.html"><i class="ti-help-alt"></i>Trợ giúp và câu hỏi thường gặp</a>
-										</li>
+										<?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) { ?>
+											<li>
+												<a href="<?= BASE_URL; ?>?act=singout"><i class="ti-close"></i>Đăng xuất</a>
+											</li>
+										<?php } ?>
 									</ul>
 								</div>
 							</div>

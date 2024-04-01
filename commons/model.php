@@ -1,40 +1,44 @@
-<?php 
+<?php
 
 // CRUD -> Create/Read(Danh sách/Chi tiết)/Update/Delete
 if (!function_exists('get_str_keys')) {
-    function get_str_keys($data) {        
+    function get_str_keys($data)
+    {
         return implode(',', array_keys($data));
     }
 }
 
 if (!function_exists('get_virtual_params')) {
-    function get_virtual_params($data) {     
+    function get_virtual_params($data)
+    {
         $keys = array_keys($data);
 
         $tmp = [];
-        foreach($keys as $key) {
+        foreach ($keys as $key) {
             $tmp[] = ":$key";
         }
-        
+
         return implode(',', $tmp);
     }
 }
 
 if (!function_exists('get_set_params')) {
-    function get_set_params($data) {     
+    function get_set_params($data)
+    {
         $keys = array_keys($data);
 
         $tmp = [];
-        foreach($keys as $key) {
+        foreach ($keys as $key) {
             $tmp[] = "$key = :$key";
         }
-        
+
         return implode(',', $tmp);
     }
 }
 
 if (!function_exists('insert')) {
-    function insert($tableName, $data = []) {
+    function insert($tableName, $data = [])
+    {
         try {
             $strKeys = get_str_keys($data);
             $virtualParams = get_virtual_params($data);
@@ -55,7 +59,8 @@ if (!function_exists('insert')) {
 }
 
 if (!function_exists('listAll')) {
-    function listAll($tableName) {
+    function listAll($tableName)
+    {
         try {
             $sql = "SELECT * FROM $tableName ORDER BY id DESC";
 
@@ -71,7 +76,8 @@ if (!function_exists('listAll')) {
 }
 
 if (!function_exists('showOne')) {
-    function showOne($tableName, $id) {
+    function showOne($tableName, $id)
+    {
         try {
             $sql = "SELECT * FROM $tableName WHERE id = :id LIMIT 1";
 
@@ -89,12 +95,13 @@ if (!function_exists('showOne')) {
 }
 
 if (!function_exists('update')) {
-    function update($tableName, $id, $data = []) {
+    function update($tableName, $id, $data = [])
+    {
         try {
             $setParams = get_set_params($data);
 
             $sql = "UPDATE $tableName SET $setParams WHERE id = :id";
-            
+
             $stmt = $GLOBALS['conn']->prepare($sql);
 
             foreach ($data as $fieldName => &$value) {
@@ -111,10 +118,11 @@ if (!function_exists('update')) {
 }
 
 if (!function_exists('delete')) {
-    function delete2($tableName, $id) {
+    function delete2($tableName, $id)
+    {
         try {
             $sql = "DELETE FROM $tableName WHERE id = :id";
-            
+
             $stmt = $GLOBALS['conn']->prepare($sql);
 
             $stmt->bindParam(":id", $id);
@@ -129,7 +137,8 @@ if (!function_exists('delete')) {
 if (!function_exists('checkUniqueName')) {
     // Nếu không trùng thì trả về True
     // Nếu trùng thì trả về False
-    function checkUniqueName($tableName, $name) {
+    function checkUniqueName($tableName, $name)
+    {
         try {
             $sql = "SELECT * FROM $tableName WHERE name = :name LIMIT 1";
 
@@ -151,7 +160,8 @@ if (!function_exists('checkUniqueName')) {
 if (!function_exists('checkUniqueNameForUpdate')) {
     // Nếu không trùng thì trả về True
     // Nếu trùng thì trả về False
-    function checkUniqueNameForUpdate($tableName, $id, $name) {
+    function checkUniqueNameForUpdate($tableName, $id, $name)
+    {
         try {
             $sql = "SELECT * FROM $tableName WHERE name = :name AND id <> :id LIMIT 1";
 
@@ -172,7 +182,8 @@ if (!function_exists('checkUniqueNameForUpdate')) {
 }
 // LoadAll sản phẩm LIMIT
 if (!function_exists('lastloadLimit')) {
-    function lastloadLimit($tableName,$start,$end) {
+    function lastloadLimit($tableName, $start, $end)
+    {
         try {
             $sql = "SELECT * FROM $tableName ORDER BY id DESC LIMIT $start,$end";
 
@@ -203,7 +214,7 @@ if (!function_exists('movearray')) {
                 $mau_size_soluongs = [];
                 foreach ($productsColors as $color) {
                     if ($product['id'] == $color['hh_id']) {
-                        $mau_size_soluong = ['idmau' => $color['id'],'mau' => $color['mau'], 'size_soluong' => []];
+                        $mau_size_soluong = ['idmau' => $color['id'], 'mau' => $color['mau'], 'size_soluong' => []];
                         foreach ($productsSizes as $size) {
                             if ($product['id'] == $size['hh_id'] && $color['id'] == $size['mau_id']) {
                                 $mau_size_soluong['size_soluong'][] = $size['size'];
@@ -259,7 +270,8 @@ if (!function_exists('productConvert')) {
 }
 // hiển thị tất cả biến thể của sản phẩm có hh_id 
 if (!function_exists('showAllVariantProduct')) {
-    function showAllVariantProduct($tableName, $hh_id) {
+    function showAllVariantProduct($tableName, $hh_id)
+    {
         try {
             $sql = "SELECT * FROM $tableName WHERE hh_id = :hh_id";
 
@@ -270,6 +282,73 @@ if (!function_exists('showAllVariantProduct')) {
             $stmt->execute();
 
             return $stmt->fetchAll();
+        } catch (\Exception $e) {
+            debug($e);
+        }
+    }
+}
+
+if (!function_exists('checkUniqueEmail')) {
+    // nếu không trùng thì trả về true
+    // nếu trung trả về false
+    function checkUniqueEmail($tableName, $email)
+    {
+        try {
+            $sql = "SELECT * FROM $tableName WHERE email = :email LIMIT 1";
+
+            $stmt = $GLOBALS['conn']->prepare($sql);
+
+            $stmt->bindParam(":email", $email);
+
+            $stmt->execute();
+
+            $data = $stmt->fetch();
+
+            return empty($data) ? true : false;
+        } catch (\Exception $e) {
+            debug($e);
+        }
+    }
+}
+
+if (!function_exists('checkUniqueEmailUpdate')) {
+    // nếu không trùng thì trả về true
+    // nếu trung trả về false
+    function checkUniqueEmailUpdate($tableName, $id,  $email)
+    {
+        try {
+            $sql = "SELECT * FROM $tableName WHERE email = :email AND id <> :id LIMIT 1";
+
+            $stmt = $GLOBALS['conn']->prepare($sql);
+
+            $stmt->bindParam(":email", $email);
+            $stmt->bindParam(":id", $id);
+
+            $stmt->execute();
+
+            $data = $stmt->fetch();
+
+            return empty($data) ? true : false;
+        } catch (\Exception $e) {
+            debug($e);
+        }
+    }
+}
+
+if (!function_exists('getUserAdminByEmailAndPassword')) {
+    function getUserAdminByEmailAndPassword($email, $mat_khau)
+    {
+        try {
+            $sql = "SELECT * FROM khach_hang WHERE email = :email AND mat_khau = :mat_khau AND vai_tro = 1 LIMIT 1";
+
+            $stmt = $GLOBALS['conn']->prepare($sql);
+
+            $stmt->bindParam(":email", $email);
+            $stmt->bindParam(":mat_khau", $mat_khau);
+
+            $stmt->execute();
+
+            return $stmt->fetch();
         } catch (\Exception $e) {
             debug($e);
         }

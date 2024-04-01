@@ -1,3 +1,46 @@
+<style>
+    /* CSS */
+    .color-radio-label {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .color-radio-button {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        /* Tạo hình dạng tròn */
+        border: 1px solid #ccc;
+        /* Viền nút radio */
+        position: relative;
+        /* Đặt vị trí tương đối */
+    }
+
+    .color-radio-button:hover {
+        border-color: #666;
+        /* Màu viền khi di chuột qua */
+    }
+
+    .checkmark {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #007bff;
+        /* Màu của nút tích */
+        display: none;
+        /* Mặc định ẩn nút tích */
+    }
+
+    .color-radio-label input[type="radio"]:checked+.color-radio-button+.checkmark {
+        display: block;
+        /* Hiển thị nút tích khi nút radio được chọn */
+    }
+</style>
 <main>
     <?php foreach ($products as  $product) : ?>
         <div class="container margin_30">
@@ -56,7 +99,13 @@
                                 <div class="col-xl-4 col-lg-5 col-md-6 col-6 colors">
                                     <ul id="colorList">
                                         <?php foreach ($products1[0]['mau_size_soluong'] as $keymau => $mausp) { ?>
-                                            <li><a href="#0" style="background-color: <?= $mausp['mau']; ?>;" class="color color_<?= $keymau; ?> <?= ($keymau == 0) ? 'active' : ''; ?>"></a></li>
+                                            <li>
+                                                <label class="color-radio-label">
+                                                    <input type="radio" name="mau" value="<?= $mausp['mau']; ?>" class="color color_<?= $keymau; ?> <?= ($keymau == 0) ? 'active' : ''; ?>">
+                                                    <span class="color-radio-button" style="background-color: <?= $mausp['mau']; ?>;"></span>
+                                                    <span class="checkmark"></span> <!-- Nút tích -->
+                                                </label>
+                                            </li>
                                         <?php }; ?>
                                     </ul>
                                 </div>
