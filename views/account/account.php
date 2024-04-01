@@ -48,6 +48,7 @@
                                     <input type="email" class="form-control" name="email_forgot" id="email_forgot" placeholder="Nhập email của bạn">
                                 </div>
                                 <p>Mật khẩu sẽ sớm được gửi đến</p>
+                                <span class=" text-warning"><?= (isset($errors['email_forgot']) && $errors['email_forgot'] != "") ? $errors['email_forgot'] : ''; ?></span>
                                 <div class="text-center"><input type="submit" name="datlaimk" value="Đặt lại mật khẩu" class="btn_1"></div>
                             </div>
                         </div>

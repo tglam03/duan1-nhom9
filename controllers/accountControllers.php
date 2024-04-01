@@ -1,4 +1,10 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require 'assets/vendor/PHPMailer-master/src/PHPMailer.php';
+require 'assets/vendor/PHPMailer-master/src/Exception.php';
+require 'assets/vendor/PHPMailer-master/src/SMTP.php';
+//Create an instance; passing `true` enables exceptions
 function account()
 {
     $title = 'Account';
@@ -37,12 +43,61 @@ function account()
             $errors['loidn'] = 'Tên đăng nhập hoặc mật khẩu không đúng';
         } else {
             $_SESSION['user'] = $user;
-            if(isset($_POST['checkeddn'])&&$_POST['checkeddn']){
-                $_COOKIE['user'] = $user['user'];
+            if (isset($_POST['checkeddn']) && $_POST['checkeddn']) {
+                $_SESSION['saveuser'] = $user;
             }
             // nếu đúng sẽ chạy sang trang admin
             header('Location: ' . BASE_URL);
             exit();
+        }
+    }
+    if (isset($_POST['datlaimk']) && $_POST['datlaimk']) {
+        $errors = [];
+        if (empty($_POST['email_forgot'])) {
+            $errors['email_forgot'] = 'Email bắt buộc phải nhập';
+        } else if (!filter_var($_POST['email_forgot'],  FILTER_VALIDATE_EMAIL)) {
+            $errors['email_forgot'] = 'Email sai định dạng';
+        }
+        if (empty($errors)) {
+            $mat_khau = loadAccountToEmail($_POST['email_forgot']);
+            $to_email = $_POST['email_forgot'];
+            $body = "Xin chào," . $mat_khau['user'] . "<br><b>Mật khẩu của bạn là: " . $mat_khau['mat_khau'] . "</b>";
+            $headers = "From: Allaiasupport@gmail.com<br>";
+            $mail = new PHPMailer(true);
+            try {
+                //Server settings
+                $mail->SMTPDebug = 1;                      //Enable verbose debug output
+                $mail->isSMTP();                                            //Send using SMTP
+                $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                $mail->Username   = 'anhkkzz2@gmail.com';                     //SMTP username
+                $mail->Password   = 'aioe mulz mxuw bruy';                               //SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;             //Enable implicit TLS encryption
+                $mail->Port       = 465;                                    //TCP port to connect to; use 465 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+                //Recipients
+                $mail->setFrom('anhkkzz2@gmail.com', 'Allia Support');
+                $mail->addAddress(''.$to_email.'', ''. $mat_khau['user'].'');     //Add a recipient              //Name is optional
+                // $mail->addReplyTo('info@example.com', 'Information');
+                // $mail->addCC('cc@example.com');
+                // $mail->addBCC('bcc@example.com');
+
+                //Attachments
+                // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+                // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+                //Content
+                $mail->isHTML(true);                                  //Set email format to HTML
+                $mail->Subject = 'Allia mật khẩu';
+                $mail->Body    = ''.$headers.''.$body.'<br>Cảm ơn quý khách<br><br><p style="color:red;">ALLIA Shop</p>';
+                // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+                $mail->send();
+                // echo 'Message has been sent';
+            } catch (Exception $e) {
+                // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
+            header('Location:'.BASE_URL.'?act=account');
         }
     }
     require_once PATH_VIEW . 'layouts/client.php';
@@ -99,6 +154,19 @@ function validateUserCreate($data)
 
 function singout()
 {
-    unset($_SESSION['user']);
+    if (isset($_GET['thoat'])) {
+        $_SESSION['thoat'] = 1;
+    }
+    if (isset($_GET['dangnhap'])) {
+        if (isset($_SESSION['thoat']) && $_SESSION['thoat'] = 1) {
+            unset($_SESSION['thoat']);
+        }
+    }
+    if (isset($_GET['dangxuat'])) {
+        if (isset($_SESSION['saveuser']) && !empty($_SESSION['saveuser'])) {
+            unset($_SESSION['saveuser']);
+        }
+        unset($_SESSION['user']);
+    }
     header('Location:' . $_SERVER['HTTP_REFERER']);
 }

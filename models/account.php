@@ -18,3 +18,22 @@ if (!function_exists('getUserAdminByUserAndPassword')) {
         }
     }
 }
+
+if (!function_exists('loadAccountToEmail')) {
+    function loadAccountToEmail($email)
+    {
+        try {
+            $sql = "SELECT user,mat_khau	FROM khach_hang WHERE email = :email LIMIT 1";
+
+            $stmt = $GLOBALS['conn']->prepare($sql);
+
+            $stmt->bindParam(":email", $email);
+
+            $stmt->execute();
+
+            return $stmt->fetch();
+        } catch (\Exception $e) {
+            debug($e);
+        }
+    }
+}

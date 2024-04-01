@@ -1,5 +1,5 @@
 <style>
-	.nav-link:hover {
+	.nav-linkmenu:hover {
 		text-decoration: underline !important;
 		color: black !important;
 	}
@@ -37,12 +37,16 @@
 								<a href="<?= BASE_URL; ?>?act=products">Sản phẩm</a>
 							</li>
 							<li><a href="<?= BASE_URL; ?>?act=about">Giới thiệu</a></li>
-							<?php if (!isset($_SESSION['user']) || empty($_SESSION['user'])) { ?>
-								<li><a href="<?= BASE_URL; ?>?act=account">Tạo tài khoản</a></li>
+							<?php if (isset($_SESSION['thoat']) && $_SESSION['thoat'] == 1) { ?>
+								<li><a href="<?= BASE_URL; ?>?act=singout&dangnhap">Đăng nhập</a></li>
 							<?php } else { ?>
-								<li class="nav-item">
-									<a class="nav-link" href="<?= BASE_URL; ?>?act=singout">Đăng xuất</a>
-								</li>
+								<?php if (!isset($_SESSION['user']) || empty($_SESSION['user'])) { ?>
+									<li><a href="<?= BASE_URL; ?>?act=account">Tạo tài khoản</a></li>
+								<?php } else { ?>
+									<li class="nav-item">
+										<a class="nav-linkmenu" href="<?= BASE_URL; ?>?act=singout&dangxuat">Đăng xuất</a>
+									</li>
+								<?php } ?>
 							<?php } ?>
 							<li><a href="<?= BASE_URL; ?>?act=help">Trợ giúp</a></li>
 						</ul>
@@ -84,12 +88,16 @@
 											<a href="<?= BASE_URL; ?>?act=products">Sản phẩm</a>
 										</li>
 										<li><a href="<?= BASE_URL; ?>?act=about">Giới thiệu</a></li>
-										<?php if (!isset($_SESSION['user']) || empty($_SESSION['user'])) { ?>
-											<li><a href="<?= BASE_URL; ?>?act=account">Tạo tài khoản</a></li>
+										<?php if (isset($_SESSION['thoat']) && $_SESSION['thoat'] == 1) { ?>
+											<li><a href="<?= BASE_URL; ?>?act=singout&dangnhap">Đăng nhập</a></li>
 										<?php } else { ?>
-											<li>
-												<a href="<?= BASE_URL; ?>?act=singout">Đăng xuất</a>
-											</li>
+											<?php if (!isset($_SESSION['user']) || empty($_SESSION['user'])) { ?>
+												<li><a href="<?= BASE_URL; ?>?act=account">Tạo tài khoản</a></li>
+											<?php } else { ?>
+												<li>
+													<a href="<?= BASE_URL; ?>?act=singout&dangxuat">Đăng xuất</a>
+												</li>
+											<?php } ?>
 										<?php } ?>
 										<li><a href="<?= BASE_URL; ?>?act=help">Trợ giúp</a></li>
 									</ul>
@@ -150,18 +158,27 @@
 										<li>
 											<a href="<?= BASE_URL; ?>?act=account"><i class="ti-package"></i>Giỏ hàng của tôi</a>
 										</li>
-										<?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) { ?>
-											<li>
-												<a href="<?= BASE_URL; ?>?act=account"><i class="ti-user"></i>Thông tin tài khoản</a>
-											</li>
+										<?php if (isset($_SESSION['thoat']) && $_SESSION['thoat'] == 1) { ?>
+										<?php } else { ?>
+											<?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) { ?>
+												<li>
+													<a href="<?= BASE_URL; ?>?act=account"><i class="ti-user"></i>Thông tin tài khoản</a>
+												</li>
+											<?php } ?>
 										<?php } ?>
 										<li>
 											<a href="<?= BASE_URL; ?>?act=help"><i class="ti-help-alt"></i>Trợ giúp và câu hỏi thường gặp</a>
 										</li>
-										<?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) { ?>
-											<li>
-												<a href="<?= BASE_URL; ?>?act=singout"><i class="ti-close"></i>Đăng xuất</a>
-											</li>
+										<?php if (isset($_SESSION['thoat']) && $_SESSION['thoat'] == 1) { ?>
+										<?php } else { ?>
+											<?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) { ?>
+												<li class="d-flex">
+													<a class="btn_1 w-100" href="<?= BASE_URL; ?>?act=singout&dangxuat"><i class="ti-close"></i>Đăng xuất</a>
+													<?php if (isset($_SESSION['saveuser']) && !empty($_SESSION['saveuser'])) { ?>
+														<a class="w-100" href="<?= BASE_URL; ?>?act=singout&thoat"><i class="ti-close"></i>Thoát</a>
+													<?php } ?>
+												</li>
+											<?php } ?>
 										<?php } ?>
 									</ul>
 								</div>

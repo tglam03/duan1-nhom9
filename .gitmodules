@@ -1,0 +1,3 @@
+[submodule "assets/vendor/PHPMailer"]
+	path = assets/vendor/PHPMailer
+	url = https://github.com/tglam03/duan1-nhom9.git
