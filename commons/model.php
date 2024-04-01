@@ -54,6 +54,29 @@ if (!function_exists('insert')) {
     }
 }
 
+if (!function_exists('insert_get_last_id')) {
+    function insert_get_last_id($tableName, $data = []) {
+        try {
+            $strKeys = get_str_keys($data);
+            $virtualParams = get_virtual_params($data);
+
+            $sql = "INSERT INTO $tableName($strKeys) VALUES ($virtualParams)";
+
+            $stmt = $GLOBALS['conn']->prepare($sql);
+
+            foreach ($data as $fieldName => &$value) {
+                $stmt->bindParam(":$fieldName", $value);
+            }
+
+            $stmt->execute();
+
+            return $GLOBALS['conn']->lastInsertId();
+        } catch (\Exception $e) {
+            debug($e);
+        }
+    }
+}
+
 if (!function_exists('listAll')) {
     function listAll($tableName) {
         try {
@@ -110,7 +133,7 @@ if (!function_exists('update')) {
     }
 }
 
-if (!function_exists('delete')) {
+if (!function_exists('delete2')) {
     function delete2($tableName, $id) {
         try {
             $sql = "DELETE FROM $tableName WHERE id = :id";

@@ -15,7 +15,7 @@
                                         <p class="owl-slide-animated owl-slide-subtitle">
                                             <?= ($key % 2 == 0) ? $psptop : 'Giá tốt nhất cho bạn'; ?>
                                         </p>
-                                        <div class="owl-slide-animated owl-slide-cta"><a class="btn_1" href="listing-grid-1-full.html" role="button">Shop Now</a></div>
+                                        <div class="owl-slide-animated owl-slide-cta"><a class="btn_1"  href="<?= BASE_URL  ?>?act=products" role="button">Shop Now</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                     <div class="grid_item">
                         <figure>
                             <span class="ribbon off">-<?= $value['giam_gia']; ?>%</span>
-                            <a href="#0">
+                            <a href="<?= BASE_URL ?>?act=product-detail&id=<?= $value['id'] ?>">
                                 <img class="img-fluid lazy" src="<?= explode(',', $value['hinh'])[0]; ?>" alt="">
                                 <img class="img-fluid lazy" src="<?= explode(',', $value['hinh'])[0]; ?>" data-src="<?= explode(',', $value['hinh'])[1]; ?>"" alt="">
                         </a>
@@ -113,7 +113,7 @@
     <!-- /end sản phẩm top sell -->
     <!-- /container -->
     <div>
-        <!-- phẩn sản phẩm sau top sell -->
+        <!-- phẩn sản phẩm mới -->
         <div class="featured lazy" data-bg="url(<?= BASE_URL ?>assets/client/img/banner1.jpg)">
             <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
                 <div class="container margin_60">
@@ -126,7 +126,7 @@
                                     <span class="new_price">$90.00</span>
                                     <span class="old_price">$170.00</span>
                                 </div>
-                                <a class="btn_1" href="listing-grid-1-full.html" role="button">Shop Now</a>
+                                <a class="btn_1" href="<?= BASE_URL ?>?act=products" role="button">Shop Now</a>
                             </div>
                         </div>
                     </div>
@@ -149,7 +149,7 @@
                         <div class="grid_item">
                             <span class="ribbon new"><?= ($key <= 2) ? 'New' : '-'.$value['giam_gia'].'%'; ?></span>
                             <figure>
-                                <a href="product-detail-1.html">
+                                <a href="<?= BASE_URL  ?>?act=products">
                                     <img class="owl-lazy" src="<?= explode(',', $value['hinh'])[0]; ?>" data-src="<?= explode(',', $value['hinh'])[1]; ?>" alt="">
                                 </a>
                             </figure>

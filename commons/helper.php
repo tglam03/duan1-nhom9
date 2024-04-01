@@ -40,3 +40,19 @@ if (!function_exists('upload_file')) {
         return null;
     }
 }
+
+
+// if (!function_exists('middleware_auth_check')) {
+//     function middleware_auth_check($act, $arrRouteNeedAuth) {
+//         if ($act == 'login') {
+//             if (!empty($_SESSION['user'])) {
+//                 header('Location: ' . BASE_URL);
+//                 exit();
+//             }
+//         } 
+//         elseif (empty($_SESSION['user']) && in_array($act, $arrRouteNeedAuth)) {
+//             header('Location: ' . BASE_URL . '?act=login');
+//             exit();
+//         }
+//     }
+// }
