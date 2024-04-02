@@ -1,9 +1,5 @@
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-require 'assets/vendor/PHPMailer-master/src/PHPMailer.php';
-require 'assets/vendor/PHPMailer-master/src/Exception.php';
-require 'assets/vendor/PHPMailer-master/src/SMTP.php';
+
 //Create an instance; passing `true` enables exceptions
 function account()
 {
@@ -61,44 +57,10 @@ function account()
         if (empty($errors)) {
             $mat_khau = loadAccountToEmail($_POST['email_forgot']);
             $to_email = $_POST['email_forgot'];
-            $body = "Xin chào," . $mat_khau['user'] . "<br><b>Mật khẩu của bạn là: " . $mat_khau['mat_khau'] . "</b>";
             $headers = "From: Allaiasupport@gmail.com<br>";
-            $mail = new PHPMailer(true);
-            try {
-                //Server settings
-                $mail->SMTPDebug = 1;                      //Enable verbose debug output
-                $mail->isSMTP();                                            //Send using SMTP
-                $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                $mail->Username   = 'anhkkzz2@gmail.com';                     //SMTP username
-                $mail->Password   = 'aioe mulz mxuw bruy';                               //SMTP password
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;             //Enable implicit TLS encryption
-                $mail->Port       = 465;                                    //TCP port to connect to; use 465 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-                //Recipients
-                $mail->setFrom('anhkkzz2@gmail.com', 'Allia Support');
-                $mail->addAddress(''.$to_email.'', ''. $mat_khau['user'].'');     //Add a recipient              //Name is optional
-                // $mail->addReplyTo('info@example.com', 'Information');
-                // $mail->addCC('cc@example.com');
-                // $mail->addBCC('bcc@example.com');
-
-                //Attachments
-                // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-                // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-
-                //Content
-                $mail->isHTML(true);                                  //Set email format to HTML
-                $mail->Subject = 'Allia mật khẩu';
-                $mail->Body    = ''.$headers.''.$body.'<br>Cảm ơn quý khách<br><br><p style="color:red;">ALLIA Shop</p>';
-                // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-                $mail->send();
-                // echo 'Message has been sent';
-            } catch (Exception $e) {
-                // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            }
-            header('Location:'.BASE_URL.'?act=account');
+            sendemail($headers, $to_email, $mat_khau);
         }
+        header('Location:'.BASE_URL.'?act=account');
     }
     require_once PATH_VIEW . 'layouts/client.php';
 }
