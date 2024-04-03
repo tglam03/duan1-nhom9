@@ -14,7 +14,7 @@
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-6">
-				<h3 data-bs-target="#collapse_2">Thể loại</h3>
+				<h3 data-bs-target="#collapse_2">Loại sản phẩm</h3>
 				<div class="collapse dont-collapse-sm links" id="collapse_2">
 					<ul>
 						<li><a href="listing-grid-1-full.html">Clothes</a></li>

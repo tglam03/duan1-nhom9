@@ -31,7 +31,6 @@ if (!function_exists('loadAccountToEmail')) {
     {
         try {
             $sql = "SELECT user,mat_khau FROM khach_hang WHERE email = :email LIMIT 1";
-
             $stmt = $GLOBALS['conn']->prepare($sql);
 
             $stmt->bindParam(":email", $email);

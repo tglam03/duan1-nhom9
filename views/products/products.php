@@ -157,8 +157,8 @@
 							<?php } ?>
 						</div>
 						<ul>
-							<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào yêu thích"><i class="ti-heart"></i><span>Thêm vào yêu thích</span></a></li>
-							<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào giỏ hàng"><i class="ti-shopping-cart"></i><span>Thêm vào giỏ hàng</span></a></li>
+							<li><a href="<?= BASE_URL. '?act=cart-add&&id=' . $value['id'] . '&soluong = 1'  ?>" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào yêu thích"><i class="ti-heart"></i><span>Thêm vào yêu thích</span></a></li>
+							<li><a href="<?= BASE_URL . '?act=cart-list' ?>" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào giỏ hàng"><i class="ti-shopping-cart"></i><span>Thêm vào giỏ hàng</span></a></li>
 						</ul>
 					</div>
 					<!-- /grid_item -->

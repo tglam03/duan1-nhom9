@@ -115,27 +115,46 @@
 					</div>
 				</div>
 				<!-- end tìm kiếm -->
+
 				<div class="col-xl-3 col-lg-2 col-md-3">
 					<ul class="top_tools">
 						<li>
 							<div class="dropdown dropdown-cart">
 								<a href="cart.html" class="cart_bt"><strong>1</strong></a>
 								<div class="dropdown-menu">
-									<ul>
-										<li>
-											<a href="product-detail-1.html">
-												<figure><img src="<?= BASE_URL; ?>assets/client/img/products/product_placeholder_square_small.jpg" data-src="img/products/shoes/thumb/1.jpg" alt="" width="50" height="50" class="lazy"></figure>
-												<strong><span>1x Armor Air x Fear</span>$90.00</strong>
-											</a>
-											<a href="#0" class="action"><i class="ti-trash"></i></a>
-										</li>
-									</ul>
+									<?php
+
+									if (!empty($_SESSION['cart'])) :
+
+										foreach ($_SESSION['cart'] as $key => $values) : ?>
+											<ul>
+												<li>
+
+													<a href="<?= BASE_URL . '?act=product-detail&id=' . $values['id']  ?>">
+														<figure><img src="<?= BASE_URL . explode(',', $values['hinh'])[0]
+																			?>" alt="" width="50" height="50" class="lazy"></figure>
+
+														<strong><span><?= $values['ten_hh'] ?>
+
+															</span><?= number_format($values['giam_gia'] ?: $values['don_gia']) ?></strong>
+													</a>
+
+
+												</li>
+											</ul>
+
+									<?php endforeach;
+									endif;
+									?>
 									<div class="total_drop">
-										<div class="clearfix"><strong>Tổng</strong><span>$200.00</span></div>
-										<a href="cart.html" class="btn_1 outline">Giỏ hàng</a><a href="checkout.html" class="btn_1">Thanh toán</a>
+										<div class="clearfix"><strong>Tổng</strong><span><?= caculator_total_oder() ?></span></div>
+										<a href="<?= BASE_URL . '?act=cart-list' ?>" class="btn_1 outline">Giỏ hàng</a><a href="<?= BASE_URL . '?act=oder-checkout' ?>" class="btn_1">Thanh toán</a>
 									</div>
 								</div>
 							</div>
+
+
+
 							<!-- /dropdown-cart-->
 						</li>
 						<li>
@@ -160,7 +179,7 @@
 									<?php } ?>
 									<ul>
 										<li>
-											<a href="<?= BASE_URL; ?>?act=account"><i class="ti-package"></i>Giỏ hàng của tôi</a>
+											<a href="<?= BASE_URL; ?>?act=cart-list"><i class="ti-package"></i>Giỏ hàng của tôi</a>
 										</li>
 										<?php if (isset($_SESSION['thoat']) && $_SESSION['thoat'] == 1) { ?>
 										<?php } else { ?>
