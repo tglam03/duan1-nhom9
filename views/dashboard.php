@@ -100,7 +100,7 @@
                     <ul>
                         <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to
                                     favorites</span></a></li>
-                        <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a>
+                        <li><a href="<?= BASE_URL. '?act=cart-add&productID=' . $value['id'] . '&quantity=1'  ?>" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a>
                         </li>
                     </ul>
                 </div>

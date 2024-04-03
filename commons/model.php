@@ -298,3 +298,23 @@ if (!function_exists('showAllVariantProduct')) {
         }
     }
 }
+
+if (!function_exists('getUserAdminByEmailAndPassword')) {
+    function getUserAdminByEmailAndPassword($email, $mat_khau)
+    {
+        try {
+            $sql = "SELECT * FROM khach_hang WHERE email = :email AND mat_khau = :mat_khau AND vai_tro = 1 LIMIT 1";
+
+            $stmt = $GLOBALS['conn']->prepare($sql);
+
+            $stmt->bindParam(":email", $email);
+            $stmt->bindParam(":mat_khau", $mat_khau);
+
+            $stmt->execute();
+
+            return $stmt->fetch();
+        } catch (\Exception $e) {
+            debug($e);
+        }
+    }
+}

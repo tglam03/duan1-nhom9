@@ -13,6 +13,11 @@ require_file(PATH_CONTROLLER);
 require_file(PATH_MODEL);
 
 
+
+// Điều hướng
+ $act = $_GET['act'] ?? '/';
+
+
 // khai báo được link cần đăng nhập thì mới được vào
 $arrRouteNeedAuth = [
     'cart-add',
@@ -24,23 +29,33 @@ $arrRouteNeedAuth = [
 
 
 // kiểm tra xem user đã đăng nhập chưa
- //middleware_auth_check($act , $arrRouteNeedAuth);
-// Điều hướng
-$act = $_GET['act'] ?? '/';
+    middleware_auth_check($act , $arrRouteNeedAuth);
+
+
 match ($act) {
     '/' => dashboard(),
     'products' => listProducts(),
     'about' => about(),
     'product-detail' => productDetail(),
 
-    // giỏ hàng
-    'cart-add'    => cartAdd($_GET['product_id'], $_GET['quantity'] ),
-    'cart-list'   => cartList(),
-    'cart-icn'    => cartInc($_GET['product_id']),  // tăng số lượng
-    'cart-dec'    => cartDec($_GET['product_id']),   // giảm số lượng
-    'cart-delete' => cartDelete($_GET['product_id']),
+    // authen
+    'account' => account(),
+    'singout' => singout(),
 
-    'checkout'    => checkout()
+    // giỏ hàng
+    'cart-add'    => cartAdd($_GET['productID'], $_GET['quantity']),
+    'cart-list'   => cartList(),
+    'cart-inc'    => cartInc($_GET['productID']),  // tăng số lượng
+    'cart-dec'    => cartDec($_GET['productID']),   // giảm số lượng
+    'cart-delete' => cartDelete($_GET['productID']),
+
+    // oder
+    'oder-checkout' => orderCheckOut(), // xử lí mua hàng
+    'oder-purchase' => oderPurchase(), // đặt hàng
+
+
+
+    
 
 };
 

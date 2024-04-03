@@ -42,17 +42,35 @@ if (!function_exists('upload_file')) {
 }
 
 
-// if (!function_exists('middleware_auth_check')) {
-//     function middleware_auth_check($act, $arrRouteNeedAuth) {
-//         if ($act == 'login') {
-//             if (!empty($_SESSION['user'])) {
-//                 header('Location: ' . BASE_URL);
-//                 exit();
-//             }
-//         } 
-//         elseif (empty($_SESSION['user']) && in_array($act, $arrRouteNeedAuth)) {
-//             header('Location: ' . BASE_URL . '?act=login');
-//             exit();
-//         }
-//     }
-// }
+if (!function_exists('middleware_auth_check')) {
+    function middleware_auth_check($act,$arrRouteNeedAuth)
+    {
+        if ($act == 'account') {
+            if (!empty($_SESSION['user'])) {
+                header('Location: ' . BASE_URL);
+                exit();
+            }
+        } elseif (empty($_SESSION['user'])  && in_array($act, $arrRouteNeedAuth)) {
+            header('Location: ' . BASE_URL . '?act=account');
+        }
+    }
+}
+
+// tính tổng tiền
+if (!function_exists('caculator_total_oder')) {
+    function caculator_total_oder($flag = true)
+    {
+        if(isset($_SESSION['cart'])){
+            $total = 0;
+            foreach($_SESSION['cart'] as $values){
+                
+                $price = $values['giam_gia'] ?: $values['don_gia'];
+                $quantity = $values['quantity'];
+
+                $total += $price * $quantity; 
+            }
+            return $flag ?  number_format($total) : $total;
+        }
+        return 0 ;
+    }
+}
