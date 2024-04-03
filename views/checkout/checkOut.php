@@ -34,24 +34,15 @@
 								</div>
 								<!-- /row -->
 								<div class="form-group">
-									<input type="text" name="user_address" required class="form-control" placeholder="Địa chỉ">
+									<input type="text" name="user_address" class="form-control" placeholder="Địa chỉ">
+									<span class=" text-warning"><?= (isset($errors['diachi']) && $errors['diachi'] != "") ? $errors['diachi'] : ''; ?></span>
 								</div>
 								<!-- /row -->
-								<!-- <div class="row no-gutters">
-									<div class="col-md-12 form-group">
-										<div class="custom-select-form">
-											<select class="wide add_bottom_10" name="country" id="country">
-												<option value="" selected>Quốc gia*</option>
-												<option value="vietnam">Việt Nam</option>
-												<option value="United states">United states</option>
-												<option value="Asia">Asia</option>
-											</select>
-										</div>
-									</div>
-								</div> -->
+
 								<!-- /row -->
 								<div class="form-group">
-									<input type="tel" name="user_phone"  required class="form-control" placeholder="Điện thoại">
+									<input type="tel" name="user_phone" class="form-control" placeholder="Điện thoại">
+									<span class=" text-warning"><?= (isset($errors['dienthoai']) && $errors['dienthoai'] != "") ? $errors['dienthoai'] : ''; ?></span>
 								</div>
 								<hr>
 								<hr>
@@ -66,12 +57,7 @@
 					<div class="step middle payments">
 						<h3>2. Thanh toán và vận chuyển</h3>
 						<ul>
-							<li>
-								<label class="container_radio">Thẻ tín dụng<a href="#0" class="info" data-bs-toggle="modal" data-bs-target="#payments_method"></a>
-									<input type="radio" name="status_payment" checked>
-									<span class="checkmark"></span>
-								</label>
-							</li>
+
 							<li>
 								<label class="container_radio">Thanh toán khi nhận hàng<a href="#0" class="info" data-bs-toggle="modal" data-bs-target="#status_payments_method"></a>
 									<input type="radio" name="status_payment">
@@ -85,29 +71,29 @@
 								</label>
 							</li>
 						</ul>
-						<div class="payment_info d-none d-sm-block">
+						<!-- <div class="payment_info d-none d-sm-block">
 							<figure><img src="img/cards_all.svg" alt=""></figure>
 							<p>Nó nên được hiểu là sự co rút của các giác quan, để lỗi lầm của chúng tôi và của bạn đều không phải là một triết lý tốt hơn. Nhưng hầu như không có nguy hiểm gì. Thông thường tritani lúc đầu không phải là những định nghĩa đó.</p>
-						</div>
+						</div> -->
 
 						<h6 class="pb-2">Phương thức vận chuyển</h6>
 
 
-						<!-- <ul>
-						<li>
-							<label class="container_radio">Giao hàng tiết kiệm<a href="#0" class="info" data-bs-toggle="modal" data-bs-target="#payments_method"></a>
-								<input type="radio" name="shipping" checked>
-								<span class="checkmark"></span>
-							</label>
-						</li>
-						<li>
-							<label class="container_radio">Giao hàng nhanh<a href="#0" class="info" data-bs-toggle="modal" data-bs-target="#payments_method"></a>
-								<input type="radio" name="shipping">
-								<span class="checkmark"></span>
-							</label>
-						</li>
+						<ul>
+							<li>
+								<label class="container_radio">Giao hàng tiết kiệm<a href="#0" class="info" data-bs-toggle="modal" data-bs-target="#payments_method"></a>
+									<input type="radio" name="shipping" value="Giao hàng tiết kiệm" checked>
+									<span class="checkmark"></span>
+								</label>
+							</li>
+							<li>
+								<label class="container_radio">Giao hàng nhanh<a href="#0" class="info" data-bs-toggle="modal" data-bs-target="#payments_method"></a>
+									<input type="radio" value="Giao hàng nhanh" name="shipping">
+									<span class="checkmark"></span>
+								</label>
+							</li>
 
-					</ul> -->
+						</ul>
 
 					</div>
 					<!-- end Thanh toán và vận chuyển------------------------- -->

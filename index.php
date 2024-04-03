@@ -50,8 +50,8 @@ match ($act) {
     'cart-delete' => cartDelete($_GET['productID']),
 
     // oder
-    'oder-checkout' => orderCheckOut(), // xử lí mua hàng
-    'oder-purchase' => oderPurchase(), // đặt hàng
+    'oder-checkout' => orderCheckOut(), //  xử lí mua hàng
+    'oder-purchase' => oderPurchase(), //   đặt hàng
 
 
 

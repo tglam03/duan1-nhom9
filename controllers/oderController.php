@@ -25,7 +25,9 @@ function oderPurchase()
         $data['status_delivery'] = STATUS_DELIVERY_WFC;  // chờ xác nhận đơn hàng
         $data['status_payment']  = STATUS_PAYMENT_UNPAID;  // chưa thanh toán
         $data['total_bill']      = caculator_total_oder(false);
-
+        $data['shipping']        = $_POST['shipping'];
+ 
+        // debug($data);    
         $orderID = insert_get_last_id('orders', $data);
 
         foreach ($_SESSION['cart']  as $productID => $item) {
@@ -35,12 +37,23 @@ function oderPurchase()
                 'quantity'      => $item['quantity'],
                 'price'         => $item['giam_gia'] ?: $item['don_gia'],
             ];
-
-            insert('oder_items', $oderItem);
         }
+
+           $errors =  validateOder($data);
+            if(empty($errors)){
+                insert('oder_items', $oderItem);
+            }
+            else{
+                header('Location: ' . BASE_URL . '?act=oder-checkout');
+                exit();
+            }
+           
+        
 
         // sử lí sau khi thêm
         // xóa dữ liệu ở giỏ hàng 
+
+
         deleteCartItemByCartID($_SESSION['cartID']);
         delete2('carts', $_SESSION['cartID']);
 
@@ -50,4 +63,23 @@ function oderPurchase()
     }
 
     header('Location: ' . BASE_URL);
+}
+
+
+function validateOder($data)
+{
+    $errors = [];
+
+    if (empty($data['dienthoai'])) {
+        $errors[] = "Số điện thoại không được để trống";
+    } else if (!preg_match("/^[0-9]*$/", $data['dienthoai'])) {
+        $errors[] = 'Số điện thoại không đúng định dạng';
+    } else if (strlen($data['dienthoai']) != 10) {
+        $errors[] = 'Số điện thoại phải đủ 10 chữ số';
+    }
+    if (empty($data['diachi'])) {
+        $errors[] = 'Địa chỉ bắt buộc phải nhập';
+    }
+   
+    return $errors;
 }
