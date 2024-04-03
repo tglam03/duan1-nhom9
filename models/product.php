@@ -3,7 +3,7 @@ if (!function_exists('locProduct')) {
     function locProduct($selectedValue, $tableName, $start, $end)
     {
         try {
-            $sql = "SELECT * FROM $tableName ORDER BY ";
+            $sql = "SELECT * FROM $tableName WHERE trangthai = 1 ORDER BY ";
             switch ($selectedValue) {
                 case 'popularity':
                     $sql .= "so_luot_xem DESC";
@@ -79,7 +79,7 @@ if (!function_exists('locselect')) {
             $selectedValue = 'luotxemloai';
         }
         try {
-            $sql = "SELECT * FROM $tableName Where 1 ";
+            $sql = "SELECT * FROM $tableName Where trangthai = 1 ";
             switch ($selectedValue) {
                 case 'dongia':
                     if ($ok == 1) {

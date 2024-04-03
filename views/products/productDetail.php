@@ -1,44 +1,6 @@
 <style>
-    /* CSS */
-    .color-radio-label {
-        position: relative;
-        cursor: pointer;
-    }
-
-    .color-radio-button {
-        display: inline-block;
-        width: 30px;
-        height: 30px;
+    .checkmap{
         border-radius: 50%;
-        /* Tạo hình dạng tròn */
-        border: 1px solid #ccc;
-        /* Viền nút radio */
-        position: relative;
-        /* Đặt vị trí tương đối */
-    }
-
-    .color-radio-button:hover {
-        border-color: #666;
-        /* Màu viền khi di chuột qua */
-    }
-
-    .checkmark {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background-color: #007bff;
-        /* Màu của nút tích */
-        display: none;
-        /* Mặc định ẩn nút tích */
-    }
-
-    .color-radio-label input[type="radio"]:checked+.color-radio-button+.checkmark {
-        display: block;
-        /* Hiển thị nút tích khi nút radio được chọn */
     }
 </style>
 <main>
@@ -91,19 +53,18 @@
 
                     <!-- thông tin sản phẩm -->
                     <div class="prod_info">
-                        <h1><?= $product['ten_hh']; ?><small style="margin-left: 2vw; color:cadetblue; font-size: 1vw;">Còn: <?= $product['mau_size_soluong']['soluong']; ?>sp</small></h1>
+                        <h1><?= $product['ten_hh']; ?><small style="margin-left: 2vw; color:cadetblue; font-size: 1vw;">Còn: <?= $product['mau_size_soluong']['soluong']; ?> sản phẩm</small></h1>
                         <p><small>SKU: <?= $product['id']; ?>SM</small><br></p>
                         <div class="prod_options">
                             <div class="row">
                                 <label class="col-xl-5 col-lg-5 col-md-6 col-6 pt-0"><strong>Màu</strong></label>
-                                <div class="col-xl-4 col-lg-5 col-md-6 col-6 colors">
+                                <div class="col-xl-4 col-lg-5 col-md-6 col-6 colors filter_type">
                                     <ul id="colorList">
                                         <?php foreach ($products1[0]['mau_size_soluong'] as $keymau => $mausp) { ?>
                                             <li>
-                                                <label class="color-radio-label">
+                                                <label class="color-radio-label container_check">
                                                     <input type="radio" name="mau" value="<?= $mausp['mau']; ?>" class="color color_<?= $keymau; ?> <?= ($keymau == 0) ? 'active' : ''; ?>">
-                                                    <span class="color-radio-button" style="background-color: <?= $mausp['mau']; ?>;"></span>
-                                                    <span class="checkmark"></span> <!-- Nút tích -->
+                                                    <span class="color-radio-button checkmark"" style="background-color: <?= $mausp['mau']; ?>;border-radius: 50%;"></span>
                                                 </label>
                                             </li>
                                         <?php }; ?>
@@ -114,9 +75,9 @@
                                 <label class="col-xl-5 col-lg-5 col-md-6 col-6"><strong>Size</strong> - Size Guide <a href="#0" data-bs-toggle="modal" data-bs-target="#size-modal"><i class="ti-help-alt"></i></a></label>
                                 <div class="col-xl-4 col-lg-5 col-md-6 col-6">
                                     <div class="custom-select-form">
-                                        <select class="wide">
+                                        <select class="wide" name="size">
                                             <?php foreach (explode(',', $product['mau_size_soluong']['size']) as $keysize => $sizesp) {
-                                                if ($keysize == 0) echo '<option value="' . $sizesp . '" selected>Small (' . $sizesp . ')</option>';
+                                                if ($keysize == 0) echo '<option value="' . $sizesp . '" selected >Small (' . $sizesp . ')</option>';
                                                 else echo '<option value="' . $sizesp . '">' . $sizesp . '</option>';
                                             }; ?>
                                         </select>
@@ -134,10 +95,10 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-5 col-md-6">
-                                <div class="price_main"> <span class="new_price">$<?= ($product['giam_gia'] == 0) ? $product['don_gia'] : ($product['don_gia'] * ((100 - $product['giam_gia']) / 100)); ?></span>
+                                <div class="price_main"> <span class="new_price"><?= ($product['giam_gia'] == 0) ? number_format($product['don_gia']) : number_format(($product['don_gia'] * ((100 - $product['giam_gia']) / 100))); ?>VND</span>
                                     <?php if ($product['giam_gia'] > 0) { ?>
                                         <span class="percentage">-<?= $product['giam_gia'] ?>%</span>
-                                        <span class="old_price">$<?= $product['don_gia'] ?></span>
+                                        <span class="old_price"><?= number_format($product['don_gia']) ?>VND</span>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -192,7 +153,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <td><strong>Màu sắc</strong></td>
-                                                        <td class="d-flex"> <?php foreach (explode(',', $product['mau_size_soluong']['mau']) as $mausp) { ?><div class="btnhinhtron" style="background-color:<?= $mausp; ?>;"></div><?php }; ?></td>
+                                                        <td class="d-flex"><?php foreach (explode(',', $product['mau_size_soluong']['mau']) as $mausp) { ?><div class="btnhinhtron" style="background-color:<?= $mausp; ?>;"></div><?php }; ?></td>
                                                     </tr>
                                                     <tr>
                                                         <td><strong>Size</strong></td>
@@ -203,6 +164,10 @@
                                                     <tr>
                                                         <td><strong>Số lượng</strong></td>
                                                         <td><?= $product['mau_size_soluong']['soluong']; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Số lượt xem</strong></td>
+                                                        <td><?= $product['so_luot_xem']; ?></td>
                                                     </tr>
                                                 </tbody>
                                             </table>

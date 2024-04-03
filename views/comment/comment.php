@@ -8,13 +8,19 @@ require_once '../../commons/connect-db.php';
 require_once '../../commons/model.php';
 // Require file trong controllers và models
 require_file(PATH_CONTROLLER);
-require_file(PATH_MODEL);
+require_once '../../models/productdetail.php';
 $dsbl = loadAllBinhluan($mahh);
 ?>
 <div class="row">
     <div>
         <div class="review_content">
             <div class="clearfix add_bottom_10">
+                <div class="d-flex justify-content-around">
+                    <h4 class="col-lg-2 text-warning">Mã Bình Luận</h4>
+                    <h4 class="col-lg-4 text-warning">Nội Dung</h4>
+                    <h4 class="col-lg-3 text-warning">Ngày Bình Luận</h4>
+                    <h4 class="col-lg-3 text-warning">Người Bình Luận</h4>
+                </div>
                 <?php foreach ($dsbl as $key => $dsbl) { ?>
                     <div class="d-flex justify-content-around">
                         <p class="col-lg-2"><?= $key + 1 ?>-MT-<?= $dsbl['id']; ?></p>
@@ -45,7 +51,7 @@ $dsbl = loadAllBinhluan($mahh);
 </div>
 <?php
 if (isset($_POST['binhluan']) && $_POST['binhluan']) {
-    if (isset($_SESSION['user']) && $_SESSION['user']!="") {
+    if (isset($_SESSION['user']) && $_SESSION['user'] != "") {
         $kh_id = $_SESSION['user']['id'];
         $noi_dung = $_POST['noidung'];
         $ngay_bl = date('h:i:s d/m/Y');
@@ -68,7 +74,7 @@ if (isset($_POST['binhluan']) && $_POST['binhluan']) {
         if (empty($_SESSION['tbnoi_dung'])) {
             insert('binh_luan', $data);
         }
-    }else{
+    } else {
         $_SESSION['tbnoi_dung'] = 'Đăng nhập để sử dụng chức năng';
     }
     header('Location:' . $_SERVER['HTTP_REFERER']);

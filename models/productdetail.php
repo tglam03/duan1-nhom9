@@ -5,7 +5,7 @@ if (!function_exists('loadAllspcungloai')) {
     function loadAllspcungloai($tableName, $loai_id, $id)
     {
         try {
-            $sql = "SELECT * FROM $tableName WHERE  loai_id = :loai_id AND id <> :id";
+            $sql = "SELECT * FROM $tableName WHERE trangthai = 1 AND loai_id = :loai_id AND id <> :id";
 
             $stmt = $GLOBALS['conn']->prepare($sql);
 
@@ -25,7 +25,7 @@ if (!function_exists('loadAllBinhluan')) {
     {
         try {
             $sql = "SELECT * from khach_hang a join binh_luan b on a.id = b.kh_id 
-            join sanpham c on b.hh_id = c.id where b.hh_id = :hh_id ORDER BY b.id DESC";
+            join sanpham c on b.hh_id = c.id where b.hh_id = :hh_id AND trangthai = 1 ORDER BY b.id DESC";
 
             $stmt = $GLOBALS['conn']->prepare($sql);
 
