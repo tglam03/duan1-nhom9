@@ -100,7 +100,7 @@
                     <ul>
                         <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to
                                     favorites</span></a></li>
-                        <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a>
+                        <li><a href="<?= BASE_URL. '?act=cart-add&productID=' . $value['id'] . '&quantity=1'  ?>" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a>
                         </li>
                     </ul>
                 </div>
@@ -113,7 +113,7 @@
     <!-- /end sản phẩm top sell -->
     <!-- /container -->
     <div>
-        <!-- phẩn sản phẩm sau top sell -->
+        <!-- phẩn sản phẩm mới -->
         <div class="featured lazy" data-bg="url(<?= BASE_URL ?>assets/client/img/banner1.jpg)">
             <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
                 <div class="container margin_60">
@@ -126,7 +126,7 @@
                                     <span class="new_price">$90.00</span>
                                     <span class="old_price">$170.00</span>
                                 </div>
-                                <a class="btn_1" href="listing-grid-1-full.html" role="button">Shop Now</a>
+                                <a class="btn_1" href="<?= BASE_URL ?>?act=products" role="button">Shop Now</a>
                             </div>
                         </div>
                     </div>
@@ -149,7 +149,7 @@
                         <div class="grid_item">
                             <span class="ribbon new"><?= ($key <= 2) ? 'New' : '-' . $value['giam_gia'] . '%'; ?></span>
                             <figure>
-                                <a href="product-detail-1.html">
+                                <a href="<?= BASE_URL  ?>?act=products">
                                     <img class="owl-lazy" src="<?= explode(',', $value['hinh'])[0]; ?>" data-src="<?= explode(',', $value['hinh'])[1]; ?>" alt="">
                                 </a>
                             </figure>

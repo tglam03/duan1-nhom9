@@ -142,7 +142,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6">
-                                <div class="btn_add_to_cart"><a href="#0" class="btn_1">Add to Cart</a></div>
+                                <div class="btn_add_to_cart"><a href="<?= BASE_URL . '?act=cart-list' ?>" class="btn_1">Add to Cart</a></div>
                             </div>
                         </div>
                     </div>
