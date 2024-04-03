@@ -3,7 +3,7 @@ if (!function_exists('lastID')) {
     function lastID($tableName)
     {
         try {
-            $sql = "SELECT id FROM $tableName ORDER BY id DESC LIMIT 1";
+            $sql = "SELECT id FROM $tableName WHERE trangthai = 1 ORDER BY id DESC LIMIT 1";
 
             $stmt = $GLOBALS['conn']->prepare($sql);
 
@@ -21,7 +21,7 @@ if (!function_exists('deleteProduct')) {
     function deleteProduct($tableName, $hh_id)
     {
         try {
-            $sql = "DELETE FROM $tableName where hh_id = :hh_id";
+            $sql = "UPDATE $tableName SET trangthai = 0 where hh_id = :hh_id";
             $stmt = $GLOBALS['conn']->prepare($sql);
 
             $stmt->bindParam(":hh_id", $hh_id);
@@ -36,7 +36,7 @@ if (!function_exists('deleteSize')) {
     function deleteSize($tableName, $mau_id)
     {
         try {
-            $sql = "DELETE FROM $tableName where mau_id = :mau_id";
+            $sql = "UPDATE $tableName SET trangthai = 0 where mau_id = :mau_id";
             $stmt = $GLOBALS['conn']->prepare($sql);
 
             $stmt->bindParam(":mau_id", $mau_id);

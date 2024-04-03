@@ -149,10 +149,14 @@
 									<a class="access_link"><span>Tài khoản</span></a>
 								<?php } ?>
 								<div class="dropdown-menu">
-									<?php if (!isset($_SESSION['user']) || empty($_SESSION['user'])) { ?>
-										<a href="<?= BASE_URL; ?>?act=account" class="btn_1">Đăng nhập hoặc đăng ký</a>
+									<?php if (isset($_SESSION['thoat']) && $_SESSION['thoat'] == 1) { ?>
+										<a class="btn_1" href="<?= BASE_URL; ?>?act=singout&dangnhap">Đăng nhập</a>
 									<?php } else { ?>
-										<p class="btn_1 w-100">Xin chào: <?= $_SESSION['user']['user'] ?></p>
+										<?php if (!isset($_SESSION['user']) || empty($_SESSION['user'])) { ?>
+											<a href="<?= BASE_URL; ?>?act=account" class="btn_1">Đăng nhập hoặc đăng ký</a>
+										<?php } else { ?>
+											<p class="btn_1 w-100">Xin chào: <?= $_SESSION['user']['user'] ?></p>
+										<?php } ?>
 									<?php } ?>
 									<ul>
 										<li>
@@ -162,7 +166,15 @@
 										<?php } else { ?>
 											<?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) { ?>
 												<li>
-													<a href="<?= BASE_URL; ?>?act=account"><i class="ti-user"></i>Thông tin tài khoản</a>
+													<a href="<?= BASE_URL; ?>?act=account-deiltail"><i class="ti-user"></i>Thông tin tài khoản</a>
+												</li>
+											<?php } ?>
+										<?php } ?>
+										<?php if (isset($_SESSION['thoat']) && $_SESSION['thoat'] == 1) { ?>
+										<?php } else { ?>
+											<?php if (isset($_SESSION['user']) && $_SESSION['user']['vai_tro'] == 1) { ?>
+												<li>
+													<a href="<?= BASE_URL_ADMIN ?>"><i class=" ti-desktop"></i>Đăng nhập vào trang quản trị</a>
 												</li>
 											<?php } ?>
 										<?php } ?>

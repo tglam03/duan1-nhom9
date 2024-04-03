@@ -1,10 +1,10 @@
 <?php
 
 session_start();
-
+require_once '../commons/helper.php';
+if (isset($_SESSION['user']) && $_SESSION['user']['vai_tro'] == 1) {
 // Require file trong commons
 require_once '../commons/env.php';
-require_once '../commons/helper.php';
 require_once '../commons/connect-db.php';
 require_once '../commons/model.php';
 
@@ -24,15 +24,8 @@ $act = $_GET['act'] ?? '/';
 $cate = isset($_GET['id']) ? $_GET['id'] : null;
 // rằng khóa 'id' luôn được đặt trước khi truy cập vào nó, từ đó ngăn ngừa lỗi "Undefined array key 'id'".
 
-
-// Kiểm tra user đã đăng nhập chưa
-middleware_auth_check($act);
-
 match ($act) {
     '/' => dashboard(),
-    //login
-    'login' => authenShowFormLogin(),
-    'logout' => authenLogout(),
 
     // CRUD product
     'product' => productListAll(),
@@ -67,5 +60,9 @@ match ($act) {
     // 'voucher-update' => voucherUpdate($_GET['id']),
     // 'voucher-delete' => voucherDelete($_GET['id']),
 };
-
 require_once '../commons/disconnect-db.php';
+}else{
+    header('Location:http://localhost/duan1_nhom9/');
+    // echo "404 - Not found";
+    // die;
+}

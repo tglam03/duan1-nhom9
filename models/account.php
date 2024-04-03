@@ -30,7 +30,7 @@ if (!function_exists('loadAccountToEmail')) {
     function loadAccountToEmail($email)
     {
         try {
-            $sql = "SELECT user,mat_khau	FROM khach_hang WHERE email = :email LIMIT 1";
+            $sql = "SELECT user,mat_khau FROM khach_hang WHERE email = :email LIMIT 1";
 
             $stmt = $GLOBALS['conn']->prepare($sql);
 

@@ -19,6 +19,7 @@ match ($act) {
     'about' => about(),
     'product-detail' => productDetail(),
     'account' => account(),
+    'account-deiltail' => accountdeiltail($_SESSION['user']['id']),
     'singout' => singout(),
 };
 

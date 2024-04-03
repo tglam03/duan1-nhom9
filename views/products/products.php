@@ -151,9 +151,9 @@
 							<h3><?= $value['ten_hh']; ?></h3>
 						</a>
 						<div class="price_box">
-							<span class="new_price">$<?= ($value['giam_gia'] == 0) ? $value['don_gia'] : ($value['don_gia'] * ((100 - $value['giam_gia']) / 100)); ?></span>
+							<span class="new_price"><?= ($value['giam_gia'] == 0) ? number_format($value['don_gia']) : number_format($value['don_gia'] * ((100 - $value['giam_gia']) / 100)); ?>VND</span>
 							<?php if ($value['giam_gia'] > 0) { ?>
-								<span class="old_price">$<?= $value['don_gia'] ?></span>
+								<span class="old_price"><?= number_format($value['don_gia']) ?>VND</span>
 							<?php } ?>
 						</div>
 						<ul>
