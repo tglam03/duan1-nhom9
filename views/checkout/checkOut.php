@@ -22,6 +22,7 @@
 							<div class="tab-pane fade show active" id="tab_1" role="tabpanel" aria-labelledby="tab_1">
 								<div class="form-group">
 									<input type="email" name="user_email" value="<?= $_SESSION['user']['email'] ?>" class="form-control" placeholder="Email">
+									<span class=" text-warning"><?= (isset($errors['user_email']) && $errors['user_email'] != "") ? $errors['user_email'] : ''; ?></span>
 								</div>
 								<!-- <div class="form-group">
 								<input type="password"  name="" class="form-control" placeholder="Mật khẩu">
@@ -30,19 +31,19 @@
 								<div class="row no-gutters">
 									<div class="form-group">
 										<input type="text" name="user_name" value="<?= $_SESSION['user']['ho_ten'] ?>" class="form-control" placeholder="Họ và tên">
-									</div>
+									</div><span class=" text-warning"><?= (isset($errors['user_name']) && $errors['user_name'] != "") ? $errors['user_name'] : ''; ?></span>
 								</div>
 								<!-- /row -->
 								<div class="form-group">
-									<input type="text" name="user_address" class="form-control" placeholder="Địa chỉ">
-									<span class=" text-warning"><?= (isset($errors['diachi']) && $errors['diachi'] != "") ? $errors['diachi'] : ''; ?></span>
+									<input type="text" name="user_address" value="<?= $_SESSION['user']['diachi'] ?>" class="form-control" placeholder="Địa chỉ">
+									<span class=" text-warning"><?= (isset($errors['user_address']) && $errors['user_address'] != "") ? $errors['user_address'] : ''; ?></span>
 								</div>
 								<!-- /row -->
 
 								<!-- /row -->
 								<div class="form-group">
-									<input type="tel" name="user_phone" class="form-control" placeholder="Điện thoại">
-									<span class=" text-warning"><?= (isset($errors['dienthoai']) && $errors['dienthoai'] != "") ? $errors['dienthoai'] : ''; ?></span>
+									<input type="tel" name="user_phone" value="<?= $_SESSION['user']['dienthoai'] ?>" class="form-control" placeholder="Điện thoại">
+									<span class=" text-warning"><?= (isset($errors['user_phone']) && $errors['user_phone'] != "") ? $errors['user_phone'] : ''; ?></span>
 								</div>
 								<hr>
 								<hr>
@@ -60,7 +61,7 @@
 
 							<li>
 								<label class="container_radio">Thanh toán khi nhận hàng<a href="#0" class="info" data-bs-toggle="modal" data-bs-target="#status_payments_method"></a>
-									<input type="radio" name="status_payment">
+									<input type="radio" name="status_payment" checked>
 									<span class="checkmark"></span>
 								</label>
 							</li>
@@ -108,17 +109,17 @@
 								<thead>
 									<tr>
 										<th>
-											Sản phẩm
+											<span class=" text-danger">Sản phẩm</span>
 										</th>
 										<th>
-											Giá
+											<span class=" text-danger">Giá</span>
 										</th>
 										<th>
-											Số lượng
+											<span class=" text-danger">Số lượng</span>
 										</th>
 
 										<th>
-											THÀNH TIỀN
+											<span class=" text-danger">THÀNH TIỀN</span>
 										</th>
 									</tr>
 								</thead>
@@ -134,7 +135,7 @@
 												<td>
 													<div class="thumb_cart">
 														<img src="<?= BASE_URL . explode(',', $values['hinh'])[0]
-																	?>" width="100px" class="lazy" alt="Image">
+																	?>" width="100%" class="lazy" alt="Image">
 													</div>
 													<span class="item_cart"><?= $values['ten_hh'] ?></span>
 												</td>
@@ -143,7 +144,7 @@
 
 															?></strong>
 												</td>
-												<td><span class="btn btn-light"><?= $values['quantity'] ?></span></td>
+												<td><span><?= $values['quantity'] ?></span></td>
 
 												<td>
 													<strong>

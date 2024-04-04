@@ -120,7 +120,7 @@
 					<ul class="top_tools">
 						<li>
 							<div class="dropdown dropdown-cart">
-								<a href="cart.html" class="cart_bt"><strong>1</strong></a>
+								<a href="<?= BASE_URL . '?act=cart-list' ?>" class="cart_bt"><strong><?=(isset($_SESSION['cart'])&&$_SESSION['cart']!="")?sizeof($_SESSION['cart']):0;?></strong></a>
 								<div class="dropdown-menu">
 									<?php
 

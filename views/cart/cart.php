@@ -21,6 +21,12 @@
 						Giá
 					</th>
 					<th>
+						Màu
+					</th>
+					<th>
+						Size
+					</th>
+					<th>
 						Số lượng
 					</th>
 					<th>
@@ -53,12 +59,22 @@
 										?></strong>
 							</td>
 							<td>
-                                <a href="<?= BASE_URL . '?act=cart-dec&productID=' . $values['id'] ?>" class="btn btn-danger">-</a>
+								<label class="container_check">
+									<span class="color-radio-button checkmark" style=" background-color:<?= $values['mausize']['mau']; ?>;border-radius: 50%;"></span>
+								</label>
+							</td>
+							<td>
+								<span><?= $values['mausize']['size']; ?></span>
+							</td>
+							<td>
+								<div class="d-flex">
+									<a href="<?= BASE_URL . '?act=cart-dec&productID=' . $values['id'] ?>" class="btn btn-danger">-</a>
 
-                                <span class="btn btn-warning"><?= $values['quantity'] ?></span>
+									<span class="btn btn-warning"><?= $values['mausize']['quantity'] ?></span>
 
-                                <a href="<?= BASE_URL . '?act=cart-inc&productID=' . $values['id'] ?>" class="btn btn-success">+</a>
-                            </td>
+									<a href="<?= BASE_URL . '?act=cart-inc&productID=' . $values['id'] ?>" class="btn btn-success">+</a>
+								</div>
+							</td>
 							<td>
 								<strong><?= $total = number_format(($values['giam_gia'] ?: $values['don_gia']) * $values['quantity']);
 
@@ -104,13 +120,13 @@
 				<div class="col-xl-4 col-lg-4 col-md-6">
 					<ul>
 						<li>
-							<span>Thành tiền</span> <?=  caculator_total_oder()  ?>
+							<span>Thành tiền</span> <?= caculator_total_oder()  ?>
 						</li>
 						<li>
 							<span>Phí ship</span> $7.00
 						</li>
 						<li>
-							<span>Tổng thanh toán</span>  <?=  caculator_total_oder()  ?>
+							<span>Tổng thanh toán</span> <?= caculator_total_oder()  ?>
 						</li>
 					</ul>
 					<a href="<?= BASE_URL ?>?act=oder-checkout" class="btn_1 full-width cart">Tiến hành thanh toán</a>

@@ -4,6 +4,22 @@
 function cartAdd($productID, $quantity = 0)
 {
     // Kiểm tra xem là có product với cái ID kia không
+    $mau = (isset($_POST['mau'])&&$_POST['mau']!="")?$_POST['mau']:'';
+    $size = (isset($_POST['size'])&&$_POST['size']!="")?$_POST['size']:'';
+    $quantity = (isset($_POST['soluong'])&&$_POST['soluong']!="")?$_POST['soluong']:1;
+    if($size!=""){
+        $soluong = explode(',',$size)[1];
+        $sizesp = explode(',',$size)[0];
+        if($quantity>$soluong){
+            $_SESSION['erorssoluong'] = "Chỉ còn $soluong sản phẩm size đó";
+            header('Location:' . $_SERVER['HTTP_REFERER']);
+            exit();
+        }
+        $sizesp = showOne('sizehh',$sizesp);
+    }
+    if($mau!=''){
+        $mau = showOne('mauhh',$mau);
+    }
     $product = showOne('sanpham', $productID);
 
     if (empty($product)) {
@@ -20,8 +36,9 @@ function cartAdd($productID, $quantity = 0)
     // Add tiếp sản phẩm vào thằng cart_items
     if (!isset($_SESSION['cart'][$productID])) {
         $_SESSION['cart'][$productID] = $product;
-        $_SESSION['cart'][$productID]['quantity'] = $quantity;
-
+        $_SESSION['cart'][$productID]['mausize']['quantity'] = $quantity;
+        $_SESSION['cart'][$productID]['mausize']['size'] = $sizesp['size'];
+        $_SESSION['cart'][$productID]['mausize']['mau'] = $mau['mau'];
         insert('cart_items', [
             'cart_id' => $cartID,
             'product_id' => $productID,
@@ -55,7 +72,7 @@ function cartInc($productID)
 
     if (isset($_SESSION['cart'][$productID])) {
 
-        $qtyTMP = $_SESSION['cart'][$productID]['quantity'] += 1;
+        $qtyTMP = $_SESSION['cart'][$productID]['mausize']['quantity'] += 1;
         updateQuantityByCartIDAndProductID($_SESSION['cartID'], $productID, $qtyTMP);
     }
     header('Location: ' . BASE_URL . '?act=cart-list');
