@@ -5,25 +5,33 @@ function orderCheckOut()
     $title = 'Trang thanh toán';
     $view = 'checkout/checkOut';
     $style = 'checkout';
+    if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
+        header('Location:' . BASE_URL . '?act=cart-list');
+        exit();
+    }
     require_once PATH_VIEW . 'layouts/client.php';
 }
 
 
 function oderPurchase()
 {
-
     if (!empty($_POST) && !empty($_SESSION['cart'])) {
-
+        if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
+            header('Location:' . BASE_URL . '?act=oder-checkout');
+            exit();
+        }
         // sử lí lưu vào bảng oder và oder items
 
         $data                    = $_POST;
         $data['user_id']         = $_SESSION['user']['id'];
         $data['status_delivery'] = STATUS_DELIVERY_WFC;  // chờ xác nhận đơn hàng
-        $data['status_payment']  = STATUS_PAYMENT_UNPAID;  // chưa thanh toán
+        $data['status_payment']  = $_POST['status_payment']; // phương thức thanh toán 0 là thanh toán khi nhận 1 là thanh toán vnpay
         $data['total_bill']      = caculator_total_oder(false);
         $data['shipping']        = $_POST['shipping'];
+        $data['thanhtoan'] = 0; // 0 là chưa thanh toán 1 là đã thanh toán
         // debug($data);    
-        $orderID = insert_get_last_id('orders', $data);
+        $_SESSION['orderid'] = $orderID = insert_get_last_id('orders', $data);
+        $_SESSION['total_bill'] = $data['total_bill'];
         $errors =  validateOder($data);
         if (empty($errors)) {
         } else {
@@ -34,10 +42,16 @@ function oderPurchase()
             $oderItem = [
                 'order_id'      => $orderID,
                 'product_id'    => $productID,
-                'quantity'      => $item['quantity'],
-                'price'         => $item['giam_gia'] ?: $item['don_gia'],
+                'quantity'      => $item['mausize']['quantity'],
+                'price'         => (isset($item['giam_gia']) && $item['giam_gia'] != "") ? $item['don_gia'] * (100 - $item['giam_gia']) / 100 : $item['don_gia'],
+                'mau_id'         => $item['mausize']['idmau'],
+                'size_id'         => $item['mausize']['idsize'],
             ];
             insert('oder_items', $oderItem);
+        }
+        if(isset($data['status_payment']) && $data['status_payment']==1){
+            header('Location:'.BASE_URL.'vnpay_php/index.php');
+            exit();
         }
         // sử lí sau khi thêm
         // xóa dữ liệu ở giỏ hàng 
@@ -84,4 +98,26 @@ function validateOder($data)
     }
 
     return $errors;
+}
+
+//lịch sử mua hàng
+function orderHistory()
+{
+    $title = 'Lịch sử mua hàng';
+    $view = 'historyOder/historyOrder';
+    $style = 'cart';
+    if(isset($_SESSION['user']) && !empty($_SESSION['user'])){
+        $historyOder = historyOder($_SESSION['user']['id']);
+    }
+    require_once PATH_VIEW . 'layouts/client.php';
+}
+
+function orderCancel(){
+    $title = 'Lịch sử mua hàng';
+    $view = 'historyOder/historyOrder';
+    $style = 'cart';
+    if(isset($_GET['ID']) && !empty($_GET['ID'])){
+        update('orders',$_GET['ID'],['status_delivery' => -1]);
+    }
+    header('Location: '. BASE_URL.'?act=orderhistory' );
 }

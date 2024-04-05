@@ -1,8 +1,18 @@
 <div class="container-fluid">
-
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Lọc theo thời gian
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><a href="<?=BASE_URL_ADMIN?>?act=/&day=7" class="dropdown-item" href="#">7 ngày</a></li>
+                <li><a href="<?=BASE_URL_ADMIN?>?act=/&day=28" class="dropdown-item" href="#">28 ngày</a></li>
+                <li><a href="<?=BASE_URL_ADMIN?>?act=/&day=90" class="dropdown-item" href="#">90 ngày</a></li>
+                <li><a href="<?=BASE_URL_ADMIN?>?act=/&day=365" class="dropdown-item" href="#">365 ngày</a></li>
+            </ul>
+        </div>
     </div>
 
     <!-- Content Row -->
@@ -16,7 +26,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Tổng thu nhập</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?=(isset($tongthunhapofday)&&$tongthunhapofday!="")?number_format($tongthunhapofday):0;?> VND</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -34,7 +44,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Số lượng bán ra</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?=(isset($soluongofday)&&$soluongofday!="")?number_format($soluongofday):0;?> sản phẩm</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -54,12 +64,9 @@
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?=(isset($avgtongthunhapofOneday)&&$avgtongthunhapofOneday!="")?number_format($avgtongthunhapofOneday):0;?> VND</div>
                                 </div>
                                 <div class="col">
-                                    <div class="progress progress-sm mr-2">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -78,8 +85,8 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                Số lượng sản phẩm</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                Số lượng đơn hủy</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?=(isset($donhuys)&&$donhuys!="")?number_format($donhuys):0;?> Đơn hàng</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -104,6 +111,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="chart-area">
+
                         <canvas id="myAreaChart"></canvas>
                     </div>
                 </div>

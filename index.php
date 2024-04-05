@@ -51,6 +51,8 @@ match ($act) {
     'oder-checkout' => orderCheckOut(), //  xử lí mua hàng
     'oder-purchase' => oderPurchase(), //   đặt hàng
     'comfirm' => comfirm(),
+    'orderhistory' => orderHistory(),
+    'orderCancel' => orderCancel(),
 };
 
 require_once './commons/disconnect-db.php';

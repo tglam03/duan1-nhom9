@@ -59,12 +59,14 @@
 										?></strong>
 							</td>
 							<td>
-								<label class="container_check">
+								<label class="container_check1">
 									<span class="color-radio-button checkmark" style=" background-color:<?= $values['mausize']['mau']; ?>;border-radius: 50%;"></span>
 								</label>
 							</td>
 							<td>
-								<span><?= $values['mausize']['size']; ?></span>
+								<div>
+									<span><?= $values['mausize']['size']; ?></span>
+								</div>
 							</td>
 							<td>
 								<div class="d-flex">
@@ -76,7 +78,7 @@
 								</div>
 							</td>
 							<td>
-								<strong><?= $total = number_format(($values['giam_gia'] ?: $values['don_gia']) * $values['quantity']);
+								<strong><?= $total = number_format(($values['giam_gia'] ?: $values['don_gia']) * $values['mausize']['quantity']);
 
 										?></strong>
 							</td>

@@ -54,7 +54,7 @@ if (isset($_POST['binhluan']) && $_POST['binhluan']) {
     if (isset($_SESSION['user']) && $_SESSION['user'] != "") {
         $kh_id = $_SESSION['user']['id'];
         $noi_dung = $_POST['noidung'];
-        $ngay_bl = date('h:i:s d/m/Y');
+        $ngay_bl = date('H:i:s d/m/Y');
         $data = [
             'hh_id' => $mahh,
             'kh_id' => $kh_id,

@@ -61,13 +61,13 @@
 
 							<li>
 								<label class="container_radio">Thanh toán khi nhận hàng<a href="#0" class="info" data-bs-toggle="modal" data-bs-target="#status_payments_method"></a>
-									<input type="radio" name="status_payment" checked>
+									<input type="radio" value="0" name="status_payment" checked>
 									<span class="checkmark"></span>
 								</label>
 							</li>
 							<li>
-								<label class="container_radio">Thanh toán online<a href="#0" class="info" data-bs-toggle="modal" data-bs-target="#status_payments_method"></a>
-									<input type="radio" name="status_payment">
+								<label class="container_radio">Thanh toán qua VNPAY<a href="#0" class="info" data-bs-toggle="modal" data-bs-target="#status_payments_method"></a>
+									<input type="radio" value="1" name="status_payment">
 									<span class="checkmark"></span>
 								</label>
 							</li>
@@ -144,11 +144,11 @@
 
 															?></strong>
 												</td>
-												<td><span><?= $values['quantity'] ?></span></td>
+												<td><span><?= $values['mausize']['quantity'] ?></span></td>
 
 												<td>
 													<strong>
-														<?= $total = number_format(($values['giam_gia'] ?: $values['don_gia']) * $values['quantity']); ?>
+														<?= $total = number_format(($values['giam_gia'] ?: $values['don_gia']) * $values['mausize']['quantity']); ?>
 													</strong>
 												</td>
 

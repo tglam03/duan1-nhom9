@@ -120,7 +120,7 @@
 					<ul class="top_tools">
 						<li>
 							<div class="dropdown dropdown-cart">
-								<a href="<?= BASE_URL . '?act=cart-list' ?>" class="cart_bt"><strong><?=(isset($_SESSION['cart'])&&$_SESSION['cart']!="")?sizeof($_SESSION['cart']):0;?></strong></a>
+								<a href="<?= BASE_URL . '?act=cart-list' ?>" class="cart_bt"><strong><?= (isset($_SESSION['cart']) && $_SESSION['cart'] != "") ? sizeof($_SESSION['cart']) : 0; ?></strong></a>
 								<div class="dropdown-menu">
 									<?php
 
@@ -184,6 +184,9 @@
 										<?php if (isset($_SESSION['thoat']) && $_SESSION['thoat'] == 1) { ?>
 										<?php } else { ?>
 											<?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) { ?>
+												<li>
+													<a href="<?= BASE_URL; ?>?act=orderhistory"><i class="ti-anchor"></i>Lịch sử mua hàng</a>
+												</li>
 												<li>
 													<a href="<?= BASE_URL; ?>?act=account-deiltail"><i class="ti-user"></i>Thông tin tài khoản</a>
 												</li>
