@@ -59,8 +59,15 @@
                                 <td><?= $cart['created_at'] ?></td>
                                 <td><?= $cart['updated_at'] ?></td>
                                 <td><?= $cart['shipping'] ?></td>
-                                <td><?= $cart['status_delivery'] ?></td>
-                                <td><?= $cart['status_payment'] ?></td>
+                                <td class="col-sm-2">
+                                    <span class=" text-info">
+                                        <?= ($cart['status_delivery'] == 0) ? '<span class="badge badge-warning">Chờ xác nhận</span>' : ($cart['status_delivery'] == 1 ? '<span class="badge badge-primary">Chờ lấy hàng</span>' : ($cart['status_delivery'] == 2 ? '<span class="badge badge-info">Đang giao hàng</span>' : ($cart['status_delivery'] == 3 ? '<span class="badge badge-success">Đã giao</span>' : ($cart['status_delivery'] == -1 ? '<span class="badge badge-danger">Đã hủy</span>' : '')))) ?>
+                                    </span>
+                                </td>
+
+
+                                <td> <?= ($cart['status_payment']  == 0) ? '<span class="badge badge-warning">Chưa thanh toán</span>' : ($cart['status_payment'] == 1 ? '<span class="badge badge-success">Đã thanh toán</span>' : ($cart['status_payment'] == -1 ? '<span class="badge badge-danger">Đơn hàng đã hủy</span>' : '')) ?></td>
+
 
 
                                 <td>

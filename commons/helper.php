@@ -65,7 +65,7 @@ if (!function_exists('caculator_total_oder')) {
             foreach($_SESSION['cart'] as $values){
                 
                 $price = $values['giam_gia'] ?: $values['don_gia'];
-                $quantity = $values['quantity'];
+                $quantity = $values['mausize']['quantity'];
 
                 $total += $price * $quantity; 
             }

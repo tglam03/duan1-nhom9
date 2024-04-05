@@ -41,7 +41,7 @@
                             <tr>
                                 <td><?= $product['id']; ?></td>
                                 <td><?= $product['ten_hh']; ?></td>
-                                <td>$<?= $product['don_gia']; ?></td>
+                                <td><?= number_format($product['don_gia']); ?>VND</td>
                                 <td><?= $product['giam_gia']; ?>%</td>
                                 <td class=" col-sm-2">
                                     <div class="slideshow-container">

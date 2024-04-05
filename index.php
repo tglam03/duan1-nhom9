@@ -33,15 +33,14 @@ middleware_auth_check($act, $arrRouteNeedAuth);
 
 
 match ($act) {
+
     '/' => dashboard(),
     'products' => listProducts(),
     'about' => about(),
     'product-detail' => productDetail(),
-    'confirm' => confirm(),
-    // login
     'account' => account(),
+    'account-deiltail' => accountdeiltail($_SESSION['user']['id']),
     'singout' => singout(),
-
     // giỏ hàng
     'cart-add'    => cartAdd($_GET['productID'], $_GET['quantity']),
     'cart-list'   => cartList(),
@@ -52,6 +51,11 @@ match ($act) {
     // oder
     'oder-checkout' => orderCheckOut(), //  xử lí mua hàng
     'oder-purchase' => oderPurchase(), //   đặt hàng
+    'comfirm'       => comfirm(),
+    'orderhistory'  => orderHistory(),
+    'orderCancel'   => orderCancel(),
+
+
 };
 
 require_once './commons/disconnect-db.php';

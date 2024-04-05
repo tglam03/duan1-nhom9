@@ -29,6 +29,21 @@ function getCartByUserID($userID) {
     }
 }
 
+function loadLimitVariant($table,$userID,$bien) {
+    try {
+        $sql = "SELECT * FROM $table WHERE $bien = :$bien ORDER BY id DESC LIMIT 1";
+
+        $stmt = $GLOBALS['conn']->prepare($sql);
+
+        $stmt->bindParam(":$bien", $userID);
+
+        $stmt->execute();
+
+        return $stmt->fetch();
+    } catch (\Exception $e) {
+        debug($e);
+    }
+}
 
 
 

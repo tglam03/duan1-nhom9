@@ -11,7 +11,7 @@
 			<div class="row small-gutters">
 				<div class="col-xl-3 col-lg-3 d-lg-flex align-items-center">
 					<div id="logo">
-						<a href="index.html"><img src="<?= BASE_URL; ?>assets/client/img/logo.svg" alt="" width="100" height="35"></a>
+						<a href="<?= BASE_URL ?>"><img src="<?= BASE_URL ?>uploads/l2.png" alt="" width="30%"></a>
 					</div>
 				</div>
 				<nav class="col-xl-6 col-lg-7">
@@ -120,8 +120,7 @@
 					<ul class="top_tools">
 						<li>
 							<div class="dropdown dropdown-cart">
-
-								<a href="<?= BASE_URL . '?act=cart-list' ?>" class="cart_bt"></a>
+								<a href="cart.html" class="cart_bt"><strong>1</strong></a>
 								<div class="dropdown-menu">
 									<?php
 
@@ -169,10 +168,14 @@
 									<a class="access_link"><span>Tài khoản</span></a>
 								<?php } ?>
 								<div class="dropdown-menu">
-									<?php if (!isset($_SESSION['user']) || empty($_SESSION['user'])) { ?>
-										<a href="<?= BASE_URL; ?>?act=account" class="btn_1">Đăng nhập hoặc đăng ký</a>
+									<?php if (isset($_SESSION['thoat']) && $_SESSION['thoat'] == 1) { ?>
+										<a class="btn_1" href="<?= BASE_URL; ?>?act=singout&dangnhap">Đăng nhập</a>
 									<?php } else { ?>
-										<p class="btn_1 w-100">Xin chào: <?= $_SESSION['user']['user'] ?></p>
+										<?php if (!isset($_SESSION['user']) || empty($_SESSION['user'])) { ?>
+											<a href="<?= BASE_URL; ?>?act=account" class="btn_1">Đăng nhập hoặc đăng ký</a>
+										<?php } else { ?>
+											<p class="btn_1 w-100">Xin chào: <?= $_SESSION['user']['user'] ?></p>
+										<?php } ?>
 									<?php } ?>
 									<ul>
 										<li>
@@ -182,7 +185,18 @@
 										<?php } else { ?>
 											<?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) { ?>
 												<li>
-													<a href="<?= BASE_URL; ?>?act=account"><i class="ti-user"></i>Thông tin tài khoản</a>
+													<a href="<?= BASE_URL; ?>?act=orderhistory"><i class="ti-anchor"></i>Lịch sử mua hàng</a>
+												</li>
+												<li>
+													<a href="<?= BASE_URL; ?>?act=account-deiltail"><i class="ti-user"></i>Thông tin tài khoản</a>
+												</li>
+											<?php } ?>
+										<?php } ?>
+										<?php if (isset($_SESSION['thoat']) && $_SESSION['thoat'] == 1) { ?>
+										<?php } else { ?>
+											<?php if (isset($_SESSION['user']) && $_SESSION['user']['vai_tro'] == 1) { ?>
+												<li>
+													<a href="<?= BASE_URL_ADMIN ?>"><i class=" ti-desktop"></i>Đăng nhập vào trang quản trị</a>
 												</li>
 											<?php } ?>
 										<?php } ?>

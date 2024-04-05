@@ -1,9 +1,4 @@
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-require 'assets/vendor/PHPMailer-master/src/PHPMailer.php';
-require 'assets/vendor/PHPMailer-master/src/Exception.php';
-require 'assets/vendor/PHPMailer-master/src/SMTP.php';
 //Create an instance; passing `true` enables exceptions
 function account()
 {
@@ -44,7 +39,7 @@ function account()
         } else {
             $_SESSION['user'] = $user;
             if (isset($_POST['checkeddn']) && $_POST['checkeddn']) {
-                $_SESSION['saveuser'] = $user;
+                $_SESSION['saveuser'] = 1;
             }
             // nếu đúng sẽ chạy sang trang admin
             header('Location: ' . BASE_URL);
@@ -61,44 +56,11 @@ function account()
         if (empty($errors)) {
             $mat_khau = loadAccountToEmail($_POST['email_forgot']);
             $to_email = $_POST['email_forgot'];
-            $body = "Xin chào," . $mat_khau['user'] . "<br><b>Mật khẩu của bạn là: " . $mat_khau['mat_khau'] . "</b>";
             $headers = "From: Allaiasupport@gmail.com<br>";
-            $mail = new PHPMailer(true);
-            try {
-                //Server settings
-                $mail->SMTPDebug = 1;                      //Enable verbose debug output
-                $mail->isSMTP();                                            //Send using SMTP
-                $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                $mail->Username   = 'anhkkzz2@gmail.com';                     //SMTP username
-                $mail->Password   = 'aioe mulz mxuw bruy';                               //SMTP password
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;             //Enable implicit TLS encryption
-                $mail->Port       = 465;                                    //TCP port to connect to; use 465 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-                //Recipients
-                $mail->setFrom('anhkkzz2@gmail.com', 'Allia Support');
-                $mail->addAddress(''.$to_email.'', ''. $mat_khau['user'].'');     //Add a recipient              //Name is optional
-                // $mail->addReplyTo('info@example.com', 'Information');
-                // $mail->addCC('cc@example.com');
-                // $mail->addBCC('bcc@example.com');
-
-                //Attachments
-                // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-                // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-
-                //Content
-                $mail->isHTML(true);                                  //Set email format to HTML
-                $mail->Subject = 'Allia mật khẩu';
-                $mail->Body    = ''.$headers.''.$body.'<br>Cảm ơn quý khách<br><br><p style="color:red;">ALLIA Shop</p>';
-                // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-                $mail->send();
-                // echo 'Message has been sent';
-            } catch (Exception $e) {
-                // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            }
-            header('Location:'.BASE_URL.'?act=account');
+            sendemail($headers, $to_email, $mat_khau);
         }
+        header('Location:' . BASE_URL . '?act=account');
+        exit();
     }
     require_once PATH_VIEW . 'layouts/client.php';
 }
@@ -168,5 +130,122 @@ function singout()
         }
         unset($_SESSION['user']);
     }
-    header('Location:' . $_SERVER['HTTP_REFERER']);
+    header('Location:'.BASE_URL.'');
+}
+
+function accountdeiltail($id)
+{
+    $users = showOne('khach_hang', $id);
+
+    if (empty($users)) {
+        e404();
+    }
+    $view = 'account/updateAccount';
+    $style = 'account';
+
+
+    if (!empty($_POST)) {
+
+        $data = [
+            "ho_ten"   => $_POST['ho_ten'] ?? null,
+            "email"    => $_POST['email'] ?? null,
+            "mat_khau" => $_POST['mat_khau'] ?? null,
+            "diachi"   => $_POST['diachi'] ?? null,
+            "dienthoai" => $_POST['dienthoai'] ?? null,
+            "vai_tro"  => $_POST['vai_tro'] ?? null,
+        ];
+        // upload ảnh
+        $avatar = (isset($_FILES['hinh']) && $_FILES['hinh']['size'] > 0) ? $_FILES['hinh'] : $_POST['hinh'];
+        if (!empty($avatar)) {
+            $data['hinh'] = upload_file($avatar, 'uploads/users/');
+        }
+        if (
+            !empty($avatar)
+            && !empty($users['hinh'])                      //Có upload file
+            && !empty($data['hinh'])                       // Upload file thành công
+            && file_exists(PATH_UPLOAD . $users['hinh'])
+        )                                                   // Phải còn file tồn tại trên hệ thống
+        {
+            unlink(PATH_UPLOAD . $users['hinh']);
+        }
+
+
+        // validation
+        $errors = validateUserUpdate($id, $data, $avatar);
+        if (!empty($errors)) {
+            $_SESSION['errors'] = $errors;
+            $_SESSION['data'] = $data;
+        } else {
+            update('khach_hang', $id, $data);
+
+            $_SESSION['success'] = 'Cập nhật thành công';
+
+            header('Location: ' . BASE_URL .  '?act=account-deiltail&id='. $id);
+
+            exit();
+        }
+    }
+    require_once PATH_VIEW . 'layouts/client.php';
+}
+
+
+function validateUserUpdate($id, $data, $avatar)
+{
+    // tên - bắt buộc, độ dài tối đa 50 kí tự
+    // email - bắt buộc phải nhập, không được trùng
+    // password - bắt buộc phải có độ dài nhỏ nhât là 6 ?? null lớn nhất là 20
+    // vai trò - bắt buộc, phải là 0 hoặc 1
+    // địa chỉ - bắt bộc
+    // số điện thoại - bắt buộc, check định dạng số điện thoại , phải đủ 10 số
+    $errors = [];
+    if (empty($data['ho_ten'])) {
+        $errors[] = 'Họ tên bắt buộc phải nhập';
+    } else if (strlen($data['ho_ten']) > 50) {
+        $errors[] = 'Họ tên phải lớn hơn 50 kí tự';
+    }
+
+    // check email
+    if (empty($data['email'])) {
+        $errors[] = 'Email bắt buộc phải nhập';
+    } else if (!checkUniqueEmailUpdate('khach_hang', $id, $data['email'])) {
+        $errors[] = 'Email đã được sử dụng';
+    } else if (!filter_var($data['email'],  FILTER_VALIDATE_EMAIL)) {
+        $errors[] = 'Email sai định dạng';
+    }
+
+
+    if (empty($data['mat_khau'])) {
+        $errors[] = 'Mật khẩu bắt buộc phải nhập';
+    } else if (strlen($data['mat_khau']) < 6 && strlen($data['mat_khau']) > 20) {
+        $errors[] = 'Mật khẩu phải có độ dài nhỏ nhất là 8 và lớn nhất là 20';
+    }
+
+    if ($data['vai_tro'] === null) {
+        $errors[] = 'Vai trò chưa được chọn';
+    } else if (!in_array($data['vai_tro'], [0, 1])) {
+        $errors[] = 'Vai trò phải chọn admin hoặc member';
+    }
+
+    if (empty($data['dienthoai'])) {
+        $errors[] = "Số điện thoại không được để trống";
+    } else if (!preg_match("/^[0-9]*$/", $data['dienthoai'])) {
+        $errors[] = 'Số điện thoại không đúng định dạng';
+    } else if (strlen($data['dienthoai']) != 10) {
+        $errors[] = 'Số điện thoại phải đủ 10 chữ số';
+    }
+    if (empty($data['diachi'])) {
+        $errors[] = 'Địa chỉ bắt buộc phải nhập';
+    }
+    if (is_array($avatar)) {
+        if (!empty($avatar) && $avatar['size'] > 0) {
+            $typeImage = ['image/png', 'image/jpg', 'image/jpeg'];
+
+            if ($avatar['size'] > 2 * 1024 * 1024) {
+                $errors[] = 'Hình ảnh phải có dung lượng nhỏ hơn 2M';
+            } else if (!in_array($avatar['type'], $typeImage)) {
+                $errors[] = 'Hình ảnh chỉ chấp nhận định dạng file: png, jpg, jpeg';
+            }
+        }
+    }
+    return $errors;
 }

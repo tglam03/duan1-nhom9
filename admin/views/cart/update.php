@@ -11,52 +11,75 @@
         <div class="card-body">
 
 
-    <!-- thông báo thành công -->
+            <!-- thông báo thành công -->
             <?php if (isset($_SESSION['success'])) : ?>
 
 
                 <div class="alert alert-success">
-                   <?= $_SESSION['success'] ?>
+                    <?= $_SESSION['success'] ?>
                 </div>
 
-                 <?php unset($_SESSION['success']) ?>
+                <?php unset($_SESSION['success']) ?>
 
             <?php endif; ?>
-   <!-- validate -->
-            
-            
-                <?php if (isset($_SESSION['errors'])) : ?>
+            <!-- validate -->
 
-                    <div class="alert alert-danger">
-                        <ul>
 
-                            <?php foreach ($_SESSION['errors'] as $error) : ?>
+            <?php if (isset($_SESSION['errors'])) : ?>
 
-                                <li><?= $error ?></li>
+                <div class="alert alert-danger">
+                    <ul>
 
-                            <?php endforeach; ?>
-                        </ul>
+                        <?php foreach ($_SESSION['errors'] as $error) : ?>
 
-                    </div>
+                            <li><?= $error ?></li>
 
-                    <?php unset($_SESSION['errors']) ?>
-                 <?php endif; ?>
+                        <?php endforeach; ?>
+                    </ul>
 
-                <form class="user" method="post" enctype="multipart/form-data">
+                </div>
+
+                <?php unset($_SESSION['errors']) ?>
+            <?php endif; ?>
+
+            <form class="user" method="post" enctype="multipart/form-data">
 
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3 mt-3">
-                            <label for="ten_loai" class="form-label">Loại hàng</label>
-                            <input type="text" class="form-control" value="<?= $category['ten_loai'] ?>" id="ten_loai" placeholder="Loại hàng" name="ten_loai">
+                            <label for="vai_tro" class="form-label">Trạng thái đơn hàng</label>
+
+                            <select class="form-control" id="trangthaidh" name="trangthaidh">
+
+                                <option <?= $carts['status_delivery'] ==  3 ? 'selected' : null ?> value="3">Đã giao</option>
+                                <option <?= $carts['status_delivery'] == -1 ? 'selected' : null ?> value="-1">Đã hủy</option>
+                                <option <?= $carts['status_delivery'] ==  2 ? 'selected' : null ?> value="2">Đang giao hàng</option>
+                                <option <?= $carts['status_delivery'] ==  1 ? 'selected' : null ?> value="1">Chờ lấy hàng</option>
+                                <option <?= $carts['status_delivery'] ==  0 ? 'selected' : null ?> value="0">Chờ xác nhận</option>
+
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3 mt-3">
+                            <label for="ten_loai" class="form-label">Trạng thái thanh toán</label>
+                            <select class="form-control" id="trangthaitt" name="trangthaitt">
+
+                                <option <?= $carts['status_payment'] ==  1 ? 'selected' : null ?> value="1">Đã thanh toán qua VnPay</option>
+                                <option <?= $carts['status_payment'] ==  0 ? 'selected' : null ?> value="0">Thanh toán khi nhận hàng</option>
+                                <option <?= $carts['status_payment'] ==  -1 ? 'selected' : null ?> value="-1">Đơn hàng đã hủy</option>
+
+
+                            </select>
                         </div>
                     </div>
                 </div>
-                                <input type="hidden" name="id" id="id">
-                    <button type="submit" class="btn btn-info">Cập nhật</button>
-                    <a href="<?= BASE_URL_ADMIN ?>?act=category" class="btn btn-danger">Back to list</a>
-                </form>
+                <input type="hidden" name="id" id="id">
+                <button type="submit" class="btn btn-info">Cập nhật</button>
+                <a href="<?= BASE_URL_ADMIN ?>?act=cart" class="btn btn-danger">Back to list</a>
+            </form>
 
-            </div>
         </div>
     </div>
+</div>

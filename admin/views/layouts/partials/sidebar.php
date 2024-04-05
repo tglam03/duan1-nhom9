@@ -105,6 +105,20 @@
     </div>
 </li>
 
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSĩ"
+        aria-expanded="true" aria-controls="collapseSĩ">
+        <i class="fas fa-ticket-alt"></i>
+        <span>Quản lí Voucher</span>
+    </a>
+    <div id="collapseSĩ" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Quản lí Voucher</h6>
+            <a class="collapse-item" href="<?= BASE_URL_ADMIN ?>?act=voucher">Danh sách Voucher</a>
+        </div>
+    </div>
+</li>
+
 
 
 

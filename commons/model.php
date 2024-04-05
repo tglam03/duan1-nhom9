@@ -85,7 +85,7 @@ if (!function_exists('listAll')) {
     function listAll($tableName)
     {
         try {
-            $sql = "SELECT * FROM $tableName ORDER BY id DESC";
+            $sql = "SELECT * FROM $tableName WHERE trangthai = 1 ORDER BY id DESC";
 
             $stmt = $GLOBALS['conn']->prepare($sql);
 
@@ -102,7 +102,7 @@ if (!function_exists('showOne')) {
     function showOne($tableName, $id)
     {
         try {
-            $sql = "SELECT * FROM $tableName WHERE id = :id LIMIT 1";
+            $sql = "SELECT * FROM $tableName WHERE trangthai = 1 AND id = :id LIMIT 1";
 
             $stmt = $GLOBALS['conn']->prepare($sql);
 
@@ -144,7 +144,7 @@ if (!function_exists('delete')) {
     function delete2($tableName, $id)
     {
         try {
-            $sql = "DELETE FROM $tableName WHERE id = :id";
+            $sql = "UPDATE $tableName SET trangthai = 0 WHERE id = :id";
 
             $stmt = $GLOBALS['conn']->prepare($sql);
 
@@ -163,7 +163,7 @@ if (!function_exists('checkUniqueName')) {
     function checkUniqueName($tableName, $name)
     {
         try {
-            $sql = "SELECT * FROM $tableName WHERE name = :name LIMIT 1";
+            $sql = "SELECT * FROM $tableName WHERE trangthai = 1 AND name = :name LIMIT 1";
 
             $stmt = $GLOBALS['conn']->prepare($sql);
 
@@ -186,7 +186,7 @@ if (!function_exists('checkUniqueNameForUpdate')) {
     function checkUniqueNameForUpdate($tableName, $id, $name)
     {
         try {
-            $sql = "SELECT * FROM $tableName WHERE name = :name AND id <> :id LIMIT 1";
+            $sql = "SELECT * FROM $tableName WHERE trangthai = 1 AND name = :name AND id <> :id LIMIT 1";
 
             $stmt = $GLOBALS['conn']->prepare($sql);
 
@@ -208,7 +208,7 @@ if (!function_exists('lastloadLimit')) {
     function lastloadLimit($tableName, $start, $end)
     {
         try {
-            $sql = "SELECT * FROM $tableName ORDER BY id DESC LIMIT $start,$end";
+            $sql = "SELECT * FROM $tableName WHERE trangthai = 1 ORDER BY id DESC LIMIT $start,$end";
 
             $stmt = $GLOBALS['conn']->prepare($sql);
 
@@ -296,7 +296,7 @@ if (!function_exists('showAllVariantProduct')) {
     function showAllVariantProduct($tableName, $hh_id)
     {
         try {
-            $sql = "SELECT * FROM $tableName WHERE hh_id = :hh_id";
+            $sql = "SELECT * FROM $tableName WHERE trangthai = 1 AND hh_id = :hh_id";
 
             $stmt = $GLOBALS['conn']->prepare($sql);
 
@@ -317,7 +317,7 @@ if (!function_exists('checkUniqueEmail')) {
     function checkUniqueEmail($tableName, $email)
     {
         try {
-            $sql = "SELECT * FROM $tableName WHERE email = :email LIMIT 1";
+            $sql = "SELECT * FROM $tableName WHERE trangthai = 1 AND email = :email LIMIT 1";
 
             $stmt = $GLOBALS['conn']->prepare($sql);
 
@@ -340,7 +340,7 @@ if (!function_exists('checkUniqueEmailUpdate')) {
     function checkUniqueEmailUpdate($tableName, $id,  $email)
     {
         try {
-            $sql = "SELECT * FROM $tableName WHERE email = :email AND id <> :id LIMIT 1";
+            $sql = "SELECT * FROM $tableName WHERE trangthai = 1 AND email = :email AND id <> :id LIMIT 1";
 
             $stmt = $GLOBALS['conn']->prepare($sql);
 
@@ -362,7 +362,7 @@ if (!function_exists('getUserAdminByEmailAndPassword')) {
     function getUserAdminByEmailAndPassword($email, $mat_khau)
     {
         try {
-            $sql = "SELECT * FROM khach_hang WHERE email = :email AND mat_khau = :mat_khau AND vai_tro = 1 LIMIT 1";
+            $sql = "SELECT * FROM khach_hang WHERE trangthai = 1 AND email = :email AND mat_khau = :mat_khau AND vai_tro = 1 LIMIT 1";
 
             $stmt = $GLOBALS['conn']->prepare($sql);
 
