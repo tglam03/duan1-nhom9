@@ -49,10 +49,6 @@ function oderPurchase()
             ];
             insert('oder_items', $oderItem);
         }
-        if(isset($data['status_payment']) && $data['status_payment']==1){
-            header('Location:'.BASE_URL.'vnpay_php/index.php');
-            exit();
-        }
         // sử lí sau khi thêm
         // xóa dữ liệu ở giỏ hàng 
         deleteCartItemByCartID($_SESSION['cartID']);
@@ -61,6 +57,10 @@ function oderPurchase()
         // delete session
         unset($_SESSION['cart']);
         unset($_SESSION['cartID']);
+        if(isset($data['status_payment']) && $data['status_payment']==1){
+            header('Location:'.BASE_URL.'vnpay_php/vnpay_pay.php');
+            exit();
+        }
         header('Location: ' . BASE_URL . '?act=comfirm');
         exit();
     }

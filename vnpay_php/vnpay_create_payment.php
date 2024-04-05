@@ -1,48 +1,50 @@
 <?php
 
 error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
+date_default_timezone_set('Asia/Ho_Chi_Minh');
+
 /**
- * Description of vnpay_ajax
+ * 
  *
- * @author xonv
+ * @author CTT VNPAY
  */
 require_once("./config.php");
 
-$vnp_TxnRef = $_POST['order_id']; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-$vnp_OrderInfo = $_POST['order_desc'];
-$vnp_OrderType = $_POST['order_type'];
-$vnp_Amount = str_replace(',', '', $_POST['amount']) * 100;
-$vnp_Locale = $_POST['vn'];
-$vnp_BankCode = $_POST['bank_code'];
-$vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
+$vnp_TxnRef = rand(1,10000); //Mã giao dịch thanh toán tham chiếu của merchant
+$vnp_Amount = $_POST['amount']; // Số tiền thanh toán
+$vnp_Locale = $_POST['language']; //Ngôn ngữ chuyển hướng thanh toán
+$vnp_BankCode = $_POST['bankCode']; //Mã phương thức thanh toán
+$vnp_IpAddr = $_SERVER['REMOTE_ADDR']; //IP Khách hàng thanh toán
 
 $inputData = array(
-    "vnp_Version" => "2.0.0",
+    "vnp_Version" => "2.1.0",
     "vnp_TmnCode" => $vnp_TmnCode,
-    "vnp_Amount" => $vnp_Amount,
+    "vnp_Amount" => $vnp_Amount* 100,
     "vnp_Command" => "pay",
     "vnp_CreateDate" => date('YmdHis'),
     "vnp_CurrCode" => "VND",
     "vnp_IpAddr" => $vnp_IpAddr,
     "vnp_Locale" => $vnp_Locale,
-    "vnp_OrderInfo" => $vnp_OrderInfo,
-    "vnp_OrderType" => $vnp_OrderType,
+    "vnp_OrderInfo" => "Thanh toan GD:" . $vnp_TxnRef,
+    "vnp_OrderType" => "other",
     "vnp_ReturnUrl" => $vnp_Returnurl,
     "vnp_TxnRef" => $vnp_TxnRef,
+    "vnp_ExpireDate"=>$expire
 );
 
 if (isset($vnp_BankCode) && $vnp_BankCode != "") {
     $inputData['vnp_BankCode'] = $vnp_BankCode;
 }
+
 ksort($inputData);
 $query = "";
 $i = 0;
 $hashdata = "";
 foreach ($inputData as $key => $value) {
     if ($i == 1) {
-        $hashdata .= '&' . $key . "=" . $value;
+        $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
     } else {
-        $hashdata .= $key . "=" . $value;
+        $hashdata .= urlencode($key) . "=" . urlencode($value);
         $i = 1;
     }
     $query .= urlencode($key) . "=" . urlencode($value) . '&';
@@ -50,11 +52,9 @@ foreach ($inputData as $key => $value) {
 
 $vnp_Url = $vnp_Url . "?" . $query;
 if (isset($vnp_HashSecret)) {
-   // $vnpSecureHash = md5($vnp_HashSecret . $hashdata);
-   	$vnpSecureHash = hash('sha256', $vnp_HashSecret . $hashdata);
-    $vnp_Url .= 'vnp_SecureHashType=SHA256&vnp_SecureHash=' . $vnpSecureHash;
+    $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret);//  
+    $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
 }
-$returnData = array('code' => '00'
-    , 'message' => 'success'
-    , 'data' => $vnp_Url);
-echo json_encode($returnData);
+header('Location: ' . $vnp_Url);
+die();
+
