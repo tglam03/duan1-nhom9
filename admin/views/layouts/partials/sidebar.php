@@ -4,9 +4,9 @@
 <!-- Sidebar - Brand -->
 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
     <div class="sidebar-brand-icon rotate-n-15">
-        <i class="fas fa-laugh-wink"></i>
+    <i class="fas fa-user-shield"></i>
     </div>
-    <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+    <div class="sidebar-brand-text mx-3"><?= $_SESSION['user']['ho_ten'] ?><sup></sup></div>
 </a>
 
 <!-- Divider -->
@@ -33,7 +33,7 @@
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
         aria-expanded="true" aria-controls="collapseOne">
-        <i class="fas fa-fw fa-cog"></i>
+        <i class="fas fa-user"></i>
         <span>Quản lí khách hàng</span>
     </a>
     <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -49,7 +49,7 @@
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
         aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-cog"></i>
+        <i class="fas fa-archive"></i>
         <span>Quản lí loại hàng</span>
     </a>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -65,7 +65,7 @@
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
         aria-expanded="true" aria-controls="collapseThree">
-        <i class="fas fa-fw fa-cog"></i>
+        <i class="fas fa-folder-open"></i>
         <span>Quản lí sản phẩm</span>
     </a>
     <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -80,7 +80,7 @@
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
         aria-expanded="true" aria-controls="collapseFour">
-        <i class="fas fa-fw fa-cog"></i>
+        <i class="fas fa-comment-dots"></i>
         <span>Quản lí bình luận</span>
     </a>
     <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -91,7 +91,30 @@
     </div>
 </li>
 
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
+        aria-expanded="true" aria-controls="collapseFive">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Quản lí đơn hàng</span>
+    </a>
+    <div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Quản lí đơn hàng</h6>
+            <a class="collapse-item" href="<?= BASE_URL_ADMIN ?>?act=cart">Danh sách đơn hàng</a>
+        </div>
+    </div>
+</li>
 
+
+
+
+
+
+<li class="nav-item active">
+    <a class="nav-link" href="<?= BASE_URL ?>">
+        <i class="fas fa-reply"></i>
+        <span>Quay lại trang bán hàng</span></a>
+</li>
 
 <!-- Divider -->
 <hr class="sidebar-divider">

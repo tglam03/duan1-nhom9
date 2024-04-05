@@ -26,7 +26,6 @@ $cate = isset($_GET['id']) ? $_GET['id'] : null;
 
 
 // Kiểm tra user đã đăng nhập chưa
-middleware_auth_check($act);
 
 match ($act) {
     '/' => dashboard(),
@@ -59,6 +58,10 @@ match ($act) {
     'comment'        => comment(),
     'comment-detail' => commentShowOne($_GET['id']),
     'delete-comment' => commentDelete($_GET['id'],$_GET['idhh']),
+
+    'cart'           => cartList(),
+    'cart-detail'    => cartShowOne($_GET['id']),
+
 
     //CRUD Mã giảm giá
     // 'voucher'        => voucherListAll(),

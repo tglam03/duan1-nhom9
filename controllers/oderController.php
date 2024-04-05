@@ -44,7 +44,7 @@ function oderPurchase()
                 insert('oder_items', $oderItem);
             }
             else{
-                header('Location: ' . BASE_URL . '?act=oder-checkout');
+                header('Location: ' . BASE_URL . '?act=confirm');
                 exit();
             }
            
@@ -62,7 +62,7 @@ function oderPurchase()
         unset($_SESSION['cartID']);
     }
 
-    header('Location: ' . BASE_URL);
+    header('Location: '. BASE_URL);
 }
 
 

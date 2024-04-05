@@ -37,8 +37,11 @@ match ($act) {
     'products' => listProducts(),
     'about' => about(),
     'product-detail' => productDetail(),
+    'confirm' => confirm(),
+    // login
     'account' => account(),
     'singout' => singout(),
+
     // giỏ hàng
     'cart-add'    => cartAdd($_GET['productID'], $_GET['quantity']),
     'cart-list'   => cartList(),

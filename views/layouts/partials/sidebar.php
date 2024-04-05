@@ -120,7 +120,8 @@
 					<ul class="top_tools">
 						<li>
 							<div class="dropdown dropdown-cart">
-								<a href="cart.html" class="cart_bt"><strong>1</strong></a>
+
+								<a href="<?= BASE_URL . '?act=cart-list' ?>" class="cart_bt"></a>
 								<div class="dropdown-menu">
 									<?php
 
@@ -132,13 +133,13 @@
 
 													<a href="<?= BASE_URL . '?act=product-detail&id=' . $values['id']  ?>">
 														<figure><img src="<?= BASE_URL . explode(',', $values['hinh'])[0]
-																			?>"  alt="" width="50" height="50" class="lazy"></figure>
+																			?>" alt="" width="50" height="50" class="lazy"></figure>
 
 														<strong><span><?= $values['ten_hh'] ?>
 
-														</span><?= number_format($values['giam_gia'] ?: $values['don_gia'])?></strong>
+															</span><?= number_format($values['giam_gia'] ?: $values['don_gia']) ?></strong>
 													</a>
-													
+
 
 												</li>
 											</ul>
@@ -148,7 +149,7 @@
 									?>
 									<div class="total_drop">
 										<div class="clearfix"><strong>Tổng</strong><span><?= caculator_total_oder() ?></span></div>
-										<a href="<?= BASE_URL . '?act=cart-list' ?>" class="btn_1 outline">Giỏ hàng</a><a href="<?= BASE_URL . '?act=oder-checkout' ?>" class="btn_1">Thanh toán</a>
+										<a href="<?= BASE_URL . '?act=cart-list' ?>" onclick="<?= alert(); ?>" class="btn_1 outline">Giỏ hàng</a><a href="<?= BASE_URL . '?act=oder-checkout' ?>" class="btn_1">Thanh toán</a>
 									</div>
 								</div>
 							</div>
@@ -175,11 +176,7 @@
 									<?php } ?>
 									<ul>
 										<li>
-<<<<<<< HEAD
-											<a href="<?= BASE_URL; ?>?act=account"><i class="ti-package"></i>Giỏ hàng của tôi</a>
-=======
 											<a href="<?= BASE_URL; ?>?act=cart-list"><i class="ti-package"></i>Giỏ hàng của tôi</a>
->>>>>>> 5882330a916832d12d699defe20eb82f05288336
 										</li>
 										<?php if (isset($_SESSION['thoat']) && $_SESSION['thoat'] == 1) { ?>
 										<?php } else { ?>
