@@ -31,7 +31,7 @@ function categoryShowOne($id)
 
 function categoryCreate()
 {
-    $title = 'Danh sách khách hàng';
+    $title = 'Danh sách loại hàng';
     $view = 'categories/create';
 
     if (!empty($_POST)) {
