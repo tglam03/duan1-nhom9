@@ -108,8 +108,8 @@
 				</div>
 				<div class="col-xl-6 col-lg-7 col-md-6 d-none d-md-block">
 					<div class="custom-search-input">
-						<form method="get">
-							<input type="text" name="kyw" placeholder="Tìm kiếm sản phẩm" value="<?= (isset($kyw) && $kyw != "") ? $kyw : ''; ?>">
+						<form method="post" action="<?=BASE_URL.'?act=products'?>" >
+							<input type="text" name="kyw" placeholder="Tìm kiếm sản phẩm" value="<?= (isset($_POST['kyw']) && $_POST['kyw'] != "") ? $_POST['kyw'] : ''; ?>">
 							<button type="submit" name="kywsb"><i class="header-icon_search_custom"></i></button>
 						</form>
 					</div>

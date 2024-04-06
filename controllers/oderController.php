@@ -57,8 +57,8 @@ function oderPurchase()
         // delete session
         unset($_SESSION['cart']);
         unset($_SESSION['cartID']);
-        if(isset($data['status_payment']) && $data['status_payment']==1){
-            header('Location:'.BASE_URL.'vnpay_php/vnpay_pay.php');
+        if (isset($data['status_payment']) && $data['status_payment'] == 1) {
+            header('Location:' . BASE_URL . 'vnpay_php/vnpay_pay.php');
             exit();
         }
         header('Location: ' . BASE_URL . '?act=comfirm');
@@ -106,18 +106,25 @@ function orderHistory()
     $title = 'Lịch sử mua hàng';
     $view = 'historyOder/historyOrder';
     $style = 'cart';
-    if(isset($_SESSION['user']) && !empty($_SESSION['user'])){
-        $historyOder = historyOder($_SESSION['user']['id']);
+    if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+        $historyOder = historyOder($_SESSION['user']['id'],'','');
+        $tongsp = sizeof($historyOder);
+        $end = 8;
+        $sotrang = ceil($tongsp / $end);
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $star = ($page - 1) * 8;
+        $historyOder = historyOder($_SESSION['user']['id'],$star,$end);
     }
     require_once PATH_VIEW . 'layouts/client.php';
 }
 
-function orderCancel(){
+function orderCancel()
+{
     $title = 'Lịch sử mua hàng';
     $view = 'historyOder/historyOrder';
     $style = 'cart';
-    if(isset($_GET['ID']) && !empty($_GET['ID'])){
-        update('orders',$_GET['ID'],['status_delivery' => -1]);
+    if (isset($_GET['ID']) && !empty($_GET['ID'])) {
+        update('orders', $_GET['ID'], ['status_delivery' => -1]);
     }
-    header('Location: '. BASE_URL.'?act=orderhistory' );
+    header('Location: ' . BASE_URL . '?act=orderhistory');
 }

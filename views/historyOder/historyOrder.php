@@ -86,8 +86,8 @@
                             </td>
                             <td class="col-sm-2">
                                 <?php if ($values['trangthaidh'] == 0) { ?>
-                                    <a href="<?= BASE_URL . '?act=orderCancel&ID=' . $values['id_order'] ?>" onclick="return confirm('Bạn có chắc hủy không')"  class="btn btn-danger">Hủy đơn hàng</a>
-                                <?php } elseif($values['trangthaidh'] == -1) { ?>
+                                    <a href="<?= BASE_URL . '?act=orderCancel&ID=' . $values['id_order'] ?>" onclick="return confirm('Bạn có chắc hủy không')" class="btn btn-danger">Hủy đơn hàng</a>
+                                <?php } elseif ($values['trangthaidh'] == -1) { ?>
                                     <a class="btn btn-danger">Đã hủy</a>
                                 <?php } ?>
                             </td>
@@ -105,7 +105,18 @@
         <!-- /cart_actions -->
     </div>
     <!-- /container -->
-
+    <div class="pagination__wrapper">
+        <ul class="pagination">
+            <?php ?>
+            <li><a href="<?= BASE_URL ?>?act=orderhistory&page=<?= (($page - 1) > 0) ? $page - 1 : '1'; ?>" class="prev" title="previous page">&#10094;</a></li>
+            <?php for ($i = 1; $i <= $sotrang; $i++) { ?>
+                <li>
+                    <a href="<?= BASE_URL ?>?act=orderhistory&page=<?= $i ?>" class="<?= ($page == $i) ? 'active' : ''; ?>"><?= $i ?></a>
+                </li>
+            <?php } ?>
+            <li><a href="<?= BASE_URL ?>?act=orderhistory&page=<?= (($page + 1) <= $sotrang) ? $page + 1 : '1'; ?>" class="next" title="next page">&#10095;</a></li>
+        </ul>
+    </div>
 </main>
 <!--/main-->
 

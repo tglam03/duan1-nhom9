@@ -54,7 +54,7 @@
 								<span class="item_cart"><?= $values['ten_hh'] ?></span>
 							</td>
 							<td>
-								<strong><?= number_format($values['giam_gia'] ?: $values['don_gia']);
+								<strong><?= $total = number_format(((isset($values['giam_gia']) && $values['giam_gia'] == 0) ? $values['don_gia'] : (100 - $values['giam_gia']) / 100 * $values['don_gia']) * $values['mausize']['quantity']);
 
 										?></strong>
 							</td>
@@ -78,7 +78,7 @@
 								</div>
 							</td>
 							<td>
-								<strong><?= $total = number_format(($values['giam_gia'] ?: $values['don_gia']) * $values['mausize']['quantity']);
+								<strong><?= $total = number_format(((isset($values['giam_gia']) && $values['giam_gia'] == 0) ? $values['don_gia'] : (100 - $values['giam_gia']) / 100 * $values['don_gia']) * $values['mausize']['quantity']);
 
 										?></strong>
 							</td>
@@ -122,13 +122,13 @@
 				<div class="col-xl-4 col-lg-4 col-md-6">
 					<ul>
 						<li>
-							<span>Thành tiền</span> <?= caculator_total_oder()  ?>
+							<span>Thành tiền(VND)</span> <?= caculator_total_oder()  ?>
 						</li>
 						<li>
-							<span>Phí ship</span> $7.00
+							<span>Phí ship(VND)</span> 7,000
 						</li>
 						<li>
-							<span>Tổng thanh toán</span> <?= caculator_total_oder()  ?>
+							<span>Tổng thanh toán(VND)</span> <?= caculator_total_oder() ?>
 						</li>
 					</ul>
 					<a href="<?= BASE_URL ?>?act=oder-checkout" class="btn_1 full-width cart">Tiến hành thanh toán</a>

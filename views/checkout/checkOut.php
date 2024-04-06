@@ -140,15 +140,14 @@
 													<span class="item_cart"><?= $values['ten_hh'] ?></span>
 												</td>
 												<td>
-													<strong><?= number_format($values['giam_gia'] ?: $values['don_gia']);
+													<strong><?= $total = number_format(((isset($values['giam_gia']) && $values['giam_gia'] == 0) ? $values['don_gia'] : (100 - $values['giam_gia']) / 100 * $values['don_gia']) * $values['mausize']['quantity']);
 
 															?></strong>
 												</td>
 												<td><span><?= $values['mausize']['quantity'] ?></span></td>
 
 												<td>
-													<strong>
-														<?= $total = number_format(($values['giam_gia'] ?: $values['don_gia']) * $values['mausize']['quantity']); ?>
+													<strong><?= $total = number_format(((isset($values['giam_gia']) && $values['giam_gia'] == 0) ? $values['don_gia'] : (100 - $values['giam_gia']) / 100 * $values['don_gia']) * $values['mausize']['quantity']); ?>
 													</strong>
 												</td>
 
