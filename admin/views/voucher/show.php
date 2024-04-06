@@ -11,7 +11,7 @@
         <div class="card-body">
             <table class="table">
                 <tr>
-                    <th>Thông tin đơn hàng</th>
+                    <th>Thông tin khách hàng</th>
                     <th>Dữ liệu</th>
                 </tr>
 

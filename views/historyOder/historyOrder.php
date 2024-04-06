@@ -82,7 +82,12 @@
                                         ?>VND</strong>
                             </td>
                             <td class="col-sm-2">
-                                <span class=" text-danger"><?= ($values['trangthaidh'] == 0) ? 'Chờ xác nhận' : ($values['trangthaidh'] == 1 ? 'Chờ lấy hàng' : ($values['trangthaidh'] == 2 ? 'Đang giao hàng' : ($values['trangthaidh'] == 3 ? 'Đã giao' : ($values['trangthaidh'] == -1 ? 'Đã hủy' : '')))) ?></span>
+                                <span class=" text-danger">
+                                    <?= ($values['trangthaidh'] == 0) ? 'Chờ xác nhận' : 
+                                    ($values['trangthaidh'] == 1 ? 'Chờ lấy hàng' : 
+                                    ($values['trangthaidh'] == 2 ? 'Đang giao hàng' : 
+                                    ($values['trangthaidh'] == 3 ? 'Đã giao' : 
+                                    ($values['trangthaidh'] == -1 ? 'Đã hủy' : '')))) ?></span>
                             </td>
                             <td class="col-sm-2">
                                 <?php if ($values['trangthaidh'] == 0) { ?>

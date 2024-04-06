@@ -53,12 +53,18 @@ match ($act) {
     'comment-detail' => commentShowOne($_GET['id']),
     'delete-comment' => commentDelete($_GET['id'],$_GET['idhh']),
 
+    'cart'           => cartList(),
+    'cart-detail'    => cartShowOne($_GET['id']),
+    'cart-update'    => cartUpdate($_GET['id']), 
+
+
     //CRUD Mã giảm giá
-    // 'voucher'        => voucherListAll(),
-    // 'voucher-detail' => voucherShowOne($_GET['id']),
-    // 'voucher-create' => voucherCreate(),
-    // 'voucher-update' => voucherUpdate($_GET['id']),
-    // 'voucher-delete' => voucherDelete($_GET['id']),
+    'voucher'        => voucherListAll(),
+    'voucher-detail' => voucherShowOne($_GET['id']),
+    'voucher-create' => voucherCreate(),
+    'voucher-update' => voucherUpdate($_GET['id']),
+    'voucher-delete' => voucherDelete($_GET['id']),
+
 };
 require_once '../commons/disconnect-db.php';
 }else{

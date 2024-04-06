@@ -122,3 +122,8 @@ function cartDelete($productID)
 
     header('Location: ' . BASE_URL . '?act=cart-list');
 }
+
+function alert(){
+ 
+}
+

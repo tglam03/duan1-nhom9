@@ -11,7 +11,7 @@
 			<div class="row small-gutters">
 				<div class="col-xl-3 col-lg-3 d-lg-flex align-items-center">
 					<div id="logo">
-						<a href="index.html"><img src="<?= BASE_URL; ?>assets/client/img/logo.svg" alt="" width="100" height="35"></a>
+						<a href="<?= BASE_URL ?>"><img src="<?= BASE_URL ?>uploads/l2.png" alt="" width="30%"></a>
 					</div>
 				</div>
 				<nav class="col-xl-6 col-lg-7">
@@ -120,7 +120,7 @@
 					<ul class="top_tools">
 						<li>
 							<div class="dropdown dropdown-cart">
-								<a href="<?= BASE_URL . '?act=cart-list' ?>" class="cart_bt"><strong><?= (isset($_SESSION['cart']) && $_SESSION['cart'] != "") ? sizeof($_SESSION['cart']) : 0; ?></strong></a>
+								<a href="cart.html" class="cart_bt"><strong>1</strong></a>
 								<div class="dropdown-menu">
 									<?php
 
@@ -148,7 +148,7 @@
 									?>
 									<div class="total_drop">
 										<div class="clearfix"><strong>Tổng</strong><span><?= caculator_total_oder() ?></span></div>
-										<a href="<?= BASE_URL . '?act=cart-list' ?>" class="btn_1 outline">Giỏ hàng</a><a href="<?= BASE_URL . '?act=oder-checkout' ?>" class="btn_1">Thanh toán</a>
+										<a href="<?= BASE_URL . '?act=cart-list' ?>" onclick="<?= alert(); ?>" class="btn_1 outline">Giỏ hàng</a><a href="<?= BASE_URL . '?act=oder-checkout' ?>" class="btn_1">Thanh toán</a>
 									</div>
 								</div>
 							</div>

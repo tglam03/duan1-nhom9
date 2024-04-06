@@ -36,14 +36,14 @@
 								<!-- /row -->
 								<div class="form-group">
 									<input type="text" name="user_address" value="<?= $_SESSION['user']['diachi'] ?>" class="form-control" placeholder="Địa chỉ">
-									<span class=" text-warning"><?= (isset($errors['user_address']) && $errors['user_address'] != "") ? $errors['user_address'] : ''; ?></span>
+									<span class=" text-warning"><?= (isset($errors['diachi']) && $errors['diachi'] != "") ? $errors['diachi'] : ''; ?></span>
 								</div>
 								<!-- /row -->
 
 								<!-- /row -->
 								<div class="form-group">
 									<input type="tel" name="user_phone" value="<?= $_SESSION['user']['dienthoai'] ?>" class="form-control" placeholder="Điện thoại">
-									<span class=" text-warning"><?= (isset($errors['user_phone']) && $errors['user_phone'] != "") ? $errors['user_phone'] : ''; ?></span>
+									<span class=" text-warning"><?= (isset($errors['dienthoai']) && $errors['dienthoai'] != "") ? $errors['dienthoai'] : ''; ?></span>
 								</div>
 								<hr>
 								<hr>
