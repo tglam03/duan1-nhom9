@@ -26,7 +26,7 @@
                 <form action="http://localhost/duan1_nhom9/vnpay_php/vnpay_create_payment.php" id="frmCreateOrder" method="post">        
                     <div class="form-group">
                         <label for="amount">Số tiền</label>
-                        <input class="form-control" data-val="true" data-val-number="The field Amount must be a number." data-val-required="The Amount field is required." id="amount" max="100000000" min="1" name="amount" type="number" value="<?=(isset($_SESSION['total_bill'])&&$_SESSION['total_bill']!='')?$_SESSION['total_bill']:10000;?>" />
+                        <input class="form-control" data-val="true" data-val-number="The field Amount must be a number." data-val-required="The Amount field is required." id="amount" max="100000000" min="1" name="amount" type="number" value="" />
                     </div>
                      <h4>Chọn phương thức thanh toán</h4>
                     <div class="form-group">

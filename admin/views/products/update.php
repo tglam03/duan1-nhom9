@@ -194,7 +194,7 @@
                             <div class="mb-3 mt-3 o-hidden">
                                 <label class="form-label">Mô tả:</label>
                                 <div class="custom-file mb-3">
-                                    <textarea class="form-control" name="mo_ta" id="mo_ta" cols="60" rows="5" value="<?= $product['mo_ta']; ?>"><?= $product['mo_ta']; ?></textarea>
+                                    <textarea class="form-control" name="mo_ta" id="mo_ta" cols="60" rows="5" ><?= $product['mo_ta']; ?></textarea>
                                     <span class=" text-warning"><?= (isset($errors['mo_ta']) && $errors['mo_ta'] != "") ? $errors['mo_ta'] : ''; ?></span>
                                 </div>
                             </div>

@@ -46,7 +46,6 @@
                                 
 
                                 <td>
-                                    <a class="btn btn-info mt-1" href="<?= BASE_URL_ADMIN ?>?act=category-detail&id=<?= $categorys['id'] ?>">Xem chi tiết</a>
                                     <a class="btn btn-warning mt-1" href="<?= BASE_URL_ADMIN ?>?act=category-update&id=<?= $categorys['id'] ?>">Cập nhật</a>
                                     <a class="btn btn-danger mt-1" href="<?= BASE_URL_ADMIN ?>?act=category-delete&id=<?= $categorys['id'] ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">Xóa</a>
                                 </td>

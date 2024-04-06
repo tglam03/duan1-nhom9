@@ -60,20 +60,7 @@
 
                             </select>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-3 mt-3">
-                            <label for="ten_loai" class="form-label">Trạng thái thanh toán</label>
-                            <select class="form-control" id="trangthaitt" name="trangthaitt">
-
-                                <option <?= $carts['status_payment'] ==  1 ? 'selected' : null ?> value="1">Đã thanh toán qua VnPay</option>
-                                <option <?= $carts['status_payment'] ==  0 ? 'selected' : null ?> value="0">Thanh toán khi nhận hàng</option>
-                                <option <?= $carts['status_payment'] ==  -1 ? 'selected' : null ?> value="-1">Đơn hàng đã hủy</option>
-
-
-                            </select>
-                        </div>
-                    </div>
+                    </div>  
                 </div>
                 <input type="hidden" name="id" id="id">
                 <button type="submit" class="btn btn-info">Cập nhật</button>

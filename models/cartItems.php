@@ -41,10 +41,8 @@ function updateQuantityByCartIDAndProductID($cartID, $productID, $quantity) {
 
  function deleteCartItemByCartID($cartID){
     try {
-             $sql = "
-            DELETE FROM cart_items 
-            WHERE cart_id = :cart_id;
-        ";
+             $sql = "DELETE FROM cart_items 
+            WHERE cart_id = :cart_id;";
         
         $stmt = $GLOBALS['conn']->prepare($sql);
 

@@ -160,19 +160,14 @@
 
 								?>
 							</table>
-							<!-- <ul>
-							<li class="clearfix"><em>1x Armor Air X Fear</em> <span>$145.00</span></li>
-							<li class="clearfix"><em>2x Armor Air Zoom Alpha</em> <span>$115.00</span></li>
-						</ul>
-						<ul>
-							<li class="clearfix"><em><strong>Tổng</strong></em> <span>$450.00</span></li>
-							<li class="clearfix"><em><strong>Vận chuyển</strong></em> <span>$0</span></li>
+							<ul>
+								<?php $giamgia = (isset($_SESSION['magg']['giam']) && $_SESSION['magg']['giam'] != "") ? $_SESSION['magg']['giam'] : 0; ?>
+								<li class="clearfix"><em><strong>Giảm giá</strong></em> <span>-<?=number_format($giamgia)?></span></li>
+								<li class="clearfix"><em><strong>Vận chuyển</strong></em> <span>7,000</span></li>
 
-						</ul> -->
+							</ul>
 							<div class="total clearfix">Thành tiền
-
-								<span><?= caculator_total_oder() ?></span>
-
+								<span><?= caculator_total_oder(true, 7000, $giamgia) ?></span>
 							</div>
 							<button type="submit" class="btn_1 full-width">Đặt mua</button>
 							<a href="<?= BASE_URL . '?act=products' ?>" onclick="return !confirm('Bạn chưa đặt mua sản phẩm. Bạn có chắc chắn muốn rời đi?')" class="btn_1 full-width">Quay lại trang sản phẩm</a>

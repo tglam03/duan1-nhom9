@@ -39,12 +39,12 @@
 			</thead>
 
 			<!-- phần sản phẩm được thêm vào giỏ hàng -->
-			<?php
+			<tbody>
+				<?php
 
-			if (!empty($_SESSION['cart'])) :
+				if (!empty($_SESSION['cart'])) :
 
-				foreach ($_SESSION['cart'] as $key => $values) : ?>
-					<tbody>
+					foreach ($_SESSION['cart'] as $key => $values) : ?>
 						<tr>
 							<td>
 								<div class="thumb_cart">
@@ -87,13 +87,11 @@
 							</td>
 
 						</tr>
+				<?php endforeach;
+				endif;
 
-					</tbody>
-
-			<?php endforeach;
-			endif;
-
-			?>
+				?>
+			</tbody>
 		</table>
 
 		<div class="row add_top_30 flex-sm-row-reverse cart_actions">
@@ -104,8 +102,27 @@
 				<div class="apply-coupon">
 					<div class="form-group">
 						<div class="row g-2">
-							<div class="col-md-6"><input type="text" name="coupon-code" value="" placeholder="Promo code" class="form-control"></div>
-							<div class="col-md-4"><button type="button" class="btn_1 outline">Áp dụng phiếu giảm giá</button></div>
+							<div class="col-md-6">
+								<div class="dropdown">
+									<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownCouponButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<?= (isset($_SESSION['magg']['tenmagg']) && $_SESSION['magg']['tenmagg'] != "") ? $_SESSION['magg']['tenmagg'] : 'Chọn phiếu giảm giá' ?>
+									</button>
+									<ul class="dropdown-menu" aria-labelledby="dropdownCouponButton">
+										<li><a href="<?= BASE_URL ?>?act=cart-list&giam=&magiamgia=">Trống</a></li>
+										<?php foreach ($vocher as $vocher) { ?>
+											<?php
+											// Chuyển đổi ngày từ định dạng 'Y-m-d' sang 'Y/m/d' để so sánh
+											$ngaybd = date('Y/m/d', strtotime($vocher['ngaybd']));
+											$ngayketthuc = date('Y/m/d', strtotime($vocher['ngayketthuc']));
+											?>
+											<?php if (date('Y/m/d') >= $ngaybd && date('Y/m/d') <= $ngayketthuc) { ?>
+												<li><a class="dropdown-item" href="<?= BASE_URL ?>?act=cart-list&giam=<?= $vocher['giam'] ?>&magiamgia=<?= $vocher['voucher'] ?>"><?= $vocher['voucher'] ?></a></li>
+											<?php } ?>
+										<?php } ?>
+
+									</ul>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -122,13 +139,19 @@
 				<div class="col-xl-4 col-lg-4 col-md-6">
 					<ul>
 						<li>
-							<span>Thành tiền(VND)</span> <?= caculator_total_oder()  ?>
+							<span>Thành tiền(VND)</span> <?= caculator_total_oder(true, 0, 0)  ?>
 						</li>
 						<li>
 							<span>Phí ship(VND)</span> 7,000
 						</li>
+						<?php if (isset($_SESSION['magg']['giam']) && $_SESSION['magg']['giam'] != "") { ?>
+							<li>
+								<span>Mã giảm giá(VND)</span>-<?= number_format($_SESSION['magg']['giam']); ?>
+							</li>
+						<?php } ?>
 						<li>
-							<span>Tổng thanh toán(VND)</span> <?= caculator_total_oder() ?>
+							<?php $giamgia = (isset($_SESSION['magg']['giam']) && $_SESSION['magg']['giam'] != "") ? $_SESSION['magg']['giam'] : 0; ?>
+							<span>Tổng thanh toán(VND)</span> <?=caculator_total_oder(true, 7000, $giamgia) ?>
 						</li>
 					</ul>
 					<a href="<?= BASE_URL ?>?act=oder-checkout" class="btn_1 full-width cart">Tiến hành thanh toán</a>

@@ -21,12 +21,12 @@ function oderPurchase()
             exit();
         }
         // sử lí lưu vào bảng oder và oder items
-
+        $giamgia = (isset($_SESSION['magg']['giam']) && $_SESSION['magg']['giam'] != "") ? $_SESSION['magg']['giam'] : 0;
         $data                    = $_POST;
         $data['user_id']         = $_SESSION['user']['id'];
         $data['status_delivery'] = STATUS_DELIVERY_WFC;  // chờ xác nhận đơn hàng
         $data['status_payment']  = $_POST['status_payment']; // phương thức thanh toán 0 là thanh toán khi nhận 1 là thanh toán vnpay
-        $data['total_bill']      = caculator_total_oder(false);
+        $data['total_bill']      = caculator_total_oder(false, 7000, $giamgia);
         $data['shipping']        = $_POST['shipping'];
         $data['thanhtoan'] = 0; // 0 là chưa thanh toán 1 là đã thanh toán
         // debug($data);    
@@ -57,8 +57,9 @@ function oderPurchase()
         // delete session
         unset($_SESSION['cart']);
         unset($_SESSION['cartID']);
+        unset($_SESSION['magg']);
         if (isset($data['status_payment']) && $data['status_payment'] == 1) {
-            header('Location:' . BASE_URL . 'vnpay_php/vnpay_pay.php');
+            header('Location:' . BASE_URL . 'vnpay_php/vnpay_create_payment.php');
             exit();
         }
         header('Location: ' . BASE_URL . '?act=comfirm');
