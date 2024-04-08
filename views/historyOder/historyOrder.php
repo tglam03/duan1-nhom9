@@ -10,83 +10,84 @@
             </div>
             <h1>Lịch sử mua hàng</h1>
         </div>
+        <?php $history = (isset($historyOder) && !empty($historyOder)) ? $historyOder :((isset($historyOder1) && !empty($historyOder1)) ? $historyOder1 : ''); ?>
         <!-- /page_header -->
         <table class="table table-striped">
             <thead>
-            <?php  $history = (isset($historyOder) && !empty($historyOder)) ? $historyOder : $historyOder1;
-             if ($history == $historyOder) { ?>
-                <tr>
-                    <th>
-                        Mã hóa đơn
-                    </th>
-                    <th>
-                        Tên khách hàng
-                    </th>
-                    <th>
-                        Số điện thoại
-                    </th>
-                    <th>
-                        Địa chỉ
-                    </th>
-                    <th>
-                        Thanh toán
-                    </th>
-                    <th>
-                        Phương thức thanh toán
-                    </th>
-                    <th>
-                        Thành tiền
-                    </th>
-                    <th>
-                        Tình trạng đơn hàng
-                    </th>
-                    <th>
-                        Thao tác
-                    </th>
-                </tr>
-                <?php }else{?>
+                <?php
+                if ($history == $historyOder || $history == '') { ?>
                     <tr>
-                    <th>
-                        Sản phẩm
-                    </th>
-                    <th>
-                        Giá
-                    </th>
-                    <th>
-                        Màu
-                    </th>
-                    <th>
-                        Size
-                    </th>
-                    <th>
-                        Số lượng
-                    </th>
-                    <th>
-                        Thành tiền
-                    </th>
-                    <th>
-                        Tình trạng đơn hàng
-                    </th>
-                    <th>
+                        <th>
+                            Mã hóa đơn
+                        </th>
+                        <th>
+                            Tên khách hàng
+                        </th>
+                        <th>
+                            Số điện thoại
+                        </th>
+                        <th>
+                            Địa chỉ
+                        </th>
+                        <th>
+                            Thanh toán
+                        </th>
+                        <th>
+                            Phương thức thanh toán
+                        </th>
+                        <th>
+                            Thành tiền
+                        </th>
+                        <th>
+                            Tình trạng đơn hàng
+                        </th>
+                        <th>
+                            Thao tác
+                        </th>
+                    </tr>
+                <?php } else { ?>
+                    <tr>
+                        <th>
+                            Sản phẩm
+                        </th>
+                        <th>
+                            Giá
+                        </th>
+                        <th>
+                            Màu
+                        </th>
+                        <th>
+                            Size
+                        </th>
+                        <th>
+                            Số lượng
+                        </th>
+                        <th>
+                            Thành tiền
+                        </th>
+                        <th>
+                            Tình trạng đơn hàng
+                        </th>
+                        <th>
 
-                    </th>
-                </tr>
-                <?php }?>
+                        </th>
+                    </tr>
+                <?php } ?>
             </thead>
 
             <!-- phần sản phẩm được thêm vào giỏ hàng -->
-            <?php
-            if (!empty($history)) :
-                foreach ($history as $key => $values) : ?>
-                    <tbody>
-                        <?php if ($history == $historyOder) { ?>
+            <tbody>
+                <?php
+                if (!empty($history)) :
+                    foreach ($history as $key => $values) : ?>
+                        <?php if ($history == $historyOder || $history=='') { ?>
                             <tr>
                                 <td>
                                     <span class="item_cart">OD-<?= $values['id'] ?></span>
                                 </td>
                                 <td><?= $values['user_name']; ?></td>
-                                <td ><?= $values['user_phone']; ?></td>
-                                <td ><?= $values['user_address']; ?></td>
+                                <td><?= $values['user_phone']; ?></td>
+                                <td><?= $values['user_address']; ?></td>
                                 <td>
                                     <div>
                                         <span><?= ($values['thanhtoan'] == 0) ? 'Chưa thanh toán' : ($values['thanhtoan'] == 1 ? 'Đã thanh toán' : '') ?></span>
@@ -155,31 +156,31 @@
                                     <span class=" text-danger">
                                         <?= ($values['trangthaidh'] == 0) ? 'Chờ xác nhận' : ($values['trangthaidh'] == 1 ? 'Chờ lấy hàng' : ($values['trangthaidh'] == 2 ? 'Đang giao hàng' : ($values['trangthaidh'] == 3 ? 'Đã giao' : ($values['trangthaidh'] == -1 ? 'Đã hủy' : '')))) ?></span>
                                 </td>
-                                <td><a class="btn btn-danger" href="<?= BASE_URL . '?act=orderhistory'?>">Quay lại</a></td>
+                                <td><a class="btn btn-danger" href="<?= BASE_URL . '?act=orderhistory' ?>">Quay lại</a></td>
                             </tr>
                         <?php } ?>
-                    </tbody>
-
-            <?php endforeach;
-            endif;
-
-            ?>
+                <?php endforeach;
+                endif;
+                ?>
+            </tbody>
         </table>
         <!-- /cart_actions -->
     </div>
     <!-- /container -->
-    <div class="pagination__wrapper">
-        <ul class="pagination">
-            <?php ?>
-            <li><a href="<?= BASE_URL ?>?act=orderhistory&page=<?= (($page - 1) > 0) ? $page - 1 : '1'; ?>" class="prev" title="previous page">&#10094;</a></li>
-            <?php for ($i = 1; $i <= $sotrang; $i++) { ?>
-                <li>
-                    <a href="<?= BASE_URL ?>?act=orderhistory&page=<?= $i ?>" class="<?= ($page == $i) ? 'active' : ''; ?>"><?= $i ?></a>
-                </li>
-            <?php } ?>
-            <li><a href="<?= BASE_URL ?>?act=orderhistory&page=<?= (($page + 1) <= $sotrang) ? $page + 1 : '1'; ?>" class="next" title="next page">&#10095;</a></li>
-        </ul>
-    </div>
+    <?php if (isset($sotrang) && !empty($sotrang)) { ?>
+        <div class="pagination__wrapper">
+            <ul class="pagination">
+                <?php ?>
+                <li><a href="<?= BASE_URL ?>?act=orderhistory&page=<?= (($page - 1) > 0) ? $page - 1 : '1'; ?>" class="prev" title="previous page">&#10094;</a></li>
+                <?php for ($i = 1; $i <= $sotrang; $i++) { ?>
+                    <li>
+                        <a href="<?= BASE_URL ?>?act=orderhistory&page=<?= $i ?>" class="<?= ($page == $i) ? 'active' : ''; ?>"><?= $i ?></a>
+                    </li>
+                <?php } ?>
+                <li><a href="<?= BASE_URL ?>?act=orderhistory&page=<?= (($page + 1) <= $sotrang) ? $page + 1 : '1'; ?>" class="next" title="next page">&#10095;</a></li>
+            </ul>
+        </div>
+    <?php } ?>
 </main>
 <!--/main-->
 

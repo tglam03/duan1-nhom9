@@ -66,7 +66,7 @@ function oderPurchase()
         exit();
     }
 
-    header('Location: '. BASE_URL);
+    header('Location: ' . BASE_URL);
 }
 
 
@@ -109,20 +109,22 @@ function orderHistory()
     $style = 'cart';
     if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
         if (isset($_GET['idorder']) && !empty($_GET['idorder'])) {
-            $historyOder = historyOder($_SESSION['user']['id'],$_GET['idorder'],'','');
-        }else{
-            $historyOder = listallhistoryOder($_SESSION['user']['id'],'','');
+            $historyOder = historyOder($_SESSION['user']['id'], $_GET['idorder'], '', '');
+        } else {
+            $historyOder = listallhistoryOder($_SESSION['user']['id'], '', '');
         }
-        $tongsp = sizeof($historyOder);
-        $end = 8;
-        $sotrang = ceil($tongsp / $end);
-        $page = isset($_GET['page']) ? $_GET['page'] : 1;
-        $star = ($page - 1) * 8;
-        if (isset($_GET['idorder']) && !empty($_GET['idorder'])) {
-            $historyOder = "";
-            $historyOder1 = historyOder($_SESSION['user']['id'],$_GET['idorder'],$star,$end);
-        }else{
-            $historyOder = listallhistoryOder($_SESSION['user']['id'],$star,$end);
+        if (!empty($historyOder)) {
+            $tongsp = sizeof($historyOder);
+            $end = 5;
+            $sotrang = ceil($tongsp / $end);
+            $page = isset($_GET['page']) ? $_GET['page'] : 1;
+            $star = ($page - 1) * 5;
+            if (isset($_GET['idorder']) && !empty($_GET['idorder'])) {
+                $historyOder = "";
+                $historyOder1 = historyOder($_SESSION['user']['id'], $_GET['idorder'], $star, $end);
+            } else {
+                $historyOder = listallhistoryOder($_SESSION['user']['id'], $star, $end);
+            }
         }
     }
     require_once PATH_VIEW . 'layouts/client.php';
