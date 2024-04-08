@@ -16,6 +16,7 @@
                 Lọc theo thời gian
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><a href="<?= BASE_URL_ADMIN ?>" class="dropdown-item" href="#">1 ngày</a></li>
                 <li><a href="<?= BASE_URL_ADMIN ?>?act=/&day=7" class="dropdown-item" href="#">7 ngày</a></li>
                 <li><a href="<?= BASE_URL_ADMIN ?>?act=/&day=28" class="dropdown-item" href="#">28 ngày</a></li>
                 <li><a href="<?= BASE_URL_ADMIN ?>?act=/&day=58" class="dropdown-item" href="#">90 ngày</a></li>

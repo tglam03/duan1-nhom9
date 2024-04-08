@@ -25,10 +25,8 @@
                         </tr>
                     </thead>
 
-                    <?php foreach ($comment as $comments) : ?>
-
                         <tbody>
-
+                        <?php foreach ($comment as $comments) : ?>
                             <tr>
                                 <td><?= $comments['idbl'] ?></td>
                                 <td><?= $comments['ten_hh'] ?></td>
@@ -39,10 +37,8 @@
                                     <a onclick="return confirm('Bạn có chắc muốn xóa không?');" class="btn btn-danger mt-1" href="<?= BASE_URL_ADMIN ?>?act=delete-comment&id=<?= $comments['idbl'] ?>&idhh=<?=$comments['idhh']?>">Xóa</a>
                                 </td>
                             </tr>
-
+                            <?php endforeach; ?>
                         </tbody>
-
-                    <?php endforeach; ?>
 
                 </table>
             </div>

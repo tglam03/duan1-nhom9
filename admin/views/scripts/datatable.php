@@ -34,7 +34,7 @@
   });
   $(document).ready(function() {
     $('#dataTable5').DataTable({
-      "lengthMenu": [2, 4, 6, 8, 10], // Số lượng bản ghi hiển thị trên mỗi trang
+      "lengthMenu": [4, 6, 8, 10], // Số lượng bản ghi hiển thị trên mỗi trang
       "order": [] // Thiết lập mặc định không có sắp xếp
     });
   });

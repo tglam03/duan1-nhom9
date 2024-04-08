@@ -24,7 +24,6 @@ function cartAdd($productID, $quantity = 0)
     } else {
         $mau = loadLimitVariant('mauhh', $productID, 'hh_id');
         $sizesp = loadLimitVariant('sizehh', $mau['id'], 'mau_id');
-        $quantity = 1;
     }
     $product = showOne('sanpham', $productID);
 
@@ -55,8 +54,7 @@ function cartAdd($productID, $quantity = 0)
             'size_id' => $sizesp['id'],
         ]);
     } else {
-        $qtyTMP = $_SESSION['cart'][$productID]['quantity'] += $quantity;
-
+        $qtyTMP = $_SESSION['cart'][$productID]['mausize']['quantity'] += $quantity;
         updateQuantityByCartIDAndProductID($cartID, $productID, $qtyTMP);
     }
 
@@ -77,9 +75,9 @@ function cartList()
                 $_SESSION['magg']['tenmagg'] = $_GET['magiamgia'];
             }
             $_SESSION['magg']['giam'] = $_GET['giam'];
-            header('Location:' . BASE_URL . '?act=cart-list');
-            exit();
         }
+        header('Location:' . BASE_URL . '?act=cart-list');
+        exit();
     }
     require_once PATH_VIEW . 'layouts/client.php';
 }

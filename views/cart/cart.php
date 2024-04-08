@@ -108,7 +108,7 @@
 										<?= (isset($_SESSION['magg']['tenmagg']) && $_SESSION['magg']['tenmagg'] != "") ? $_SESSION['magg']['tenmagg'] : 'Chọn phiếu giảm giá' ?>
 									</button>
 									<ul class="dropdown-menu" aria-labelledby="dropdownCouponButton">
-										<li><a href="<?= BASE_URL ?>?act=cart-list&giam=&magiamgia=">Trống</a></li>
+										<li><a class="dropdown-item" href="<?= BASE_URL ?>?act=cart-list&giam=1&magiamgia=">Trống</a></li>
 										<?php foreach ($vocher as $vocher) { ?>
 											<?php
 											// Chuyển đổi ngày từ định dạng 'Y-m-d' sang 'Y/m/d' để so sánh
