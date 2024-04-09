@@ -64,7 +64,9 @@
 
                                 <td>
                                     <a class="btn btn-info mt-1" href="<?= BASE_URL_ADMIN ?>?act=cart-detail&id=<?= $cart['id'] ?>">Xem chi tiết</a>
-                                    <a class="btn btn-warning mt-1" href="<?= BASE_URL_ADMIN ?>?act=cart-update&id=<?= $cart['id'] ?>">Cập nhật</a>
+                                    <?php if ($cart['status_delivery'] != -1 && $cart['status_delivery'] != 3) { ?>
+                                        <a class="btn btn-warning mt-1" href="<?= BASE_URL_ADMIN ?>?act=cart-update&id=<?= $cart['id'] ?>">Cập nhật</a>
+                                    <?php } ?>
                                     <?php if ($cart['status_delivery'] == 0) { ?>
                                         <a class="btn btn-danger mt-1" href="<?= BASE_URL_ADMIN ?>?act=cart-delete&id=<?= $cart['id'] ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">Hủy bỏ đơn hàng</a>
                                     <?php } ?>

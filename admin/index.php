@@ -62,6 +62,7 @@ match ($act) {
     'voucher-create' => voucherCreate(),
     'vocher-update' => voucherUpdate($_GET['id']),
     'vocher-delete' => voucherDelete($_GET['id']),
+    'thongke' => thongke(),
 
 };
 require_once '../commons/disconnect-db.php';

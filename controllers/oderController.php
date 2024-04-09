@@ -48,6 +48,12 @@ function oderPurchase()
                 'size_id'         => $item['mausize']['idsize'],
             ];
             insert('oder_items', $oderItem);
+            if (!empty($item['mausize']['idsize'])) {
+                $showsizehh = showOne('sizehh', $item['mausize']['idsize']);
+                if (!empty($item['mausize']['quantity'])) {
+                    update('sizehh', $item['mausize']['idsize'], ['soluong' => $showsizehh['soluong'] - $item['mausize']['quantity']]);
+                }
+            }
         }
         // sử lí sau khi thêm
         // xóa dữ liệu ở giỏ hàng 

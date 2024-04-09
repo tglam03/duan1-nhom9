@@ -39,9 +39,6 @@
                             Thành tiền
                         </th>
                         <th>
-                            Tình trạng đơn hàng
-                        </th>
-                        <th>
                             Thao tác
                         </th>
                     </tr>
@@ -151,10 +148,6 @@
                                     <strong><?= $total = number_format((isset($values['giam_gia']) && $values['giam_gia'] != 0) ? ((100 - $values['giam_gia']) * $values['don_gia'] / 100) : ($values['don_gia']) * $values['quantity']);
 
                                             ?>VND</strong>
-                                </td>
-                                <td>
-                                    <span class=" text-danger">
-                                        <?= ($values['trangthaidh'] == 0) ? 'Chờ xác nhận' : ($values['trangthaidh'] == 1 ? 'Chờ lấy hàng' : ($values['trangthaidh'] == 2 ? 'Đang giao hàng' : ($values['trangthaidh'] == 3 ? 'Đã giao' : ($values['trangthaidh'] == -1 ? 'Đã hủy' : '')))) ?></span>
                                 </td>
                                 <td><a class="btn btn-danger" href="<?= BASE_URL . '?act=orderhistory' ?>">Quay lại</a></td>
                             </tr>

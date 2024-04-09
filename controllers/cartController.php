@@ -91,9 +91,13 @@ function cartInc($productID)
     }
 
     if (isset($_SESSION['cart'][$productID])) {
-
-        $qtyTMP = $_SESSION['cart'][$productID]['mausize']['quantity'] += 1;
-        updateQuantityByCartIDAndProductID($_SESSION['cartID'], $productID, $qtyTMP);
+        if(isset($_SESSION['cart'][$productID]['mausize']['idsize']) && $_SESSION['cart'][$productID]['mausize']['idsize']!=""){
+            $soluong = showOne('sizehh',$_SESSION['cart'][$productID]['mausize']['idsize']);
+            if($_SESSION['cart'][$productID]['mausize']['quantity']<=$soluong['soluong']){
+                $qtyTMP = $_SESSION['cart'][$productID]['mausize']['quantity'] += 1;
+                updateQuantityByCartIDAndProductID($_SESSION['cartID'], $productID, $qtyTMP);
+            }
+        }
     }
     header('Location: ' . BASE_URL . '?act=cart-list');
 }
@@ -107,9 +111,9 @@ function cartDec($productID)
     if (empty($product)) {
         debug('404 Not found');
     }
-    if (isset($_SESSION['cart'][$productID]) && $_SESSION['cart'][$productID]['quantity'] >  1) {
+    if (isset($_SESSION['cart'][$productID]) && $_SESSION['cart'][$productID]['mausize']['quantity'] >  1) {
 
-        $qtyTMP = $_SESSION['cart'][$productID]['quantity'] -= 1;
+        $qtyTMP = $_SESSION['cart'][$productID]['mausize']['quantity'] -= 1;
         updateQuantityByCartIDAndProductID($_SESSION['cartID'], $productID, $qtyTMP);
     }
     header('Location: ' . BASE_URL . '?act=cart-list');
