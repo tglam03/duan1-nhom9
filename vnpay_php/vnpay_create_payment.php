@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 
@@ -11,8 +11,8 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
 require_once("./config.php");
 
 $vnp_TxnRef = rand(1,10000); //Mã giao dịch thanh toán tham chiếu của merchant
-$vnp_Amount = $_POST['amount']; // Số tiền thanh toán
-$vnp_Locale = $_POST['language']; //Ngôn ngữ chuyển hướng thanh toán
+$vnp_Amount = (isset($_SESSION['total_bill'])&&$_SESSION['total_bill']!='')?$_SESSION['total_bill']:10000; // Số tiền thanh toán
+$vnp_Locale = 'vn'; //Ngôn ngữ chuyển hướng thanh toán
 $vnp_BankCode = $_POST['bankCode']; //Mã phương thức thanh toán
 $vnp_IpAddr = $_SERVER['REMOTE_ADDR']; //IP Khách hàng thanh toán
 

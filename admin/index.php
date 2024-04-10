@@ -43,7 +43,6 @@ match ($act) {
     
     //CRUD Category
     'category'        => categoryListAll(),
-    'category-detail' => categoryShowOne($cate),
     'category-create' => categoryCreate(),
     'category-update' => categoryUpdate($cate),
     'category-delete' => categoryDelete($cate),
@@ -60,10 +59,10 @@ match ($act) {
 
     //CRUD Mã giảm giá
     'voucher'        => voucherListAll(),
-    'voucher-detail' => voucherShowOne($_GET['id']),
     'voucher-create' => voucherCreate(),
-    'voucher-update' => voucherUpdate($_GET['id']),
-    'voucher-delete' => voucherDelete($_GET['id']),
+    'vocher-update' => voucherUpdate($_GET['id']),
+    'vocher-delete' => voucherDelete($_GET['id']),
+    'thongke' => thongke(),
 
 };
 require_once '../commons/disconnect-db.php';

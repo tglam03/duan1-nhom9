@@ -147,18 +147,24 @@ if (!function_exists('locselect')) {
 
 //locsp theo tên 
 if (!function_exists('loctenProduct')) {
-    function loctenProduct($kyw)
+    function loctenProduct($kyw,$start, $end)
     {
         try {
-            $sql = "SELECT * FROM sanpham WHERE ten_hh like %$kyw% ORDER BY id DESC ";
+            // Sử dụng tham số hóa để bảo vệ truy vấn khỏi SQL Injection
+            $sql = "SELECT * FROM sanpham WHERE ten_hh like :kyw ORDER BY id DESC LIMIT $start, $end";
             $stmt = $GLOBALS['conn']->prepare($sql);
-
+            $kyw = "%" . $kyw . "%";
+            $stmt->bindParam(':kyw', $kyw, PDO::PARAM_STR);
             $stmt->execute();
 
+            // Xử lý kết quả và trả về
             return $stmt->fetchAll();
         } catch (\Exception $e) {
-            debug($e);
+            // Xử lý lỗi một cách thích hợp, ví dụ: ghi log và trả về một giá trị mặc định
+            error_log("Error in loctenProduct: " . $e->getMessage());
+            return [];
         }
     }
 }
+
 

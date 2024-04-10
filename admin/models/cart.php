@@ -19,3 +19,20 @@ function historyOder($kh_id) {
         debug($e);
     }
 }
+
+if (!function_exists('loadAllofdayProductid')) {
+    function loadAllofdayProductid($id)
+    {
+        try {
+            $sql = "SELECT a.id as idorder,hinh,ten_hh,b.product_id, SUM(b.quantity) AS total_quantity, SUM(b.price*b.quantity) AS tienthu FROM orders a join oder_items b on a.id = b.order_id join sanpham c on b.product_id = c.id WHERE a.trangthai = 1 ";
+            $sql .= " AND a.id = :id GROUP BY b.product_id ORDER BY b.product_id DESC";
+            $stmt = $GLOBALS['conn']->prepare($sql);
+            $stmt->bindParam(':id',$id);
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+        } catch (\Exception $e) {
+            debug($e);
+        }
+    }
+}

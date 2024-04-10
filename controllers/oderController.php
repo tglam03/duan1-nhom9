@@ -21,12 +21,12 @@ function oderPurchase()
             exit();
         }
         // sử lí lưu vào bảng oder và oder items
-
+        $giamgia = (isset($_SESSION['magg']['giam']) && $_SESSION['magg']['giam'] != "") ? $_SESSION['magg']['giam'] : 0;
         $data                    = $_POST;
         $data['user_id']         = $_SESSION['user']['id'];
         $data['status_delivery'] = STATUS_DELIVERY_WFC;  // chờ xác nhận đơn hàng
         $data['status_payment']  = $_POST['status_payment']; // phương thức thanh toán 0 là thanh toán khi nhận 1 là thanh toán vnpay
-        $data['total_bill']      = caculator_total_oder(false);
+        $data['total_bill']      = caculator_total_oder(false, 7000, $giamgia);
         $data['shipping']        = $_POST['shipping'];
         $data['thanhtoan'] = 0; // 0 là chưa thanh toán 1 là đã thanh toán
         // debug($data);    
@@ -48,6 +48,12 @@ function oderPurchase()
                 'size_id'         => $item['mausize']['idsize'],
             ];
             insert('oder_items', $oderItem);
+            if (!empty($item['mausize']['idsize'])) {
+                $showsizehh = showOne('sizehh', $item['mausize']['idsize']);
+                if (!empty($item['mausize']['quantity'])) {
+                    update('sizehh', $item['mausize']['idsize'], ['soluong' => $showsizehh['soluong'] - $item['mausize']['quantity']]);
+                }
+            }
         }
         // sử lí sau khi thêm
         // xóa dữ liệu ở giỏ hàng 
@@ -57,15 +63,16 @@ function oderPurchase()
         // delete session
         unset($_SESSION['cart']);
         unset($_SESSION['cartID']);
-        if(isset($data['status_payment']) && $data['status_payment']==1){
-            header('Location:'.BASE_URL.'vnpay_php/vnpay_pay.php');
+        unset($_SESSION['magg']);
+        if (isset($data['status_payment']) && $data['status_payment'] == 1) {
+            header('Location:' . BASE_URL . 'vnpay_php/vnpay_create_payment.php');
             exit();
         }
         header('Location: ' . BASE_URL . '?act=comfirm');
         exit();
     }
 
-    header('Location: '. BASE_URL);
+    header('Location: ' . BASE_URL);
 }
 
 
@@ -106,18 +113,36 @@ function orderHistory()
     $title = 'Lịch sử mua hàng';
     $view = 'historyOder/historyOrder';
     $style = 'cart';
-    if(isset($_SESSION['user']) && !empty($_SESSION['user'])){
-        $historyOder = historyOder($_SESSION['user']['id']);
+    if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+        if (isset($_GET['idorder']) && !empty($_GET['idorder'])) {
+            $historyOder = historyOder($_SESSION['user']['id'], $_GET['idorder'], '', '');
+        } else {
+            $historyOder = listallhistoryOder($_SESSION['user']['id'], '', '');
+        }
+        if (!empty($historyOder)) {
+            $tongsp = sizeof($historyOder);
+            $end = 5;
+            $sotrang = ceil($tongsp / $end);
+            $page = isset($_GET['page']) ? $_GET['page'] : 1;
+            $star = ($page - 1) * 5;
+            if (isset($_GET['idorder']) && !empty($_GET['idorder'])) {
+                $historyOder = "";
+                $historyOder1 = historyOder($_SESSION['user']['id'], $_GET['idorder'], $star, $end);
+            } else {
+                $historyOder = listallhistoryOder($_SESSION['user']['id'], $star, $end);
+            }
+        }
     }
     require_once PATH_VIEW . 'layouts/client.php';
 }
 
-function orderCancel(){
+function orderCancel()
+{
     $title = 'Lịch sử mua hàng';
     $view = 'historyOder/historyOrder';
     $style = 'cart';
-    if(isset($_GET['ID']) && !empty($_GET['ID'])){
-        update('orders',$_GET['ID'],['status_delivery' => -1]);
+    if (isset($_GET['ID']) && !empty($_GET['ID'])) {
+        update('orders', $_GET['ID'], ['status_delivery' => -1]);
     }
-    header('Location: '. BASE_URL.'?act=orderhistory' );
+    header('Location: ' . BASE_URL . '?act=orderhistory');
 }

@@ -22,11 +22,8 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-
-                    <?php foreach ($products as $product) : ?>
-
                         <tbody>
-
+                        <?php foreach ($products as $product) : ?>
                             <tr>
                                 <td><?= $product['id'] ?></td>
                                 <td><?= $product['ten_hh'] ?></td>
@@ -36,10 +33,8 @@
                                 </td>
 
                             </tr>
-
+                            <?php endforeach; ?>
                         </tbody>
-
-                    <?php endforeach; ?>
 
                 </table>
             </div>

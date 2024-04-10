@@ -1,18 +1,20 @@
-<?php 
+<?php
 
 // Khai báo các hàm dùng Global
 if (!function_exists('require_file')) {
-    function require_file($pathFolder) {
+    function require_file($pathFolder)
+    {
         $files = array_diff(scandir($pathFolder), ['.', '..']);
 
-        foreach($files as $file) {
+        foreach ($files as $file) {
             require_once $pathFolder . $file;
         }
     }
 }
 
 if (!function_exists('debug')) {
-    function debug($data) {
+    function debug($data)
+    {
         echo "<pre>";
 
         print_r($data);
@@ -22,7 +24,8 @@ if (!function_exists('debug')) {
 }
 
 if (!function_exists('e404')) {
-    function e404() {
+    function e404()
+    {
         echo "404 - Not found";
         die;
     }
@@ -30,9 +33,10 @@ if (!function_exists('e404')) {
 
 
 if (!function_exists('upload_file')) {
-    function upload_file($file, $pathFolderUpload) {
+    function upload_file($file, $pathFolderUpload)
+    {
         $imagePath = $pathFolderUpload . time() . '-' . basename($file['name']);
-            
+
         if (move_uploaded_file($file['tmp_name'], PATH_UPLOAD . $imagePath)) {
             return $imagePath;
         }
@@ -43,7 +47,7 @@ if (!function_exists('upload_file')) {
 
 
 if (!function_exists('middleware_auth_check')) {
-    function middleware_auth_check($act,$arrRouteNeedAuth)
+    function middleware_auth_check($act, $arrRouteNeedAuth)
     {
         if ($act == 'account') {
             if (!empty($_SESSION['user'])) {
@@ -58,19 +62,26 @@ if (!function_exists('middleware_auth_check')) {
 
 // tính tổng tiền
 if (!function_exists('caculator_total_oder')) {
-    function caculator_total_oder($flag = true)
+    function caculator_total_oder($flag = true, $ship = 0, $discount = 0)
     {
-        if(isset($_SESSION['cart'])){
+        if (isset($_SESSION['cart'])) {
             $total = 0;
-            foreach($_SESSION['cart'] as $values){
-                
-                $price = $values['giam_gia'] ?: $values['don_gia'];
+            foreach ($_SESSION['cart'] as $values) {
+
+                $price = $values['giam_gia'] == 0 ? $values['don_gia'] : (100 - $values['giam_gia']) / 100 * $values['don_gia'];
                 $quantity = $values['mausize']['quantity'];
 
-                $total += $price * $quantity; 
+                $total += $price * $quantity;
             }
-            return $flag ?  number_format($total) : $total;
+
+            // Tính chi phí vận chuyển
+            $total += $ship;
+
+            // Áp dụng giảm giá
+            $total -= $discount;
+
+            return $flag ? number_format($total) : $total;
         }
-        return 0 ;
+        return 0;
     }
 }

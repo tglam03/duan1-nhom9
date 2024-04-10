@@ -62,4 +62,37 @@
     .container_check1 input:checked~.checkmark:after {
         display: block;
     }
+
+    /* Định dạng cho dropdown button */
+    .dropdown-button {
+        background-color: #f8f9fa;
+        border: 1px solid #ced4da;
+        color: #212529;
+        padding: 8px 12px;
+        cursor: pointer;
+    }
+
+    /* Định dạng cho dropdown menu */
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        z-index: 1;
+    }
+
+    /* Hiển thị menu dropdown khi button được nhấp */
+    .dropdown-button:focus+.dropdown-menu {
+        display: block;
+    }
+
+    /* Định dạng cho các mục trong dropdown menu */
+    .dropdown-menu-item {
+        padding: 8px 12px;
+    }
+
+    /* Định dạng khi hover lên một mục trong dropdown menu */
+    .dropdown-menu-item:hover {
+        background-color: #f8f9fa;
+    }
 </style>

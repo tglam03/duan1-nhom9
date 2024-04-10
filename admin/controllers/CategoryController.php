@@ -13,21 +13,6 @@ function categoryListAll()
 
     require_once PATH_VIEW_ADMIN . 'layouts/master.php';
 }
-function categoryShowOne($id)
-{
-
-    $category = showOne('loai', $id);
-
-    if (empty($category)) {
-        e404();
-    }
-
-
-    $title = 'Chi tiết loại hàng: ' . $category['ten_loai'];
-    $view = 'categories/show';
-
-    require_once PATH_VIEW_ADMIN . 'layouts/master.php';
-}
 
 function categoryCreate()
 {

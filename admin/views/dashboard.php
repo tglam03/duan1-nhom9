@@ -1,20 +1,13 @@
-<div class="container-fluid">
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Lọc theo thời gian
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li><a href="<?=BASE_URL_ADMIN?>?act=/&day=7" class="dropdown-item" href="#">7 ngày</a></li>
-                <li><a href="<?=BASE_URL_ADMIN?>?act=/&day=28" class="dropdown-item" href="#">28 ngày</a></li>
-                <li><a href="<?=BASE_URL_ADMIN?>?act=/&day=90" class="dropdown-item" href="#">90 ngày</a></li>
-                <li><a href="<?=BASE_URL_ADMIN?>?act=/&day=365" class="dropdown-item" href="#">365 ngày</a></li>
-            </ul>
-        </div>
-    </div>
+<style>
+    .dataTables_info {
+        display: none;
+    }
 
+    .dataTables_filter {
+        display: none;
+    }
+</style>
+<div class="container-fluid">
     <!-- Content Row -->
     <div class="row">
 
@@ -26,7 +19,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Tổng thu nhập</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?=(isset($tongthunhapofday)&&$tongthunhapofday!="")?number_format($tongthunhapofday):0;?> VND</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= (isset($tongthunhapofday) && $tongthunhapofday != "") ? number_format($tongthunhapofday) : 0; ?> VND</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -44,7 +37,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Số lượng bán ra</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?=(isset($soluongofday)&&$soluongofday!="")?number_format($soluongofday):0;?> sản phẩm</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= (isset($soluongofday) && $soluongofday != "") ? number_format($soluongofday) : 0; ?> sản phẩm</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -64,7 +57,7 @@
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?=(isset($avgtongthunhapofOneday)&&$avgtongthunhapofOneday!="")?number_format($avgtongthunhapofOneday):0;?> VND</div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?= (isset($avgtongthunhapofOneday) && $avgtongthunhapofOneday != "") ? number_format($avgtongthunhapofOneday) : 0; ?> VND</div>
                                 </div>
                                 <div class="col">
                                 </div>
@@ -86,7 +79,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                 Số lượng đơn hủy</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?=(isset($donhuys)&&$donhuys!="")?number_format($donhuys):0;?> Đơn hàng</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= (isset($donhuys) && $donhuys != "") ? number_format($donhuys) : 0; ?> Đơn hàng</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -98,53 +91,6 @@
     </div>
 
     <!-- Content Row -->
-
-    <div class="row">
-
-        <!-- Area Chart -->
-        <div class="col-xl-8 col-lg-7">
-            <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Tổng quan thu nhập</h6>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                    <div class="chart-area">
-
-                        <canvas id="myAreaChart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Pie Chart -->
-        <div class="col-xl-4 col-lg-5">
-            <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Nguồn doanh thu</h6>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                    <div class="chart-pie pt-4 pb-2">
-                        <canvas id="myPieChart"></canvas>
-                    </div>
-                    <div class="mt-4 text-center small">
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-primary"></i> Direct
-                        </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-success"></i> Social
-                        </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-info"></i> Referral
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="row">
         <div class="col-xl-12 col-lg-12">
             <div class="card shadow mb-4">
@@ -154,39 +100,51 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <div class="chart-area">
-                        <canvas id="myAreaChart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xl-6 col-lg-6">
-            <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Biểu đồ hàng hóa</h6>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                    <div class="chart-area">
-                        <canvas id="myAreaChart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    <div class="chart-area" style="position: relative; width:100%; height:400px;">
+                        <?php if (!empty($products)) { ?>
+                            <div id="piechart" class="chart-responsive" style="width:100%; height:100%;"></div>
 
-        <div class="col-xl-6 col-lg-6">
-            <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Biểu đồ hàng hóa</h6>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                    <div class="chart-area">
-                        <canvas id="myAreaChart"></canvas>
+                            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+                            <script type="text/javascript">
+                                // Load google charts
+                                google.charts.load('current', {
+                                    'packages': ['corechart']
+                                });
+                                google.charts.setOnLoadCallback(drawChart);
+
+                                // Draw the chart and set the chart values
+                                function drawChart() {
+                                    var data = google.visualization.arrayToDataTable([
+                                        ['Danh mục', 'Số lượng sản phẩm'],
+                                        <?php
+                                        $tongdm = count($products);
+                                        $i = 1;
+                                        foreach ($products as $products) {
+                                            $soluong = '';
+                                            if ($i == $tongdm) $dauphau = "";
+                                            else $dauphau = ",";
+                                            $soluong = $products['mau_size_soluong']['soluong'];
+                                            if ($soluong == "") {
+                                                $soluong = 0;
+                                            }
+                                            echo "['" . $products['ten_hh'] . "', $soluong]" . $dauphau;
+                                            $i += 1;
+                                        }
+                                        ?>
+                                    ]);
+
+                                    // Optional; add a title and set the width and height of the chart
+                                    var options = {
+                                        'title': 'Biểu đồ thống kê hàng hóa'
+                                    };
+
+                                    // Display the chart inside the <div> element with id="piechart"
+                                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                                    chart.draw(data, options);
+                                }
+                            </script>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

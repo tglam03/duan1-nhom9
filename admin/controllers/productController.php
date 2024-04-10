@@ -17,7 +17,7 @@ function productListAll()
 
 function productCreate()
 {
-    unset( $_SESSION['success']);
+    unset($_SESSION['success']);
     $title = 'Thêm Mới Sản Phẩm';
     $view = 'products/add';
     $script1 = 'scripts';
@@ -26,7 +26,7 @@ function productCreate()
         //validate
         $product_img = $_FILES['hinh'] ?? null;
         $countimg = count($product_img['name']);
-         //xử lý hình ảnh
+        //xử lý hình ảnh
         if (!empty($product_img)) {
             for ($i = 0; $i < $countimg; $i++) {
                 $product_imgs[$i]['name'] = $product_img['name'][$i];
@@ -59,7 +59,7 @@ function productCreate()
                 }
             }
         }
-        $errors = validateProduct($data, $data1, implode(',', $hinh));
+        $errors = validateProduct($data, $data1, $product_img);
         if (!empty($errors)) {
             require_once PATH_VIEW_ADMIN . 'layouts/master.php';
             exit();
@@ -110,7 +110,6 @@ function productUpdate($id)
         //validate
         $product_img = $_FILES['hinh'] ?? null;
         $countimg = count($product_img['name']);
-        // //xử lý hình ảnh
         if (!empty($product_img)) {
             for ($i = 0; $i < $countimg; $i++) {
                 $product_imgs[$i]['name'] = $product_img['name'][$i];
@@ -142,16 +141,16 @@ function productUpdate($id)
                         'soluong' => (isset($value[1]) && $value[1] != "") ? $value[1] : '',
                     ];
                 } else {
-                    if (!empty($value[1]) && !empty($value[0])){
+                    if (!empty($value[1]) && !empty($value[0])) {
                         $data1[$i][] = [
                             'size' => (isset($value[0]) && $value[0] != "") ? $value[0] : '',
                             'soluong' => (isset($value[1]) && $value[1] != "") ? $value[1] : '',
-                    ];
-                }
+                        ];
+                    }
                 }
             }
         }
-        $errors = validateProduct($data, $data1, 1);
+        $errors = validateProduct($data, $data1, $product_img);
         if (!empty($errors)) {
             require_once PATH_VIEW_ADMIN . 'layouts/master.php';
             exit();
@@ -223,7 +222,7 @@ function productDelete($id)
     header('Location: ' . BASE_URL_ADMIN . '?act=product');
     exit();
 }
-function validateProduct($data, $data1, $data2)
+function validateProduct($data, $data1, $product_img)
 {
     $errors = [];
     //check ten hàng hóa
@@ -249,9 +248,19 @@ function validateProduct($data, $data1, $data2)
             }
         }
     }
-    if ($data2 == "") {
-        //check hinh
-        $errors['hinh'] = 'Hình ảnh không được để trống';
+    if ($product_img == "") {
+    } else {
+        if (is_array($product_img)) {
+            for ($i=0; $i < count($product_img); $i++) {
+                if (!empty($product_img['name'][$i]) && $product_img['size'][$i] > 0) {
+                    $typeImage = ['image/png', 'image/jpg', 'image/jpeg'];
+                    if (!in_array($product_img['type'][$i], $typeImage)) {
+                        $errors['hinh'] = 'Hình ảnh chỉ chấp nhận định dạng file: png, jpg, jpeg';
+                    }
+                    // debug($product_img);
+                }
+            }
+        }
     }
     for ($i = 1; $i <= sizeof($data1); $i++) {
         if (isset($data1[$i][1]['idsize']) && !empty($data1[$i][1]['idsize'])) {
@@ -260,7 +269,7 @@ function validateProduct($data, $data1, $data2)
                 continue;
             }
         }
-    
+
         // Kiểm tra các điều kiện khác và ghi lại lỗi nếu cần
         if (empty($data1[$i][1]['size'])) {
             $errors[$i]['size'] = 'Bắt buộc chọn size';

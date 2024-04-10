@@ -44,33 +44,12 @@
                                 <td><?= number_format($product['don_gia']); ?>VND</td>
                                 <td><?= $product['giam_gia']; ?>%</td>
                                 <td class=" col-sm-2">
-                                    <div class="slideshow-container">
+                                    <div>
                                         <?php
-                                        $a = 1;
-                                        $hinhs = explode(',', $product['hinh']);
-                                        $sohinh = sizeof($hinhs);
-                                        if ($sohinh > 1) {
-                                            foreach ($hinhs as $hinh) {
-                                                $a++;
-                                                echo '  <div class="mySlides' . $key . ' fade">
-                                                            <div class="numbertext">' . $a . ' / ' . $sohinh . '</div>
-                                                                <img src="' . BASE_URL . $hinh . '" style="width:100%">
-                                                            <div class="text">Hình ' . $a . '</div>
+                                        $hinhs = explode(',', $product['hinh'])[0];
+                                        echo '  <div>
+                                                                <img src="' . BASE_URL . $hinhs . '" style="width:100%">
                                                         </div>';
-                                                if ($a == $sohinh) {
-                                                    $a = 0;
-                                                }
-                                            }
-                                        }
-                                        ?>
-                                    </div>
-                                    <div style="text-align:center">
-                                        <?php
-                                        if ($sohinh > 1) {
-                                            for ($i = 1; $i <= $sohinh; $i++) {
-                                                echo '<span class="dot' . $key . '"></span>';
-                                            };
-                                        }
                                         ?>
                                     </div>
                                 </td>
@@ -124,40 +103,6 @@
                                     <a class="btn btn-danger" href="<?= BASE_URL_ADMIN ?>?act=product-delete&id=<?= $product['id'] ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">Xóa</a>
                                 </td>
                             </tr>
-                            <?php if ($hinhs != '') { ?>
-                                <script>
-                                    let slideIndex<?= $key ?> = 0; // Sử dụng key để tạo slideIndex riêng cho mỗi slideshow
-                                    showSlides<?= $key ?>();
-
-                                    function showSlides<?= $key ?>() {
-                                        let i;
-                                        let slides = document.getElementsByClassName("mySlides<?= $key ?>");
-                                        let dots = document.getElementsByClassName("dot<?= $key ?>");
-                                        // Ẩn tất cả các slide
-                                        for (i = 0; i < slides.length; i++) {
-                                            slides[i].style.display = "none";
-                                        }
-
-                                        // Tăng slideIndex và kiểm tra xem nó có vượt qua số lượng slides hay không
-                                        slideIndex<?= $key ?>++;
-                                        if (slideIndex<?= $key ?> > slides.length) {
-                                            slideIndex<?= $key ?> = 1;
-                                        }
-
-                                        // Loại bỏ lớp "active" từ tất cả các nút điều hướng
-                                        for (i = 0; i < dots.length; i++) {
-                                            dots[i].classList.remove("active");
-                                        }
-
-                                        // Hiển thị slide hiện tại và thêm lớp "active" vào nút điều hướng tương ứng
-                                        slides[slideIndex<?= $key ?> - 1].style.display = "block";
-                                        dots[slideIndex<?= $key ?> - 1].classList.add("active");
-
-                                        // Gọi lại hàm này sau 1 giây để chuyển đổi slide
-                                        setTimeout(showSlides<?= $key ?>, 1000);
-                                    }
-                                </script>
-                            <?php } ?>
                         <?php endforeach; ?>
                     </tbody>
                 </table>

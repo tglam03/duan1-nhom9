@@ -4,24 +4,23 @@ function cartList()
 {
     $title = 'Danh sách đơn hàng';
     $view = 'cart/index';
-
+    $script = 'datatable';
+    $style = 'datatable';
     $carts = listAll('orders');
 
     require_once PATH_VIEW_ADMIN . 'layouts/master.php';
 }
 function cartShowOne($id)
 {
-
-    $carts = showOne('orders', $id);
-
-    if (empty($cart)) {
+    $carts = loadAllofdayProductid($id);
+    if (empty($carts)) {
         e404();
     }
 
-    debug($cart);
-    $title = 'Chi tiết loại hàng: ' . $cart['ten_loai'];
-    $view = 'categories/show';
-
+    $title = 'Chi tiết đơn hàng: OD-' . $id;
+    $view = 'cart/show';
+    $script = 'datatable';
+    $style = 'datatable';
     require_once PATH_VIEW_ADMIN . 'layouts/master.php';
 }
 function cartUpdate($id)
@@ -33,12 +32,15 @@ function cartUpdate($id)
     }
     $title = 'Cập nhật đơn hàng';
     $view = 'cart/update';
-    
     if (!empty($_POST)) {
-
+        if ($_POST['trangthaidh'] == 3) {
+            $thanhtoan = 1;
+        } else {
+            $thanhtoan = 0;
+        }
         $data = [
             "status_delivery"   => $_POST['trangthaidh'] ?? null,
-            "status_payment"   => $_POST['trangthaitt'] ?? null,
+            "thanhtoan"   => $thanhtoan,
 
         ];
 
@@ -46,7 +48,7 @@ function cartUpdate($id)
         // validation
         // $erors = validateCategoryUpdate($data);
         if (empty($erors)) {
-            
+
             update('orders', $id, $data);
 
             $_SESSION['success'] = 'Cập nhật thành công';

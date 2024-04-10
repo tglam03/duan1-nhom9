@@ -54,13 +54,17 @@
                     <div class="col-md-6">
                         <div class="mb-3 mt-3">
                             <label for="ngayketthuc" class="form-label">Ngày kết thúc</label>
-                            <input type="date" class="form-control" value="" id="	ngayketthuc" placeholder=" Ngày kết thúc" name="ngayketthuc">
+                            <input type="date" class="form-control" value="" id="ngayketthuc" placeholder=" Ngày kết thúc" name="ngayketthuc">
                         </div>
-                    
+                        <div class="mb-3 mt-3">
+                            <label for="giam" class="form-label">Số tiền giảm</label>
+                            <input type="text" class="form-control" value="" id="giam" placeholder=" Số tiền giảm" name="tiengiam">
+                        </div>
                     </div>
 
-                <button type="submit" class="btn btn-info">Thêm mới</button>
-                <a href="<?= BASE_URL_ADMIN ?>/?act=voucher" class="btn btn-danger">Back to list</a>
+
+                    <button type="submit" class="btn btn-info">Thêm mới</button>
+                    <a href="<?= BASE_URL_ADMIN ?>?act=voucher" class="btn btn-danger">Back to list</a>
             </form>
 
         </div>
