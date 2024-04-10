@@ -21,7 +21,7 @@ function thongke()
     $donhangdanglay = loadAllofOneDay($day,'status_delivery = 1');
     $donhangchogiao = loadAllofOneDay($day,'status_delivery = 2');
     $tongdondagiao = loadAllofOneDay($day, 'status_delivery = 3');
-    $vocherofday = listAll('magiamgia');
+    $vocherofdays = listAll('magiamgia');
     if ($tongthunhap != "") {
         $tongthunhapofday = 0;
         $soluongofday = 0;

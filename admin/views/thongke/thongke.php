@@ -16,12 +16,12 @@
                 Lọc theo thời gian
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li><a href="<?= BASE_URL_ADMIN ?>" class="dropdown-item" href="#">1 ngày</a></li>
-                <li><a href="<?= BASE_URL_ADMIN ?>?act=thongke&day=7" class="dropdown-item" href="#">7 ngày</a></li>
-                <li><a href="<?= BASE_URL_ADMIN ?>?act=thongke&day=28" class="dropdown-item" href="#">28 ngày</a></li>
-                <li><a href="<?= BASE_URL_ADMIN ?>?act=thongke&day=58" class="dropdown-item" href="#">90 ngày</a></li>
-                <li><a href="<?= BASE_URL_ADMIN ?>?act=thongke&day=90" class="dropdown-item" href="#">168 ngày</a></li>
-                <li><a href="<?= BASE_URL_ADMIN ?>?act=thongke&day=365" class="dropdown-item" href="#">365 ngày</a></li>
+                <li><a href="<?= BASE_URL_ADMIN ?>?act=thongke&day=1" class="dropdown-item">1 ngày</a></li>
+                <li><a href="<?= BASE_URL_ADMIN ?>?act=thongke&day=7" class="dropdown-item">7 ngày</a></li>
+                <li><a href="<?= BASE_URL_ADMIN ?>?act=thongke&day=28" class="dropdown-item">28 ngày</a></li>
+                <li><a href="<?= BASE_URL_ADMIN ?>?act=thongke&day=58" class="dropdown-item">90 ngày</a></li>
+                <li><a href="<?= BASE_URL_ADMIN ?>?act=thongke&day=90" class="dropdown-item">168 ngày</a></li>
+                <li><a href="<?= BASE_URL_ADMIN ?>?act=thongke&day=365" class="dropdown-item">365 ngày</a></li>
             </ul>
         </div>
     </div>
@@ -475,9 +475,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (!empty($vocherofday)) : ?>
+                                <?php if (!empty($vocherofdays)) : ?>
 
-                                    <?php foreach ($vocherofday as $keyvocher => $vocherofday) : ?>
+                                    <?php foreach ($vocherofdays as $keyvocher => $vocherofday) : ?>
                                         <?php $ngaybd = date('Y/m/d', strtotime($vocherofday['ngaybd']));
                                         $ngayketthuc = date('Y/m/d', strtotime($vocherofday['ngayketthuc'])); ?>
                                         <?php if (date('Y/m/d') >= $ngaybd && date('Y/m/d') <= $ngayketthuc) { ?>
