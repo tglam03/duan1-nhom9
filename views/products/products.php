@@ -103,20 +103,20 @@
 									<div class="filter_type">
 										<ul>
 											<li>
-												<label class="container_check">$0 — $50<small>11</small>
-													<input type="radio" name="dongia" value="0-50">
+												<label class="container_check">0 — 50,000VND<small>11</small>
+													<input type="radio" name="dongia" value="0-50000">
 													<span class="checkmark"></span>
 												</label>
-												<label class="container_check">$50 — $100<small>11</small>
-													<input type="radio" name="dongia" value="50-100">
+												<label class="container_check">50,000VND — 100,000VND<small>11</small>
+													<input type="radio" name="dongia" value="50000-100000">
 													<span class="checkmark"></span>
 												</label>
-												<label class="container_check">$100 — $150<small>11</small>
-													<input type="radio" name="dongia" value="100-150">
+												<label class="container_check">100,000VND — 450,000VND<small>11</small>
+													<input type="radio" name="dongia" value="100000-150000">
 													<span class="checkmark"></span>
 												</label>
-												<label class="container_check">>$150<small>11</small>
-													<input type="radio" name="dongia" value=">150">
+												<label class="container_check">>450,000VND<small>11</small>
+													<input type="radio" name="dongia" value=">450000">
 													<span class="checkmark"></span>
 												</label>
 											</li>

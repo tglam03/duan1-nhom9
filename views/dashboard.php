@@ -120,11 +120,11 @@
                     <div class="row justify-content-center justify-content-md-start">
                         <div class="col-lg-6 wow" data-wow-offset="150">
                             <h3>Armor<br>Air Color 720</h3>
-                            <p>Lightweight cushioning and durable support with a Phylon midsole</p>
+                            <p>BST "Bloom" Xuân/Hạ 2024 - Sơ mi form loose phối màu ở vai áo</p>
                             <div class="feat_text_block">
                                 <div class="price_box">
-                                    <span class="new_price">$90.00</span>
-                                    <span class="old_price">$170.00</span>
+                                    <span class="new_price">90.000VND</span>
+                                    <span class="old_price">170.00VND</span>
                                 </div>
                                 <a class="btn_1" href="<?= BASE_URL ?>?act=products" role="button">Shop Now</a>
                             </div>

@@ -59,7 +59,7 @@ function productCreate()
                 }
             }
         }
-        $errors = validateProduct($data, $data1, $product_img);
+        $errors = validateProduct($data, $data1, $product_img,0);
         if (!empty($errors)) {
             require_once PATH_VIEW_ADMIN . 'layouts/master.php';
             exit();
@@ -150,7 +150,7 @@ function productUpdate($id)
                 }
             }
         }
-        $errors = validateProduct($data, $data1, $product_img);
+        $errors = validateProduct($data, $data1, $product_img,1);
         if (!empty($errors)) {
             require_once PATH_VIEW_ADMIN . 'layouts/master.php';
             exit();
@@ -218,11 +218,10 @@ function productDelete($id)
     deleteProduct('sizehh', $id);
     deleteProduct('mauhh', $id);
     delete2('sanpham', $id);
-    $_SESSION['success'] = 'Xóa thành công';
     header('Location: ' . BASE_URL_ADMIN . '?act=product');
     exit();
 }
-function validateProduct($data, $data1, $product_img)
+function validateProduct($data, $data1, $product_img,$check)
 {
     $errors = [];
     //check ten hàng hóa
@@ -248,7 +247,8 @@ function validateProduct($data, $data1, $product_img)
             }
         }
     }
-    if ($product_img == "") {
+    if ($product_img['name'] == "" && $check == 0) {
+        $errors['hinh'] = 'Hình ảnh chỉ chấp nhận định dạng file: png, jpg, jpeg';
     } else {
         if (is_array($product_img)) {
             for ($i=0; $i < count($product_img); $i++) {

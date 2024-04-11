@@ -85,14 +85,14 @@ if (!function_exists('locselect')) {
                     if ($ok == 1) {
                         $sql .= " AND don_gia $dongia1";
                     } else {
-                        $sql .= " AND don_gia > $dongia1[0] AND don_gia < $dongia1[1]";
+                        $sql .= " AND don_gia >= $dongia1[0] AND don_gia <= $dongia1[1]";
                     }
                     break;
                 case 'luotxem':
                     if ($ok1 == 1) {
                         $sql .= " AND so_luot_xem $soluotxem1";
                     } else {
-                        $sql .= " AND so_luot_xem > $soluotxem1[0] AND so_luot_xem < $soluotxem1[1]";
+                        $sql .= " AND so_luot_xem >= $soluotxem1[0] AND so_luot_xem <= $soluotxem1[1]";
                     }
                     break;
                 case 'loai':
@@ -102,32 +102,32 @@ if (!function_exists('locselect')) {
                     if ($ok == 1 && $ok1 ==1) {
                         $sql .= " AND don_gia $dongia1 AND so_luot_xem $soluotxem1";
                     } elseif($ok==1 && $ok1=0){
-                        $sql .= " AND don_gia $dongia1 AND so_luot_xem > $soluotxem1[0] AND so_luot_xem < $soluotxem1[1]";
+                        $sql .= " AND don_gia $dongia1 AND so_luot_xem >= $soluotxem1[0] AND so_luot_xem < $soluotxem1[1]";
                     }else{
-                        $sql .= " AND don_gia > $dongia1[0] AND don_gia < $dongia1[1] AND so_luot_xem $soluotxem1";
+                        $sql .= " AND don_gia >= $dongia1[0] AND don_gia <= $dongia1[1] AND so_luot_xem $soluotxem1";
                     }
                     break;
                 case 'dongialoai':
                     if ($ok = 1) {
                         $sql .= " AND don_gia $dongia1 AND loai_id $loaisp";
                     } else {
-                        $sql .= " AND don_gia > $dongia1[0] AND don_gia < $dongia1[1] AND loai_id $loaisp";
+                        $sql .= " AND don_gia >= $dongia1[0] AND don_gia <= $dongia1[1] AND loai_id $loaisp";
                     }
                     break;
                 case 'dongialuotxemloai':
                     if ($ok == 1 && $ok1 ==1) {
                         $sql .= " AND don_gia $dongia1 AND so_luot_xem $soluotxem1 AND loai_id $loaisp";
                     } elseif($ok==1 && $ok1=0){
-                        $sql .= " AND don_gia $dongia1 AND so_luot_xem > $soluotxem1[0] AND so_luot_xem < $soluotxem1[1] AND loai_id $loaisp";
+                        $sql .= " AND don_gia $dongia1 AND so_luot_xem >= $soluotxem1[0] AND so_luot_xem <= $soluotxem1[1] AND loai_id $loaisp";
                     }else{
-                        $sql .= " AND don_gia > $dongia1[0] AND don_gia < $dongia1[1] AND so_luot_xem $soluotxem1 AND loai_id $loaisp";
+                        $sql .= " AND don_gia >= $dongia1[0] AND don_gia <= $dongia1[1] AND so_luot_xem $soluotxem1 AND loai_id $loaisp";
                     }
                     break;
                 case 'luotxemloai':
                     if ($ok1 = 1) {
                         $sql .= " AND don_gia $dongia1 AND loai_id $loaisp";
                     } else {
-                        $sql .= " AND don_gia BETWEEN $dongia1[0] AND $dongia1[1] AND loai_id $loaisp";
+                        $sql .= " AND don_gia >= $dongia1[0] AND don_gia <= $dongia1[1]  AND loai_id $loaisp";
                     }
                     break;
                 default:
